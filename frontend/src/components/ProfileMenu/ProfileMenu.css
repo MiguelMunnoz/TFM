@@ -1,0 +1,73 @@
+.dropdown-content {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    padding: 16px 12px;
+    min-width: 180px;
+    z-index: 2000;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    box-shadow: 0 8px 20px rgba(33, 37, 41, 0.2);
+    border-radius: 12px;
+    border: 1px solid #ced4da;
+    backdrop-filter: saturate(180%) blur(10px);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    transform-origin: top right;
+}
+
+
+/*ITEMS*/
+.dropdown-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  border-left: 3px solid transparent;
+  border-radius: 8px;
+  user-select: none;
+  color: #842029;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 123, 255, 0.08); /* azul claro translúcido */
+  border-left-color: #0d6efd; /* azul profesional */
+}
+
+.dropdown-item__link {
+  color: #403a34; /* gris oscuro neutro */
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+  font-size: 0.95rem;
+  transition: color 0.25s ease;
+}
+
+.dropdown-item__link:hover {
+  color: #0d6efd; /* azul corporativo */
+  text-decoration: underline;
+}
+
+/* Modificador para "logout" (más separación y color de alerta) */
+.dropdown-item--logout {
+  border-top: 1px solid #dee2e6;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+.dropdown-item--logout:hover {
+  background-color: rgba(220, 53, 69, 0.08); /* rojo claro translúcido */
+  border-left-color: #dc3545;
+}
+
+.dropdown-item--logout .dropdown-item__link {
+  color: #842029;
+  font-weight: 600;
+}
+
+.dropdown-item--logout .dropdown-item__link:hover {
+  color: #a71d2a;
+  text-decoration: underline;
+}

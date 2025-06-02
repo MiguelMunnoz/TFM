@@ -1,0 +1,41 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav-bar {
+  width: 100%;
+  background-color: #1f2937; /* gris oscuro */
+  color: white;
+  position: fixed; /* pegar arriba */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navMenu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navMenu-container ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.navMenu-item a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navMenu-item a:hover {
+    color: #60a5fa; /* azul claro */
+}

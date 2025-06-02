@@ -1,0 +1,88 @@
+/* Contenedor principal de la vista */
+.view {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background-color: #f9fafb;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Sección superior con filtros y botones */
+.header-section {
+    position: relative;
+    top: 50px;
+
+    border: 2px solid white;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Filtro de búsqueda */
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-container label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.filter-container input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  width: 220px;
+}
+
+/* Botones de configuración */
+.config-container {
+  display: flex;
+  gap: 12px;
+}
+
+.config-container button {
+  padding: 8px 14px;
+  font-size: 14px;
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.config-container button:hover {
+  background-color: #2563eb;
+}
+
+/* Lista de tareas */
+.content-section {
+  position: relative;
+  top: 28px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 12px;
+  gap: 16px;
+}
+
+/* Mensaje cuando no hay tareas */
+.content-section p {
+  color: #6b7280;
+  font-style: italic;
+}
