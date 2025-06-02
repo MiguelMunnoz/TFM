@@ -1,7 +1,7 @@
 const http = require('http');
-const app = require('./app');
-const connectDB = require('./config/databse');
-const { initializeWebSocket } = require('./websockets/websocket');
+const app = require('./src/app');
+const connectDB = require('./src/config/databse');
+const { initializeWebSocket } = require('./src/websockets/websocket');
 const PORT = 3000;
 
 const startServer = async () => {
