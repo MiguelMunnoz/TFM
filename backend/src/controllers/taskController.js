@@ -5,10 +5,12 @@ const { SECRET_KEY } = require('../config/config');
 
 const taskController = {
     getTasksController: [
-        ...createTaskValidations,
+        
         async (req, res) => {
             try {
+                console.log('Recogiendo todas las tasks...')
                 const data = await getTasks();
+                console.log('Tasks: ', data);
                 res.status(200).json(data);
             } catch (error) {
                 console.log('[ERROR] Error getting task info: ', error);
@@ -62,6 +64,7 @@ const taskController = {
     deleteTaskController: [
         async (req, res) => {
             try {
+                console.log('Recibe llamada para eliminar...');
                 const { id } = req.params;
                 const data = await deleteTask(id);
                 res.status(203).json(data);

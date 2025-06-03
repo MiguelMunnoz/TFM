@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors({
-    origin: 'http://127.0.0.1:5501', // origen específico permitido
+    origin: 'http://localhost:5173', // origen específico permitido
     credentials: true               // permitir cookies/autenticación
 })); 
 app.use(cookieParser());
