@@ -12,7 +12,7 @@ const TaskGallery = ({tasks}) => {
         <div className='task-gallery'>
             {tasks.length > 0 ? (
                 tasks.map(task => (
-                    <Task key={task.id} {...task}/>
+                    <Task key={task._id} {...task}/>
                 ))) : (
                     <p>No se encontraron tareas</p>
             )}
