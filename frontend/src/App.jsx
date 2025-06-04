@@ -2,7 +2,7 @@ import './App.css'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './layouts/NavBar/NavBar';
-import Tasks from './views/Tasks/Tasks';
+import Tasks from './views/TasksView/TasksView';
 
 function App() {
 

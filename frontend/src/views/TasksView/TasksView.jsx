@@ -1,14 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import './TasksView.css';
+
+/*Components*/
 import Task from '../../components/Task/Task'; // Asegúrate de que este componente exista
 import TaskGallery from '../../components/TaskGallery/TaskGallery';
+import Modal from '../../components/Modal/Modal';
 
-import './Tasks.css';
+/*Servides*/
 import { taskService } from '../../services/api';
 
+/*Redux Toolkit*/
 import { useSelector, useDispatch } from 'react-redux';
 import { setTasks } from '../../slices/taskSlice';
 
 const Tasks = () => {
+	const [isModalVisible, setModalVisibility] = useState(false);
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks.tasks);
 
@@ -21,6 +27,18 @@ const Tasks = () => {
 		fetchTasks();
 	}, [dispatch]);
 
+	const handleSubmit = () => {
+		setModalVisibility(true);	
+	}
+
+	/*Manejamos el filtro*/
+	const handleFilter = (filter) => {
+		const fetchFilter = async () => {
+			const res = await taskService.filter(filter);
+			dispatch(setTasks(res.data));
+		};
+		fetchFilter();
+	}
 	
 	return (
 		<div className="view">
@@ -28,14 +46,14 @@ const Tasks = () => {
 			<section className="header-section">
 				<div className="config-container">
 
-					<button>Create task</button>
+					<button onClick={()=>handleSubmit()}>Create task</button>
 				</div>
 				<div className="filter-container">
 					<label htmlFor="status-filter">Status Filter</label>
-					<select id="status-filter" className="input">
+					<select id="status-filter" className="input" onChange={(e)=>handleFilter(e.target.value)}>
 						<option value="all">All</option>
 						<option value="pending">Pending</option>
-						<option value="in progress">In Progress</option>
+						<option value="in-progress">In Progress</option>
 						<option value="completed">Completed</option>
 					</select>
 				</div>
@@ -44,6 +62,8 @@ const Tasks = () => {
 			<section className="content-section">
 				<TaskGallery tasks={tasks}/>
 			</section>
+
+			{isModalVisible && <Modal onClose={() => setModalVisibility(false)}/>}
 
 		</div>
 	);

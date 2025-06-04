@@ -26,7 +26,13 @@ const taskService = {
     },
     create: (taskData) => api.post('/tasks', taskData),
     update: (id, taskData) => api.put(`/tasks/${id}`, taskData),
-    delete: (id) => api.delete(`/tasks/${id}`)
+    delete: (id) => api.delete(`/tasks/${id}`),
+
+    filter: (filter) => api.get('/tasks/filter', {
+        params: {
+            status: filter,
+        }
+    })
 }
 
 export {

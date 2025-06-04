@@ -10,6 +10,7 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
+    /* Manejo del array de tareas */
     setTasks: (state, action) => {
       state.tasks = action.payload;
     },

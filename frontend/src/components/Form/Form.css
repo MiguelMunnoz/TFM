@@ -1,0 +1,124 @@
+.form-container {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #1f2937; 
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-input {
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db; 
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: black;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/*Styles for select input*/
+.form-select-input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    cursor: pointer;
+
+    appearance: none; /* Elimina el estilo por defecto */
+    background-color: #f9fafb;
+    color: #111827;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='none'%20stroke='%23666'%20d='M0,0%20L2,2%20L4,0'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.65rem;
+}
+
+/*Colores para el select*/
+.status-all {
+  background-color: #fff;
+  color: #111827;
+}
+
+.status-pending {
+    background-color: #fff7ed;
+    color: #f39c12;
+}
+
+.status-in-progress {
+    background-color: #e6f0fa;
+    color: #3498db;
+}
+
+.status-completed {
+    background-color: #eafaf1;
+    color: #2ecc71;
+}
+
+.form-errors {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.4rem;
+}
+
+.nav-button {
+  padding: 0.6rem 1rem;
+  margin-top: 1rem;
+  margin-right: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.nav-button.submit {
+  background-color: #2563eb;
+  color: white;
+}
+
+.nav-button.submit:hover {
+  background-color: #1d4ed8;
+}
+
+.nav-button.reset {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.nav-button.reset:hover {
+  background-color: #d1d5db;
+}

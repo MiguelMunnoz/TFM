@@ -92,11 +92,11 @@ const taskController = {
                 }
 
                 //A los usuarios sin permisos les impedimos ver otras tareas que no sean las suyas
-                const cookie = getCookieInfo(req);
+                /*const cookie = getCookieInfo(req);
                 const role = cookie.role;
                 if (role !== 'admin') {
                     filter.userID = cookie.userId;
-                }
+                }*/
 
                 const data = await filterTasks(filter);
                 res.status(200).json(data);
