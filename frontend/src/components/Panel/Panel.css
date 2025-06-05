@@ -1,5 +1,5 @@
 /* Capa de fondo oscurecida */
-.modal-backdrop {
+.panel-backdrop {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -11,7 +11,7 @@
 }
 
 /* Contenedor del modal */
-.modal {
+.panel {
   background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -23,10 +23,10 @@
 }
 
 /* Botón de cerrar */
-.modal-close {
+.panel-close {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 16px;
+  right: 20px;
   background: none;
   border: none;
   font-size: 20px;
@@ -34,18 +34,18 @@
   color: #6b7280; /* gris moderno */
 }
 
-.modal-close:hover {
+.panel-close:hover {
   color: #111827;
 }
 
 /* Título y contenido */
-.modal h2 {
+.panel h2 {
   margin-bottom: 16px;
   font-size: 1.5rem;
   color: #1f2937;
 }
 
-.modal p {
+.panel-backdrop p {
   font-size: 1rem;
   color: #374151;
 }

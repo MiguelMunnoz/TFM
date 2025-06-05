@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './TasksView.css';
 
 /*Components*/
@@ -11,12 +11,13 @@ import { taskService } from '../../services/api';
 
 /*Redux Toolkit*/
 import { useSelector, useDispatch } from 'react-redux';
-import { setTasks } from '../../slices/taskSlice';
+import { setTasks, setModalVisibility } from '../../slices/taskSlice';
 
 const Tasks = () => {
-	const [isModalVisible, setModalVisibility] = useState(false);
+	//const [isModalVisible, setModalVisibility] = useState(false);
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks.tasks);
+	const isModalVisible = useSelector((state) => state.tasks.isModalVisible);
 
 	/*Recargamos la lista cada vez que se modifique el array de tareas*/
 	useEffect(() => {
@@ -28,7 +29,7 @@ const Tasks = () => {
 	}, [dispatch]);
 
 	const handleSubmit = () => {
-		setModalVisibility(true);	
+		dispatch(setModalVisibility(true))
 	}
 
 	/*Manejamos el filtro*/
@@ -63,7 +64,7 @@ const Tasks = () => {
 				<TaskGallery tasks={tasks}/>
 			</section>
 
-			{isModalVisible && <Modal onClose={() => setModalVisibility(false)}/>}
+			{ isModalVisible && <Modal onClose={()=> dispatch(setModalVisibility(false))}/>}
 
 		</div>
 	);

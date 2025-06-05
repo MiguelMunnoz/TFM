@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import './Form.css';
 
 const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
-    const [status, setStatus] = useState('all');
 
     /*Quiza toca pasar el handleSubmit al padre (el Modal) */
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, watch } = useForm({
         resolver: yupResolver(schema)
     });
+    const status = watch('status') || 'all';
     
     useEffect(() => {
         console.log('Se ha instanciado un nuevo formulario:');
@@ -24,13 +23,8 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
         } 
     }, [initialData, reset]);
 
-    const handleSelect = (newStatusValue) => {
-        setStatus(newStatusValue);
-    };
-
     const handleReset = () => {
         reset();
-        setStatus('all');
     };
 
     const submit = (data) => {
@@ -47,7 +41,7 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
             <div className="form-group" key={field}>
                 <label className="form-label">{capitalize(field)}</label>
                 {field == 'status' ? (
-                    <select className={`form-select-input status-${status}`} onChange={(e) => handleSelect(e.target.value)} {...register(field)}>
+                    <select className={`form-select-input status-${status}`} {...register(field)}>
                         <option className='status-all' value='all'>All</option>
                         <option className='status-pending' value='pending'>Pending</option>
                         <option className='status-in-progress' value='in-progress'>In Progress</option>
@@ -67,6 +61,7 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
 
     return (
         <div className='form-container'>
+            <h2>{title}</h2>
             <form onSubmit={handleSubmit(submit)}>
                 {fields.map(formField)}
                 <button 
