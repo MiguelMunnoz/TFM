@@ -4,18 +4,19 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import './Form.css';
 
-const Form = ({title, fields, initialData = null, schema, onSubmit, onCancel}) => {
+const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
     const [status, setStatus] = useState('all');
 
+    /*Quiza toca pasar el handleSubmit al padre (el Modal) */
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(schema)
     });
     
     useEffect(() => {
         console.log('Se ha instanciado un nuevo formulario:');
-        console.log('Titulo del nuevo formulario: ', title.toLowerCase());
-        console.log('DATOS: ', initialData);
-    });
+        console.log('Titulo del nuevo formulario: ', title?.toLowerCase());
+        console.log('DATOS INICIALES: ', initialData);
+    }, []);
 
     useEffect(() => {
         if (initialData){
@@ -23,30 +24,30 @@ const Form = ({title, fields, initialData = null, schema, onSubmit, onCancel}) =
         } 
     }, [initialData, reset]);
 
+    const handleSelect = (newStatusValue) => {
+        setStatus(newStatusValue);
+    };
+
     const handleReset = () => {
         reset();
-        onCancel();
+        setStatus('all');
     };
 
     const submit = (data) => {
         console.log('FORMDATA QUE SE ENVIA: ', data);
         onSubmit(data);
     }
-
+    
     const capitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
-
-    const handleSelect = (newStatusValue) => {
-        setStatus(newStatusValue);
-    }
 
     const formField = (field) => {
         return (
             <div className="form-group" key={field}>
                 <label className="form-label">{capitalize(field)}</label>
-                {field == 'Status' ? (
-                    <select className={`form-select-input status-${status}`} onChange={(e) => handleSelect(e.target.value)}>
+                {field == 'status' ? (
+                    <select className={`form-select-input status-${status}`} onChange={(e) => handleSelect(e.target.value)} {...register(field)}>
                         <option className='status-all' value='all'>All</option>
                         <option className='status-pending' value='pending'>Pending</option>
                         <option className='status-in-progress' value='in-progress'>In Progress</option>
@@ -78,9 +79,9 @@ const Form = ({title, fields, initialData = null, schema, onSubmit, onCancel}) =
                 <button 
                     type="button"
                     className="nav-button reset"
-                    onClick={handleReset}
+                    onClick={()=>handleReset()}
                 > 
-                    Cancelar
+                    Clear
                 </button>
             </form>
         </div>

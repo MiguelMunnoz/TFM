@@ -7,7 +7,7 @@ const taskSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required: true,
+        required: false,
     },
     description: {
         type: String,
@@ -15,7 +15,7 @@ const taskSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        required: true,
+        required: false,
     },
     time: {
         type: String,
@@ -23,12 +23,12 @@ const taskSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        require: true,
+        require: false,
         default: 'Pending',
     },
     trelloID: {
         type: String,
-        require: true,
+        require: false,
     },
     images: {
         type: [String],

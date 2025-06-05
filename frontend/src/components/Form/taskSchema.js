@@ -9,7 +9,7 @@ const taskSchema = yup.object({
         .string()
         .required('La descripcion es obligatoria'),
 
-    sstatus: yup
+    status: yup
         .string()
         .required('El estado de la tarea es obligatorio')
 });
