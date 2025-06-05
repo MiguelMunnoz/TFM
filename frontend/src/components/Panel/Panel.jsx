@@ -1,16 +1,44 @@
 import './Panel.css';
 
-const Panel = ({task, onClose}) => {
+import ImageGallery from '../ImageGallery/ImageGallery';
+
+const Panel = ({task}) => {
     return (
-        <div className='panel'>
-            <div className='task-info'>
-                <h3>{task.title}</h3>
-                <span className={`task-status status-${task.status}`}>{task.status}</span> 
-                <p className='task-date'>{task.date}</p>
-                <p className='task-time'>{task.time}</p>
-                <div className='description'>Description: {task.description}</div>
+        <div className="panel-task-card">
+            <section className="task-header">
+                <div className="task-title-status">
+                    <h3 className="task-title">{task.title}</h3>
+                    <span className={`task-status status-${task.status}`}>
+                    {task.status}
+                    </span>
+                </div>
+
+                <div className="task-meta">
+                    <span className="task-date">
+                    📅 {new Date(task.date).toLocaleDateString('es-ES', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                    })}
+                    </span>
+
+                    <span className="task-time">🕒 {task.time}</span>
+                </div>
+            </section>
+
+            <section>
+                <div className="task-description">
+                    <p className="task-description-content">{task.description}</p>
+                </div>
+            </section>
+            
+            <section>
+                <ImageGallery task={task}/>
+            </section>
+
+            <div className="task-actions">
+                <button className="update-button">Update</button>
             </div>
-            <button className='delete-button' onClick={() => onClose()}>X</button>
         </div>
     )
 }

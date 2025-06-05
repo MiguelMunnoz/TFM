@@ -1,63 +1,116 @@
-/* Capa de fondo oscurecida */
-.panel-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
+.panel-task-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Estilo general para cada sección */
+.panel-task-card section {
+  border-bottom: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+/* HEADER: título y status en la misma línea */
+.task-title-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.task-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* STATUS badge */
+.task-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  color: white;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* Fecha y hora centradas y separadas */
+.task-meta {
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* Contenedor del modal */
-.panel {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 90%;
-  max-width: 500px;
-  padding: 24px 32px;
-  position: relative;
-  animation: fadeInUp 0.3s ease;
-}
-
-/* Botón de cerrar */
-.panel-close {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #6b7280; /* gris moderno */
-}
-
-.panel-close:hover {
-  color: #111827;
-}
-
-/* Título y contenido */
-.panel h2 {
+  gap: 2rem;
+  font-size: 0.95rem;
+  color: #666;
   margin-bottom: 16px;
-  font-size: 1.5rem;
-  color: #1f2937;
+  text-align: center;
 }
 
-.panel-backdrop p {
+/* Descripción con mejor formato visual */
+.task-description {
+  background-color: #f9f9f9;
+  border-left: 4px solid #007bff;
+  padding: 16px;
+  border-radius: 8px;
   font-size: 1rem;
-  color: #374151;
+  line-height: 1.5;
+  color: #333;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
-/* Animación de entrada */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.task-description-content {
+  margin: 0.5rem 0;
+  color: #555;
 }
+
+/* Galería de imágenes */
+.task-image-gallery {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+}
+
+.task-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Acciones */
+.task-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.task-actions button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #38a046;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-actions button:hover {
+  background-color: #2e8b3f;
+}
+
+
+
+
+
