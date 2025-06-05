@@ -73,3 +73,13 @@
 .master-list li input {
   margin-right: 8px;
 }
+
+/*Clases para animacion fade-out*/
+.task-gallery-wrapper {
+  transition: opacity 500ms ease;
+  opacity: 1;
+}
+
+.task-gallery-wrapper.exit {
+  opacity: 0;
+}

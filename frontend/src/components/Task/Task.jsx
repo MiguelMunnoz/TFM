@@ -1,21 +1,11 @@
 import { useEffect } from 'react';
 import './Task.css';
-import {useDispatch } from 'react-redux';
-import { removeTask } from '../../slices/taskSlice';
-import { taskService } from '../../services/api';
 
-const Task = (task) => {
-    const dispatch = useDispatch();
+const Task = ({task, onDelete}) => {
 
     useEffect(()=>{
         console.log('Task Instanciada: ', task);
     }, []);
-
-    const handleDelete = (taskId) => {
-        console.log('Eliminando tarea...');
-        taskService.delete(taskId);
-        dispatch(removeTask(taskId));
-    }
 
     return (
         <div className='task'>
@@ -26,7 +16,7 @@ const Task = (task) => {
                 <p className='task-time'>{task.time}</p>
                 <div className='description'>Description: {task.description}</div>
             </div>
-            <button className='delete-button' onClick={()=>handleDelete(task._id)}>X</button>
+            <button className='delete-button' onClick={()=>onDelete(task._id)}>X</button>
         </div>
     )
 }
