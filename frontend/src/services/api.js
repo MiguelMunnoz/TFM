@@ -35,6 +35,13 @@ const taskService = {
     })
 }
 
+const userService = {
+    register: (userData) => api.post('/register', userData),
+    login: (userData) => api.post('/login', userData),
+    logout: () => api.post('/logout'),
+}
+
 export {
-    taskService
+    taskService,
+    userService
 }

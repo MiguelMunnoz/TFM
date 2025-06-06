@@ -37,22 +37,36 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
     };
 
     const formField = (field) => {
+
+        const statusField = (
+            <select className={`form-select-input status-${status}`} {...register(field)}>
+                <option className='status-all' value='all'>All</option>
+                <option className='status-pending' value='pending'>Pending</option>
+                <option className='status-in-progress' value='in-progress'>In Progress</option>
+                <option className='status-completed' value='completed'>Completed</option>
+            </select>
+        );
+            
+        const roleField = (
+            <select className='form-select-input' {...register(field)}>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        );
+
+        const newField = field == 'status' ? (statusField) : ( 
+                         field == 'role' ? (roleField) : (
+                            <input 
+                                {...register(field)}
+                                className='form-input'
+                            />
+                        ));
+
         return (
             <div className="form-group" key={field}>
                 <label className="form-label">{capitalize(field)}</label>
-                {field == 'status' ? (
-                    <select className={`form-select-input status-${status}`} {...register(field)}>
-                        <option className='status-all' value='all'>All</option>
-                        <option className='status-pending' value='pending'>Pending</option>
-                        <option className='status-in-progress' value='in-progress'>In Progress</option>
-                        <option className='status-completed' value='completed'>Completed</option>
-                    </select> 
-                ):(
-                    <input 
-                        {...register(field)}
-                        className='form-input'
-                    />
-                ) }
+                
+                {newField}
                 
                 {errors[field] && <p className='form-errors'>{errors[field].message}</p>}
             </div>

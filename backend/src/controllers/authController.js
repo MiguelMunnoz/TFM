@@ -7,10 +7,16 @@ const CONFIG = require('../config/config');
 const authController = {
     registerUserController: [
         async (req, res) => {
+            console.log('Enviando informacion de registro...');
             try {
                 const { username, password, role } = req.body;
+                console.log('Datos del body: ', req.body);
+                console.log('Username: ', username);
+                console.log('Password: ', password);
+                console.log('Role: ', role);
 
                 if (!username || !password || !role) {
+                    console.log('Returning 400 Error...');
                     return res.status(400).json({ error: 'Required fields are missing (username, password, role)' });
                 }
                 
