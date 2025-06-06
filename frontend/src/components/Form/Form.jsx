@@ -15,6 +15,7 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
         console.log('Se ha instanciado un nuevo formulario:');
         console.log('Titulo del nuevo formulario: ', title?.toLowerCase());
         console.log('DATOS INICIALES: ', initialData);
+
     }, []);
 
     useEffect(() => {

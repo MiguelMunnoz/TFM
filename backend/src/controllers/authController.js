@@ -36,6 +36,7 @@ const authController = {
 
     loginUserController: [
         async (req, res) => {
+            console.log('Entramos en el login');
             try {
                 const { username, password } = req.body;
                 const user = await getUserByEmail(username);
@@ -48,7 +49,8 @@ const authController = {
                 if(!isMatch) {
                     return res.status(401).json({ message: 'Invalid credentials' });
                 }
-
+                
+                console.log('Llegamos a la creacion del token');
                 const token = jwt.sign(
                     {
                         userId: user._id,
@@ -59,16 +61,20 @@ const authController = {
                     { expiresIn: '1h'}
                 );
 
+                console.log('Token: ', token);
+
                 res.cookie('token', token, {
                     httpOnly: true,
-                    secure: false,
+                    secure: false,               // 🔐 obligatorio con SameSite: 'None'
                     sameSite: 'Lax',
-                    maxAge: 60*60*1000,
+                    maxAge: 3 * 60 * 60 * 1000
                 });
+                console.log('Enviando cookie');
 
                 res.json({
                     message: 'Login success',
                     role: user.role,
+                    jwt: token
                 });
             } catch (error) {
                 console.log('[ERROR] Error in login: ', error);

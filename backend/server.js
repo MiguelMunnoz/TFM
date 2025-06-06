@@ -13,7 +13,7 @@ const startServer = async () => {
         initializeWebSocket(server);
 
         server.listen(PORT, ()=>{
-            console.log(`Server running at http://127.0.0.1:${PORT}`);
+            console.log(`Server running at http://localhost:${PORT}`);
         })
     } catch(error) {
         console.log('[ERROR] Error starting the server.', error);

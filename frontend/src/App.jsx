@@ -13,17 +13,16 @@ const App = () =>  {
 	return (
 		<Router>
 			<Routes>
+				<Route element={<AuthLayout />}>
+					<Route path="/" element={<AuthView />} />
+				</Route>
 
-			<Route element={<AuthLayout />}>
-				<Route path="/" element={<AuthView />} />
-			</Route>
-
-			<Route element={<AppLayout />}>
-				<Route path="/tasks" element={<TasksView />} />
-				<Route path="/events" element={<EventsView />} />
-				<Route path="/images" element={<ImagesView />} />
-				{/* Puedes agregar más rutas aquí */}
-			</Route>
+				<Route element={<AppLayout />}>
+					<Route path="/tasks" element={<TasksView />} />
+					<Route path="/events" element={<EventsView />} />
+					<Route path="/images" element={<ImagesView />} />
+					{/* Puedes agregar más rutas aquí */}
+				</Route>
 			</Routes>
 		</Router>
 	)
