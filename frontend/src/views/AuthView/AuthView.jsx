@@ -7,6 +7,7 @@ import { userService } from '../../services/api';
 
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/userSlice';
+import { startLoading, stopLoading } from '../../slices/loadingSlice';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -41,6 +42,7 @@ const AuthView = () => {
      
     const handleLogin = async (userData) => {
          try {
+            dispatch(startLoading());
             const response = await userService.login(userData);
 
             if (response.status === 200) {
@@ -48,8 +50,12 @@ const AuthView = () => {
 
                 console.log('Login exitoso. Redirigiendo...');
                 //window.location.href = '/tasks'; // Fuerza recarga para que se reconozca la cookie
-                navigate('tasks');
+                setTimeout(() => {
+                    dispatch(stopLoading());
+                    navigate('tasks');
+                }, 500)
             }
+            
         } catch (error) {
             console.error('Error en login:', error);
         }

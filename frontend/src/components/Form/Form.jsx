@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import './Form.css';
 
 const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
+    const isLoading = useSelector(state => state.loading.isLoading);
 
     /*Quiza toca pasar el handleSubmit al padre (el Modal) */
     const { register, handleSubmit, formState: { errors }, reset, watch } = useForm({
@@ -82,8 +84,9 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
                 <button 
                     type="submit"
                     className="nav-button submit"
+                    disabled={isLoading}
                 > 
-                    Enviar
+                    {isLoading ? 'Cargando...' : 'Enviar'}
                 </button>
 
                 <button 
