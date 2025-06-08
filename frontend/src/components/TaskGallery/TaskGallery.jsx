@@ -1,6 +1,6 @@
 import './TaskGallery.css';
 import Task from '../Task/Task';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {useDispatch } from 'react-redux';
 import { removeTask } from '../../slices/taskSlice';
 import { taskService } from '../../services/api';
@@ -9,22 +9,16 @@ const TaskGallery = ({tasks}) => {
     const [deletingTasks, setDeletingTasks] = useState([]);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log('Instanciando componente...');
-        console.log('Info que me llega: ', tasks);
-    });
-
     const handleDelete = (taskId) => {
     // Marcar como en proceso de eliminación
     setDeletingTasks((prev) => [...prev, taskId]);
 
     // Esperar a que la animación termine
     setTimeout(() => {
-        //onDelete(taskId); // Llamas a Redux u otra lógica externa
         taskService.delete(taskId);
         dispatch(removeTask(taskId));
         setDeletingTasks((prev) => prev.filter((id) => id !== taskId));
-    }, 500); // coincide con tu duración CSS
+    }, 500); // Debe coincidir con la duracion en CSS
   };
 
     return (

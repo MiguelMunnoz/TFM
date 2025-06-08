@@ -6,9 +6,6 @@ const api = axios.create({
     baseURL: URL_API,
     timeout: 10000,
     withCredentials: true,
-    headers: {
-        'Content-Type' : 'application/json'
-    },
     /*
     withCredentials: true,
     responseType: 'json',
@@ -45,7 +42,17 @@ const userService = {
     logout: () => api.get('/logout', { withCredentials: true }),
 }
 
+const imageService = {
+    upload: (imageData) => api.post('/images/upload', imageData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }, 
+        withCredentials: true,
+    }),
+}
+
 export {
     taskService,
-    userService
+    userService,
+    imageService
 }

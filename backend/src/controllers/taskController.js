@@ -39,6 +39,7 @@ const taskController = {
                 console.log('Entrando en el manejador de tareas -> creando...');
                 const taskData = req.body;
                 console.log('Info que llega: ', taskData);
+                console.log('Info de las imagenes: ', taskData.images);
                 const response = await createTask(taskData);
                 res.status(201).json(response);
             } catch (error) {

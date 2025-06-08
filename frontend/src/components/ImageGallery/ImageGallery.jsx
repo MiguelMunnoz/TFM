@@ -1,6 +1,6 @@
 import './ImageGallery.css';
 
-const ImageGallery = ({task}) => {
+/*const ImageGallery = ({task}) => {
     return (
         <div className="task-image-gallery">
                 {(task.images && task.images.length > 0
@@ -16,6 +16,27 @@ const ImageGallery = ({task}) => {
                 ))}
             </div>
     )
-}
+}*/
+
+const ImageGallery = ({ task }) => {
+    const images = task.images || [];
+
+    return (
+        <div className="image-gallery">
+            <h4>Imágenes</h4>
+            {images.length === 0 ? (
+                <p className="no-images">No hay imágenes</p>
+            ) : (
+                <div className="image-grid">
+                    {images.map((imgSrc, index) => (
+                        <div key={index} className="image-wrapper">
+                            <img src={imgSrc} alt={`task-img-${index}`} className="gallery-image" />
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
 
 export default ImageGallery;

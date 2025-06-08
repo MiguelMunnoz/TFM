@@ -31,9 +31,33 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
     };
 
     const submit = (data) => {
-        console.log('FORMDATA QUE SE ENVIA: ', data);
-        onSubmit(data);
-    }
+        const files = data.images ? Array.from(data.images) : [];
+        let filenames = readInputFiles(files);
+
+        const formData = {
+            ...data,
+            images: filenames,
+        };
+
+        console.log('Recogiendo datos del formulario: ', data);
+        if(data.images) {
+            console.log('Entramos aqui si hay iamgenes...');
+            
+            //Costruimos los datos de los archivos para enviarlos al servidor
+            const imageData = new FormData();
+            for (let file of files) {
+                imageData.append('file', file);
+            }
+            console.log('Imagenes antes de ser parte de formData: ', files);
+            console.log('Recogiendo imagenes del fomulario: ', imageData);
+            onSubmit(formData, imageData);
+        } else {
+            onSubmit(formData);
+        }
+        
+    };
+
+    const readInputFiles = files => Array.from(files).map(file => file.name);
     
     const capitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
@@ -78,7 +102,16 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
 
         const newField = isArrayField ? dateTimeField :
             field === 'status' ? statusField :
-            field === 'role' ? roleField : (
+            field === 'role' ? roleField :  
+            field === 'images' ? (
+                <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    {...register(field)}
+                    className="form-input"
+                />
+            ) : (
                 <input
                     {...register(field)}
                     className="form-input"

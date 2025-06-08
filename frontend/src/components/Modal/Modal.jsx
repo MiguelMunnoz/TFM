@@ -6,7 +6,7 @@ import taskSchema from '../Form/taskSchema';
 
 import {useDispatch, useSelector } from 'react-redux';
 import { addTask, setModalVisibility } from '../../slices/taskSlice';
-import { taskService } from '../../services/api';
+import { taskService, imageService } from '../../services/api';
 
 const Modal = ({task=null, onClose}) => {
     const dispatch = useDispatch();
@@ -17,7 +17,17 @@ const Modal = ({task=null, onClose}) => {
 
     }
 
-    const handleSubmit = async (taskData) => {
+    const handleSubmit = async (taskData, imageData=undefined) => {
+        if(imageData) {
+            console.log('DATOS DE LAS IMAGENES QUE SE SUBEN: ', imageData);
+            const dataImage = await imageService.upload(imageData);
+            if (!dataImage) {
+                throw new Error('[ERROR] Error uploading files.');
+            }
+        }
+
+        console.log('Informacion antes de crear la task: ', taskData);
+        console.log('Informacion de las imagenes antes de crear la task: ', imageData);
         const res = await taskService.create(taskData);
         dispatch(addTask(res.data));
         dispatch(setModalVisibility(false));
@@ -35,7 +45,7 @@ const Modal = ({task=null, onClose}) => {
                 {task ? (
                     <Panel task={task} onClose={()=>handleClose()}/>
                 ) : (
-                    <Form title='Create Task Form' fields={visibleFields} schema={taskSchema} onSubmit={(taskData)=>handleSubmit(taskData)}/>
+                    <Form title='Create Task Form' fields={visibleFields} schema={taskSchema} onSubmit={(taskData, imageData)=>handleSubmit(taskData, imageData)}/>
                 )}
                 
             </div>
