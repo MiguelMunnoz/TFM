@@ -1,6 +1,7 @@
+const path = require('path');
 const imageService = require('../services/imageServices');
 
-const imageController = {
+const imageController = {    
 
     uploadImage: [
         async (req, res) => {
@@ -54,22 +55,21 @@ const imageController = {
         }
     ],
     getImage: [
-        (req, res) => {
-            const { filename } = req.params;
-            const filePath = path.join(uploadDir, filename);
-        
-            try {
-                if (fs.existsSync(filePath)) {
-                    res.status(200).sendFile(filePath); 
-                } else {
-                    res.status(404).json({ error: 'Imagen no encontrada' });
-                }
-            } catch (error) {
-                console.log('[ERROR] Error getting files: ', error);
-                res.status(500).json({ error: 'Error getting files' });
-            }
+    async (req, res) => {
+        const { filename } = req.params;
+
+        try {
+            const info = await imageService.getFile(filename);
+            console.log('Info tras obtener la imagen en el server: ', info);
+
+            res.set('Content-Type', info.contentType);
+            res.send(info.imageBuffer);
+        } catch (error) {
+            console.log('[ERROR] Error getting files: ', error);
+            res.status(500).json({ error: 'Error getting files' });
         }
-    ],
+    }
+],
     deleteImage: [
         async (req, res) => {
             try {

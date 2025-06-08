@@ -31,14 +31,28 @@ const Task = ({task, onDelete}) => {
         setShowModal(true);
     }
 
+    const formattedDate = new Date(task.date).toLocaleDateString('es-ES', {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                        });
+
     return (
         <>
             <div className='task' onClick={()=>handleEdit()}>
                 <div className='task-info'>
                     <h3>{task.title}</h3>
-                    <span className={`task-status status-${task.status}`}>{task.status}</span> 
-                    <p className='task-date'>{task.date}</p>
-                    <p className='task-time'>{task.time}</p>
+                    <span className={`task-status status-${task.status}`}>{task.status}</span>
+                    <div className="task-datetime-container">
+                        <div className="datetime-item">
+                            <span role="img" aria-label="calendar">📅</span>
+                            {formattedDate} {/* ejemplo: '05 de junio de 2024' */}
+                        </div>
+                        <div className="datetime-item">
+                            <span role="img" aria-label="clock">🕒</span>
+                            {task.time} {/* ejemplo: '19:13' */}
+                        </div>
+                    </div> 
                     <div className='description'>{task.description}</div>
                 </div>
                 <button className='delete-button' onClick={(e)=> {

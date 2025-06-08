@@ -10,16 +10,17 @@ const TaskGallery = ({tasks}) => {
     const dispatch = useDispatch();
 
     const handleDelete = (taskId) => {
-    // Marcar como en proceso de eliminación
-    setDeletingTasks((prev) => [...prev, taskId]);
+        console.log('Id de la tarea que quiero eliminar: ', taskId);
+        // Marcar como en proceso de eliminación
+        setDeletingTasks((prev) => [...prev, taskId]);
 
-    // Esperar a que la animación termine
-    setTimeout(() => {
-        taskService.delete(taskId);
-        dispatch(removeTask(taskId));
-        setDeletingTasks((prev) => prev.filter((id) => id !== taskId));
-    }, 500); // Debe coincidir con la duracion en CSS
-  };
+        // Esperar a que la animación termine
+        setTimeout(() => {
+            taskService.delete(taskId);
+            dispatch(removeTask(taskId));
+            setDeletingTasks((prev) => prev.filter((id) => id !== taskId));
+        }, 500); // Debe coincidir con la duracion en CSS
+    };
 
     return (
         <div className='task-gallery'>

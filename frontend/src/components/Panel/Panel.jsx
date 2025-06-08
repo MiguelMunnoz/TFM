@@ -2,7 +2,12 @@ import './Panel.css';
 
 import ImageGallery from '../ImageGallery/ImageGallery';
 
+import { useDispatch } from 'react-redux';
+import { removeTask } from '../../slices/taskSlice';
+import { taskService } from '../../services/api';
+
 const Panel = ({task}) => {
+    const dispatch = useDispatch();
 
     console.log('Info de la task: ', task);
     const trashIcon = (
@@ -20,6 +25,21 @@ const Panel = ({task}) => {
         <path d="M9 6V4C9 3.45 9.45 3 10 3H14C14.55 3 15 3.45 15 4V6" 
     /></svg>)
 
+    const formattedDate = new Date(task.date).toLocaleDateString('es-ES', {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                        });
+
+    const handleDelete = (taskId) => {
+        console.log('Id de la tarea que quiero eliminar: ', taskId);
+        // Esperar a que la animación termine
+        setTimeout(() => {
+            taskService.delete(taskId);
+            dispatch(removeTask(taskId));
+        }, 500); // Debe coincidir con la duracion en CSS
+    };
+
     return (
         <div className="panel-task-card">
             <section className="task-header">
@@ -30,20 +50,21 @@ const Panel = ({task}) => {
                     </span>
                 </div>
 
-                <div className="task-meta">
-                    <span className="task-date">
-                    📅 {new Date(task.date).toLocaleDateString('es-ES', {
-                        day: '2-digit',
-                        month: 'long',
-                        year: 'numeric',
-                    })}
-                    </span>
-
-                    <span className="task-time">🕒 {task.time}</span>
+                <div className="task-datetime-container">
+                    <div className="datetime-item">
+                        <span role="img" aria-label="calendar">📅</span>
+                        {formattedDate} {/* ejemplo: '05 de junio de 2024' */}
+                    </div>
+                    <div className="datetime-item">
+                        <span role="img" aria-label="clock">🕒</span>
+                        {task.time} {/* ejemplo: '19:13' */}
+                    </div>
                 </div>
+
             </section>
 
             <section>
+                <h4>Description</h4>
                 <div className="task-description">
                     <p className="task-description-content">{task.description}</p>
                 </div>
@@ -55,7 +76,7 @@ const Panel = ({task}) => {
 
             <div className="task-actions">
                 <button className="update-task-button">Edit</button>
-                <button className="delete-task-button">{trashIcon}</button>
+                <button className="delete-task-button" onClick={ () => handleDelete(task._id) }>{trashIcon}</button>
             </div>
             
         </div>

@@ -52,6 +52,40 @@
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
+.form-input[type="file"] {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out;
+    width: 100%;
+}
+
+.form-input[type="file"]:hover {
+    border-color: #999;
+    background-color: #f1f1f1;
+}
+
+.form-input[type="file"]::file-selector-button {
+    padding: 0.4rem 1rem;
+    margin-right: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.form-input[type="file"]::file-selector-button:hover {
+    background-color: #0056b3;
+}
+
 /*Styles for select input*/
 .form-select-input {
     width: 100%;

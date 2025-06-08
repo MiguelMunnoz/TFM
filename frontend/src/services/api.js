@@ -49,6 +49,23 @@ const imageService = {
         }, 
         withCredentials: true,
     }),
+
+    getImageByName: async (imageName) => {
+        try {
+            const response = await api.get(`images/list/${imageName}`, {
+                responseType: 'blob',
+                withCredentials: true,
+            });
+            console.log('Response data:', response.data);
+
+            const imageUrl = URL.createObjectURL(response.data); // response.data es el blob
+            console.log('URL generada: ', imageUrl);
+            return imageUrl;
+        } catch (error) {
+            console.error('[ERROR] Error getting image by name: ', error);
+            throw error;
+        }
+    }
 }
 
 export {

@@ -48,6 +48,7 @@
   font-weight: 600;
   color: #1f2937;
   margin: 0;
+  max-width: 240px;
 }
 
 .task-status {
@@ -75,10 +76,39 @@
     color: #2ecc71;
 }
 
-.task-date,
-.task-time {
-  font-size: 13px;
-  color: #4b5563;
+/* Fecha y hora centradas y separadas */
+.task-datetime-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
+
+    font-size: 0.95rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    background-color: #f9f9f9;
+}
+
+.datetime-item {
+    display: flex;
+    align-items: center;
+    background-color: #eef2f6;
+    padding: 0.35rem 0.75rem;
+    border-radius: 1rem;
+    color: #333;
+    gap: 0.4rem;
+    font-weight: 500;
+    font-size: 0.68rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.datetime-item svg {
+    width: 1rem;
+    height: 1rem;
+    color: #555;
 }
 
 .description {
@@ -90,26 +120,25 @@
   border-radius: 8px;
 }
 
-.edit-button,
 .delete-button {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 6px;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-}
+  position: absolute;
+  top: 1.1rem;
+  right: 0.75rem;
+  margin: 0;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
 
-.delete-button {
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    background-color: #fee2e2;
-    color: #b91c1c;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
+  border: none;
+  border-radius: 50%;
+
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  
+  background-color: #fee2e2;
+  color: #b91c1c;
+  transition: background-color 0.2s ease;
 }
 
 .delete-button:hover {

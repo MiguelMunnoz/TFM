@@ -1,41 +1,59 @@
 import './ImageGallery.css';
-
-/*const ImageGallery = ({task}) => {
-    return (
-        <div className="task-image-gallery">
-                {(task.images && task.images.length > 0
-                    ? task.images.slice(0, 4)
-                    : Array(4).fill(null)
-                ).map((img, index) => (
-                    <img
-                    key={index}
-                    src={img || 'https://via.placeholder.com/60x60?text=No+Img'}
-                    alt={`imagen-${index}`}
-                    className="task-image"
-                    />
-                ))}
-            </div>
-    )
-}*/
+import { imageService } from '../../services/api';
+import { useEffect, useState } from 'react';
 
 const ImageGallery = ({ task }) => {
+    const [imageUrls, setImageUrls] = useState([]);
     const images = task.images || [];
 
+    useEffect(() => {
+        let active = true;
+        let urls = [];
+
+        const loadImages = async () => {
+            try {
+                urls = await Promise.all(
+                    images.map(async (name) => {
+                        const url = await imageService.getImageByName(name);
+                        console.log('URL obtenida:', url);
+                        return url;
+                    })
+                );
+                if (active) setImageUrls(urls);
+            } catch (err) {
+                console.error('Error cargando imágenes:', err);
+            }
+        };
+
+        loadImages();
+
+        return () => {
+            active = false;
+            urls.forEach((url) => URL.revokeObjectURL(url));
+        };
+    }, [images]);
+
     return (
-        <div className="image-gallery">
-            <h4>Imágenes</h4>
-            {images.length === 0 ? (
-                <p className="no-images">No hay imágenes</p>
-            ) : (
-                <div className="image-grid">
-                    {images.map((imgSrc, index) => (
-                        <div key={index} className="image-wrapper">
-                            <img src={imgSrc} alt={`task-img-${index}`} className="gallery-image" />
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
+        <>
+            <h4>Images</h4>
+            <div className="image-gallery">
+                {imageUrls.length !== 0 ? (
+                    <div className="image-grid">
+                        {imageUrls.map((imgSrc, index) => (
+                            <div key={index} className="image-wrapper">
+                                <img
+                                    src={imgSrc}
+                                    alt={`task-img-${index}`}
+                                    className="gallery-image"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="no-images">No hay imágenes</p>
+                )}
+            </div>
+        </>
     );
 };
 

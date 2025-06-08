@@ -7,17 +7,14 @@ import './Form.css';
 const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
     const isLoading = useSelector(state => state.loading.isLoading);
 
-    /*Quiza toca pasar el handleSubmit al padre (el Modal) */
     const { register, handleSubmit, formState: { errors }, reset, watch } = useForm({
         resolver: yupResolver(schema)
     });
-    const status = watch('status') || 'all';
+    const status = watch('status');
     
     useEffect(() => {
         console.log('Se ha instanciado un nuevo formulario:');
-        console.log('Titulo del nuevo formulario: ', title?.toLowerCase());
         console.log('DATOS INICIALES: ', initialData);
-
     }, []);
 
     useEffect(() => {
@@ -40,7 +37,7 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
         };
 
         console.log('Recogiendo datos del formulario: ', data);
-        if(data.images) {
+        if(data.images && data.images.length > 0) {
             console.log('Entramos aqui si hay iamgenes...');
             
             //Costruimos los datos de los archivos para enviarlos al servidor
@@ -48,7 +45,6 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
             for (let file of files) {
                 imageData.append('file', file);
             }
-            console.log('Imagenes antes de ser parte de formData: ', files);
             console.log('Recogiendo imagenes del fomulario: ', imageData);
             onSubmit(formData, imageData);
         } else {
@@ -68,7 +64,6 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
 
         const statusField = isArrayField ? null : (
             <select className={`form-select-input status-${status}`} {...register(field)}>
-                <option className="status-all" value="all">All</option>
                 <option className="status-pending" value="pending">Pending</option>
                 <option className="status-in-progress" value="in-progress">In Progress</option>
                 <option className="status-completed" value="completed">Completed</option>
@@ -100,18 +95,20 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
             </div>
         ) : null;
 
+        const imageField = isArrayField ? null : (
+            <input
+                type="file"
+                multiple
+                accept="image/*"
+                {...register(field)}
+                className="form-input"
+            />
+        )
+
         const newField = isArrayField ? dateTimeField :
             field === 'status' ? statusField :
             field === 'role' ? roleField :  
-            field === 'images' ? (
-                <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    {...register(field)}
-                    className="form-input"
-                />
-            ) : (
+            field === 'images' ? imageField : (
                 <input
                     {...register(field)}
                     className="form-input"
