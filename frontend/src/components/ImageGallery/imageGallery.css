@@ -9,11 +9,20 @@
 }
 
 .image-wrapper {
+    position: relative;
     width: 100px;
     height: 100px;
     overflow: hidden;
     border-radius: 8px;
     border: 1px solid #ddd;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 .gallery-image {
@@ -28,8 +37,8 @@
 }
 
 .image-placeholder {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     border: 2px dashed #bbb;
     border-radius: 0.5rem;
     display: flex;
@@ -46,5 +55,27 @@
     background-color: #f0f0f0;
     border-color: #888;
     color: #555;
+}
+
+.image-delete-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+}
+
+.image-delete-button:hover {
+    background-color: rgba(255, 0, 0, 1);
 }
 

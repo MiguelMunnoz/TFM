@@ -2,8 +2,11 @@ import './ImageGallery.css';
 import { imageService } from '../../services/api';
 import { useEffect, useState } from 'react';
 
+import Image from '../Image/Image';
+
 const ImageGallery = ({ task }) => {
     const [imageUrls, setImageUrls] = useState([]);
+    const [imageZoomed, setImageZoomed] = useState(null);
     const images = task.images || [];
 
     useEffect(() => {
@@ -33,6 +36,10 @@ const ImageGallery = ({ task }) => {
         };
     }, [images]);
 
+    const handleClick = (imgSrc) => {
+        setImageZoomed(imgSrc);
+    }
+
     return (
         <>
             <h4>Images</h4>
@@ -45,13 +52,19 @@ const ImageGallery = ({ task }) => {
                                     src={imgSrc}
                                     alt={`task-img-${index}`}
                                     className="gallery-image"
+                                    onClick={ () => handleClick(imgSrc) }
                                 />
+                                <button className="image-delete-button">X</button>
                             </div>
                         ))}
                     </div>
                 ) : (
                     <p className="no-images">No hay imágenes</p>
                 )}
+                { imageZoomed && (
+                    <Image src={imageZoomed} onClick={() => setImageZoomed(null)} />
+                )}
+                
             </div>
         </>
     );
