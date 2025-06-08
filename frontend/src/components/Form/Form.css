@@ -16,6 +16,13 @@
   text-align: center;
 }
 
+/* Grupo de fecha y hora */
+.date-time-wrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
 .form-group {
   margin-bottom: 1.25rem;
   display: flex;
@@ -87,7 +94,7 @@
     color: #2ecc71;
 }
 
-.form-errors {
+.form-group .form-errors {
   color: #dc2626;
   font-size: 0.875rem;
   margin-top: 0.4rem;

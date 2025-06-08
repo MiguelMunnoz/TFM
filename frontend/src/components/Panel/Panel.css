@@ -91,7 +91,7 @@
 /* Acciones */
 .task-actions {
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 12px;
   margin-top: 16px;
 }
@@ -99,16 +99,29 @@
 .task-actions button {
   padding: 8px 16px;
   border: none;
-  background-color: #38a046;
   color: white;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.task-actions button:hover {
+.update-task-button {
+  background-color: #3ab150;
+}
+
+.update-task-button:hover {
   background-color: #2e8b3f;
 }
+
+.delete-task-button {
+  background-color: #cc3c3c;
+}
+
+.delete-task-button:hover {
+  background-color: #a73232;
+}
+
+
 
 
 

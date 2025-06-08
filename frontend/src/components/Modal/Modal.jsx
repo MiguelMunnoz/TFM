@@ -4,12 +4,13 @@ import Panel from '../Panel/Panel';
 import Form from '../Form/Form';
 import taskSchema from '../Form/taskSchema';
 
-import {useDispatch } from 'react-redux';
+import {useDispatch, useSelector } from 'react-redux';
 import { addTask, setModalVisibility } from '../../slices/taskSlice';
 import { taskService } from '../../services/api';
 
 const Modal = ({task=null, onClose}) => {
     const dispatch = useDispatch();
+    const visibleFields = useSelector(state => state.tasks.visibleFields);
     
     const handleClose = () => {
         onClose();
@@ -34,7 +35,7 @@ const Modal = ({task=null, onClose}) => {
                 {task ? (
                     <Panel task={task} onClose={()=>handleClose()}/>
                 ) : (
-                    <Form title='Create Task Form' fields={['title', 'description', 'status']} schema={taskSchema} onSubmit={(taskData)=>handleSubmit(taskData)}/>
+                    <Form title='Create Task Form' fields={visibleFields} schema={taskSchema} onSubmit={(taskData)=>handleSubmit(taskData)}/>
                 )}
                 
             </div>

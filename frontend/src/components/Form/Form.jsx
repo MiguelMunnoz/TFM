@@ -40,41 +40,62 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
     };
 
     const formField = (field) => {
+        const isArrayField = Array.isArray(field); 
 
-        const statusField = (
+        const statusField = isArrayField ? null : (
             <select className={`form-select-input status-${status}`} {...register(field)}>
-                <option className='status-all' value='all'>All</option>
-                <option className='status-pending' value='pending'>Pending</option>
-                <option className='status-in-progress' value='in-progress'>In Progress</option>
-                <option className='status-completed' value='completed'>Completed</option>
+                <option className="status-all" value="all">All</option>
+                <option className="status-pending" value="pending">Pending</option>
+                <option className="status-in-progress" value="in-progress">In Progress</option>
+                <option className="status-completed" value="completed">Completed</option>
             </select>
         );
-            
-        const roleField = (
-            <select className='form-select-input' {...register(field)}>
+
+        const roleField = isArrayField ? null : (
+            <select className="form-select-input" {...register(field)}>
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
             </select>
         );
 
-        const newField = field == 'status' ? (statusField) : ( 
-                         field == 'role' ? (roleField) : (
-                            <input 
-                                {...register(field)}
-                                className='form-input'
-                            />
-                        ));
+        const dateTimeField = isArrayField ? (
+            <div className="date-time-wrapper">
+                {field.map(name => (
+                    <div key={name} className="form-group">
+                        <label className="form-label">
+                            {capitalize(name)}
+                        </label>   
+                        <input
+                            type={name}
+                            {...register(name)}
+                            className="form-input"
+                        />
+                        {errors[name] && <p className="form-errors">{errors[name].message}</p>}
+                    </div>
+                ))}
+            </div>
+        ) : null;
+
+        const newField = isArrayField ? dateTimeField :
+            field === 'status' ? statusField :
+            field === 'role' ? roleField : (
+                <input
+                    {...register(field)}
+                    className="form-input"
+                />
+            );
 
         return (
-            <div className="form-group" key={field}>
-                <label className="form-label">{capitalize(field)}</label>
-                
+            <div className="form-group" key={isArrayField ? field.join('-') : field}>
+                <label className="form-label">
+                    {capitalize(isArrayField ? "" : field)}
+                </label>
                 {newField}
-                
-                {errors[field] && <p className='form-errors'>{errors[field].message}</p>}
+                {(!isArrayField && errors[field]) && <p className="form-errors">{errors[field].message}</p>}
             </div>
-        )
+        );
     };
+
 
     return (
         <div className='form-container'>
