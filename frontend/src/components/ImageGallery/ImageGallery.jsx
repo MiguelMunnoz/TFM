@@ -18,7 +18,6 @@ const ImageGallery = ({ task }) => {
                 urls = await Promise.all(
                     images.map(async (name) => {
                         const url = await imageService.getImageByName(name);
-                        console.log('URL obtenida:', url);
                         return url;
                     })
                 );

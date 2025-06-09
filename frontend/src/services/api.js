@@ -19,13 +19,14 @@ const api = axios.create({
 
 const taskService = {
     getAll: () => {
-        console.log('Enviando peticion...');
         return api.get('/tasks', {
             withCredentials: true
         })
     },
     create: (taskData) => api.post('/tasks', taskData, { withCredentials: true }),
-    update: (id, taskData) => api.put(`/tasks/${id}`, taskData, { withCredentials: true }),
+    update: (id, updatedData) => {
+        return api.put(`/tasks`, {id, updatedData}, { withCredentials: true })
+    },
     delete: (id) => api.delete(`/tasks/${id}`, { withCredentials: true }),
 
     filter: (filter) => api.get('/tasks/filter', {
@@ -56,10 +57,8 @@ const imageService = {
                 responseType: 'blob',
                 withCredentials: true,
             });
-            console.log('Response data:', response.data);
-
+            
             const imageUrl = URL.createObjectURL(response.data); // response.data es el blob
-            console.log('URL generada: ', imageUrl);
             return imageUrl;
         } catch (error) {
             console.error('[ERROR] Error getting image by name: ', error);

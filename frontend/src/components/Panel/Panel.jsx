@@ -1,15 +1,22 @@
 import './Panel.css';
 
 import ImageGallery from '../ImageGallery/ImageGallery';
+import taskSchema from '../Form/taskSchema';
 
-import { useDispatch } from 'react-redux';
-import { removeTask } from '../../slices/taskSlice';
-import { taskService } from '../../services/api';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateTask, removeTask } from '../../slices/taskSlice';
+import { taskService, imageService } from '../../services/api';
+
+import Modal from '../Modal/Modal';
+import Form from '../Form/Form';
 
 const Panel = ({task}) => {
-    const dispatch = useDispatch();
+    const [isEdit, setEdit] = useState(false);
 
-    console.log('Info de la task: ', task);
+    const dispatch = useDispatch();
+    const visibleFields = useSelector(state => state.tasks.visibleFields);
+
     const trashIcon = (
     <svg 
         xmlns="http://www.w3.org/2000/svg"
@@ -32,55 +39,96 @@ const Panel = ({task}) => {
                         });
 
     const handleDelete = (taskId) => {
-        console.log('Id de la tarea que quiero eliminar: ', taskId);
-        // Esperar a que la animación termine
         setTimeout(() => {
             taskService.delete(taskId);
             dispatch(removeTask(taskId));
         }, 500); // Debe coincidir con la duracion en CSS
     };
 
+    const handleEdit = () => {
+        setEdit(true);
+    }
+
+    const handleSave = async (taskData, imageData=undefined) => {
+        try {
+            if(imageData) {
+                const dataImage = await imageService.upload(imageData);
+                if (!dataImage) {
+                    throw new Error('[ERROR] Error uploading files.');
+                }
+            }
+            
+            /*Controlamos duplicados y nos aseguramos de actualizar toda la lista de imagenes*/
+            taskData = {
+                ...taskData, 
+                images: [...new Set([...taskData.images, ...task.images])]
+            }
+
+            const res = await taskService.update(task._id, taskData);
+            dispatch(updateTask(res.data));
+            setEdit(false);
+        } catch (error) {
+            console.error('[ERROR] Error updating task.', error);
+        }
+        
+    }
+
     return (
         <div className="panel-task-card">
-            <section className="task-header">
-                <div className="task-title-status">
-                    <h3 className="task-title">{task.title}</h3>
-                    <span className={`task-status status-${task.status}`}>
-                    {task.status}
-                    </span>
-                </div>
+            {isEdit ? (<Form 
+                            title='Edit Task Form' 
+                            initialData={task} 
+                            fields={visibleFields} 
+                            schema={taskSchema} 
+                            onSubmit={(taskData, imageData)=>handleSave(taskData, imageData)}
+            />):(
+                <>
+                    <section className="task-header">
+                        <div className="task-title-status">
+                            <h3 className="task-title">{task.title}</h3>
+                            <span className={`task-status status-${task.status}`}>
+                                {task.status}
+                            </span>
+                        </div>
 
-                <div className="task-datetime-container">
-                    <div className="datetime-item">
-                        <span role="img" aria-label="calendar">📅</span>
-                        {formattedDate} {/* ejemplo: '05 de junio de 2024' */}
+                        <div className="task-datetime-container">
+                            <div className="datetime-item">
+                                <span role="img" aria-label="calendar">📅</span>
+                                {formattedDate} {/* ejemplo: '05 de junio de 2024' */}
+                            </div>
+                            <div className="datetime-item">
+                                <span role="img" aria-label="clock">🕒</span>
+                                {task.time} {/* ejemplo: '19:13' */}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Description</h4>
+                        <div className="task-description">
+                            <p className="task-description-content">{task.description}</p>
+                        </div>
+                    </section>
+                    
+                    <section>
+                        <ImageGallery task={task}/>
+                    </section>
+
+                    <div className="task-actions">
+                        <button className="update-task-button" onClick={ () => handleEdit(task._id) }>{isEdit ? 'Save' : 'Edit'}</button>
+                        <button className="delete-task-button" onClick={ () => handleDelete(task._id) }>{trashIcon}</button>
                     </div>
-                    <div className="datetime-item">
-                        <span role="img" aria-label="clock">🕒</span>
-                        {task.time} {/* ejemplo: '19:13' */}
-                    </div>
-                </div>
+                </>
+            )
+        }            
 
-            </section>
-
-            <section>
-                <h4>Description</h4>
-                <div className="task-description">
-                    <p className="task-description-content">{task.description}</p>
-                </div>
-            </section>
-            
-            <section>
-                <ImageGallery task={task}/>
-            </section>
-
-            <div className="task-actions">
-                <button className="update-task-button">Edit</button>
-                <button className="delete-task-button" onClick={ () => handleDelete(task._id) }>{trashIcon}</button>
-            </div>
-            
         </div>
     )
+
+    /*Dos opciones: 
+        -Instanciar un Modal y manejar sus props para que me devuelva una Form en lugar de un panel cuando le doy a editar
+        -Instanciar directamente un Form
+    */ 
 }
 
 export default Panel;

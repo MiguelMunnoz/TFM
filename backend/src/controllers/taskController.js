@@ -53,6 +53,7 @@ const taskController = {
 
         async (req, res) => {
             try {
+                console.log('Body recibido:', req.body);
                 const { id, updatedData } = req.body;
                 const response = await updateTask(id, updatedData);
                 res.status(200).json(response);

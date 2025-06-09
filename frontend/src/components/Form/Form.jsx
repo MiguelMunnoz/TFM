@@ -11,15 +11,18 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
         resolver: yupResolver(schema)
     });
     const status = watch('status');
-    
-    useEffect(() => {
-        console.log('Se ha instanciado un nuevo formulario:');
-        console.log('DATOS INICIALES: ', initialData);
-    }, []);
 
     useEffect(() => {
         if (initialData){
-            reset(initialData);
+            const formattedData = {
+                ...initialData,
+                images: null,
+                date: initialData.date
+                    ? new Date(initialData.date).toISOString().split('T')[0]
+                    : null
+            };
+
+            reset(formattedData);
         } 
     }, [initialData, reset]);
 

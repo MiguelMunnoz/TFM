@@ -23,10 +23,10 @@ const tasksSlice = createSlice({
 			state.tasks = state.tasks.filter(task => task._id !== action.payload);
 		},
 		updateTask: (state, action) => {
-			const index = state.tasks.findIndex(task => task._id === action.payload._id);
-			if (index !== -1) {
-				state.tasks[index] = action.payload;
-			}
+			const updatedTask = action.payload;
+			state.tasks = state.tasks.map(task =>
+				task._id === updatedTask._id ? updatedTask : task
+			);
 		},
 		clearTasks(state) {
 			state.tasks = [];

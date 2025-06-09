@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setTasks, setModalVisibility } from '../../slices/taskSlice';
 
 const Tasks = () => {
-	//const [isModalVisible, setModalVisibility] = useState(false);
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks.tasks);
 	const isModalVisible = useSelector((state) => state.tasks.isModalVisible);

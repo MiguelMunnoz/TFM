@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Task.css';
 import Modal from '../Modal/Modal';
 
@@ -20,14 +20,8 @@ const Task = ({task, onDelete}) => {
         <path d="M9 6V4C9 3.45 9.45 3 10 3H14C14.55 3 15 3.45 15 4V6" 
     /></svg>)
 
-    useEffect(()=>{
-        console.log('Task Instanciada: ', task);
-    }, []);
-
 
     const handleEdit = () => {
-        console.log('Click en editar');
-        //dispatch(setModalVisibility(true));
         setShowModal(true);
     }
 
@@ -63,7 +57,7 @@ const Task = ({task, onDelete}) => {
                 </button>
             </div>
 
-            { showModal && <Modal task={task} onClose={ () => setShowModal(false) }/>}
+            { showModal && <Modal taskId={task._id} onClose={ () => setShowModal(false) }/>}
         </>
     )
 }
