@@ -52,9 +52,9 @@ const Tasks = () => {
 					<label htmlFor="status-filter">Status Filter</label>
 					<select id="status-filter" className="input" onChange={(e)=>handleFilter(e.target.value)}>
 						<option value="all">All</option>
-						<option value="pending">Pending</option>
-						<option value="in-progress">In Progress</option>
-						<option value="completed">Completed</option>
+						<option className="status-pending" value="pending">Pending</option>
+						<option className="status-in-progress" value="in-progress">In Progress</option>
+						<option className="status-completed" value="completed">Completed</option>
 					</select>
 				</div>
 			</section>

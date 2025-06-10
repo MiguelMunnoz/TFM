@@ -1,0 +1,24 @@
+.star {
+  position: absolute;
+  top: 0.5rem;
+  right: 3rem;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+
+  font-size: 32px;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s ease;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+  
+
+.star:hover {
+    transform: translateY(-4px);
+}
+
+.star.filled {
+  color: #f5c518; /* color dorado */
+}

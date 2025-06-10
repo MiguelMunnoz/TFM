@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Task.css';
 import Modal from '../Modal/Modal';
+import FavIcon from '../FavIcon/FavIcon';
 
 const Task = ({task, onDelete}) => {
     const [showModal, setShowModal] = useState(false);
@@ -49,6 +50,7 @@ const Task = ({task, onDelete}) => {
                     </div> 
                     <div className='description'>{task.description}</div>
                 </div>
+                <FavIcon className="fav-icon"/>
                 <button className='delete-button' onClick={(e)=> {
                         e.stopPropagation();
                         onDelete(task._id);
