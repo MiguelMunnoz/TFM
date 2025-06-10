@@ -3,24 +3,37 @@ import Task from '../Task/Task';
 import { useState } from 'react';
 import {useDispatch } from 'react-redux';
 import { removeTask } from '../../slices/taskSlice';
-import { taskService } from '../../services/api';
+import { taskService, imageService } from '../../services/api';
 
 const TaskGallery = ({tasks}) => {
     const [deletingTasks, setDeletingTasks] = useState([]);
     const dispatch = useDispatch();
 
     const handleDelete = (taskId) => {
+        const images = tasks.find(task => task._id === taskId).images;
         console.log('Id de la tarea que quiero eliminar: ', taskId);
+
         // Marcar como en proceso de eliminación
         setDeletingTasks((prev) => [...prev, taskId]);
 
         // Esperar a que la animación termine
-        setTimeout(() => {
+        setTimeout(() => {            
             taskService.delete(taskId);
             dispatch(removeTask(taskId));
             setDeletingTasks((prev) => prev.filter((id) => id !== taskId));
+            
+            //Rutina para la eliminacion de imagenes en el servidor
+            deleteImages(images);
         }, 500); // Debe coincidir con la duracion en CSS
+
+        
     };
+
+    const deleteImages = (images) => {
+        images.forEach(img => {
+            imageService.deleteImage(img);
+        });
+    }
 
     return (
         <div className='task-gallery'>

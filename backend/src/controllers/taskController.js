@@ -1,4 +1,5 @@
 const { getTasks, getTaskById, createTask, deleteTask, updateTask, filterTasks } = require('../services/taskServices');
+const { deleteFile } = require('../services/imageServices');
 const { createTaskValidations } = require('../validations/taskValidations');
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = require('../config/config');
@@ -57,6 +58,9 @@ const taskController = {
                 const { id, updatedData } = req.body;
                 const response = await updateTask(id, updatedData);
                 res.status(200).json(response);
+
+
+
             } catch (error) {
                 console.log('[ERROR] Error updating task info: ', error);
                 res.status(500).json({ error: '[ERROR] Error updating task info.' });

@@ -74,9 +74,8 @@ const imageController = {
         async (req, res) => {
             try {
                 const { filename } = req.params;
-                const { taskId } = req.query;
-                console.log(`Eliminando imagen con nombre ${filename} para la tarea con ID: ${taskId}`)
-                await imageService.deleteFile(filename, taskId);
+                console.log(`Eliminando imagenes con nombre ${filename}`)
+                await imageService.deleteFile(filename);
                 res.status(200).json({ message: 'Archivo eliminado exitosamente' });
             } catch (error) {
                 console.log('Error al eliminar archivo:', error);

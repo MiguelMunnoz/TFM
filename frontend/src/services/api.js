@@ -57,14 +57,16 @@ const imageService = {
                 responseType: 'blob',
                 withCredentials: true,
             });
-            
+
             const imageUrl = URL.createObjectURL(response.data); // response.data es el blob
             return imageUrl;
         } catch (error) {
             console.error('[ERROR] Error getting image by name: ', error);
             throw error;
         }
-    }
+    },
+
+    deleteImage: async (imageName) => { await api.delete(`/images/delete/${imageName}`, {withCredentials: true})}
 }
 
 export {

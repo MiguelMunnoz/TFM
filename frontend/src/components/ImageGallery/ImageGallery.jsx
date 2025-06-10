@@ -58,7 +58,7 @@ const ImageGallery = ({ task }) => {
         const res = await taskService.update(task._id, taskData);
         console.log('Tarea actualizada: ', res.data);
         dispatch(updateTask(res.data));
-
+        imageService.deleteImage(images[index]);
     }
 
     return (
