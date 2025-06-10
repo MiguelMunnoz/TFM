@@ -33,6 +33,10 @@ const taskSchema = new mongoose.Schema({
     images: {
         type: [String],
         default: [],
+    },
+    fav: {
+        type: Boolean,
+        default: false
     }
 });
 

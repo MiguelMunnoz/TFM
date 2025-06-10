@@ -50,7 +50,7 @@ const Task = ({task, onDelete}) => {
                     </div> 
                     <div className='description'>{task.description}</div>
                 </div>
-                <FavIcon className="fav-icon"/>
+                <FavIcon className="fav-icon" task={task}/>
                 <button className='delete-button' onClick={(e)=> {
                         e.stopPropagation();
                         onDelete(task._id);

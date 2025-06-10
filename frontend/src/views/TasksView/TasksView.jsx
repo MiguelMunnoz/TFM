@@ -56,6 +56,7 @@ const Tasks = () => {
 						<option className="status-in-progress" value="in-progress">In Progress</option>
 						<option className="status-completed" value="completed">Completed</option>
 					</select>
+					
 				</div>
 			</section>
 

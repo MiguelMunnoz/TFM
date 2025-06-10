@@ -44,7 +44,6 @@ const ImageGallery = ({ task }) => {
     }
 
     const handleDelete = async (index) => {
-        console.log('Eliminando imagen con nombre: ', images[index]);
         
         let updatedImages = Object.values(images);
         updatedImages.splice(index);
@@ -56,7 +55,7 @@ const ImageGallery = ({ task }) => {
 
         dispatch(updateTask(taskData))
         const res = await taskService.update(task._id, taskData);
-        console.log('Tarea actualizada: ', res.data);
+
         dispatch(updateTask(res.data));
         imageService.deleteImage(images[index]);
     }
