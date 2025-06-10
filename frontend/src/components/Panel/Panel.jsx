@@ -65,6 +65,7 @@ const Panel = ({task}) => {
             }
 
             const res = await taskService.update(task._id, taskData);
+            console.log('Tarea actualizada: ', res.data);
             dispatch(updateTask(res.data));
             setEdit(false);
         } catch (error) {
@@ -124,11 +125,6 @@ const Panel = ({task}) => {
 
         </div>
     )
-
-    /*Dos opciones: 
-        -Instanciar un Modal y manejar sus props para que me devuelva una Form en lugar de un panel cuando le doy a editar
-        -Instanciar directamente un Form
-    */ 
 }
 
 export default Panel;

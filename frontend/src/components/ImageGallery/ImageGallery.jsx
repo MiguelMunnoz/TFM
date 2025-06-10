@@ -3,10 +3,14 @@ import { imageService } from '../../services/api';
 import { useEffect, useState } from 'react';
 
 import Image from '../Image/Image';
+import { useDispatch } from 'react-redux';
+import { updateTask } from '../../slices/taskSlice';
+import { taskService } from '../../services/api';
 
 const ImageGallery = ({ task }) => {
     const [imageUrls, setImageUrls] = useState([]);
     const [imageZoomed, setImageZoomed] = useState(null);
+    const dispatch = useDispatch();
     const images = task.images || [];
 
     useEffect(() => {
@@ -39,6 +43,24 @@ const ImageGallery = ({ task }) => {
         setImageZoomed(imgSrc);
     }
 
+    const handleDelete = async (index) => {
+        console.log('Eliminando imagen con nombre: ', images[index]);
+        
+        let updatedImages = Object.values(images);
+        updatedImages.splice(index);
+
+        const taskData = {
+            ...task, 
+            images: updatedImages
+        }
+
+        dispatch(updateTask(taskData))
+        const res = await taskService.update(task._id, taskData);
+        console.log('Tarea actualizada: ', res.data);
+        dispatch(updateTask(res.data));
+
+    }
+
     return (
         <>
             <h4>Images</h4>
@@ -53,7 +75,7 @@ const ImageGallery = ({ task }) => {
                                     className="gallery-image"
                                     onClick={ () => handleClick(imgSrc) }
                                 />
-                                <button className="image-delete-button">X</button>
+                                <button className="image-delete-button" onClick={() => handleDelete(index)}>X</button>
                             </div>
                         ))}
                     </div>
