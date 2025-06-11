@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import './SideBar.css';
 
-const SideBar = ({ onSelect }) => {
+import { Link } from 'react-router-dom';
+
+const SideBar = () => {
   const [active, setActive] = useState('notas');
 
   const items = [
@@ -11,20 +13,20 @@ const SideBar = ({ onSelect }) => {
 
   const handleSelect = (key) => {
     setActive(key);
-    if (onSelect) onSelect(key);
   };
 
   return (
     <aside className="sidebar">
       {items.map(item => (
-        <div
-          key={item.key}
-          className={`sidebar-item ${active === item.key ? 'active' : ''}`}
+        <Link 
+          key={item.key}  
+          to={`/${item.key.toLowerCase()}`}
+          className={`link sidebar-item ${active === item.key ? 'active' : ''}`}
           onClick={() => handleSelect(item.key)}
-        >
-          <span className="icon">{item.icon}</span>
-          <span className="label">{item.label}</span>
-        </div>
+        >  
+            <span className="icon">{item.icon}</span>
+            <span className="label">{item.label}</span>
+        </Link>
       ))}
     </aside>
   );

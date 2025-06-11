@@ -1,5 +1,5 @@
 import NavBar from '../NavBar/NavBar';
-import SideBar from '../../components/SideBar/SideBar';
+import SideBar from '../SideBar/SideBar';
 import { Outlet } from 'react-router-dom';
 
 import './AppLayout.css';
