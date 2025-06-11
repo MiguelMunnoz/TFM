@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import {  } from '../services/api';
-
 const initialState = {
   tasks: [],
   isModalVisible: false,

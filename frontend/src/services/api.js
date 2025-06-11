@@ -29,12 +29,16 @@ const taskService = {
     },
     delete: (id) => api.delete(`/tasks/${id}`, { withCredentials: true }),
 
-    filter: (filter) => api.get('/tasks/filter', {
-        params: {
-            status: filter,
-        },
-        withCredentials: true,
-    })
+    filter: (filter, checked) => { 
+        console.log('Enviando filter=', filter, ' y checked=', checked);
+        return api.get('/tasks/filter', {
+            params: {
+                status: filter,
+                fav: checked
+            },
+            withCredentials: true,
+        })
+    }
 }
 
 const userService = {
@@ -69,8 +73,13 @@ const imageService = {
     deleteImage: async (imageName) => { await api.delete(`/images/delete/${imageName}`, {withCredentials: true})}
 }
 
+const eventService = {
+    create: (eventData) => api.post('/events', eventData, { withCredentials: true }),
+}
+
 export {
     taskService,
     userService,
-    imageService
+    imageService,
+    eventService
 }

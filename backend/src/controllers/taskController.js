@@ -86,17 +86,26 @@ const taskController = {
         async (req, res) => {
             try {
                 
-                const { status } = req.query;
+                const { status, fav } = req.query;
+                console.log('STATUS: ', status);
+                console.log('Favosritos: ', fav);
+                console.log(typeof fav);
                 let filter = {};
-
                 //Añadimos el filtro de status
-                if(status) {
+                if(status) { 
                     if(status.toLowerCase() === 'all') {
                         filter = {};
                     } else {
                         filter.status = status.toLowerCase();
                     }
                 }
+                console.log('FILTRO despues de status: ', filter);
+
+                if(fav === 'true') {
+                    console.log('Hemos encontrado un fav verdadero');
+                    filter.fav = fav
+                }
+                console.log('FILTRO despues de fav: ', filter);
 
                 //A los usuarios sin permisos les impedimos ver otras tareas que no sean las suyas
                 /*const cookie = getCookieInfo(req);
