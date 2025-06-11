@@ -74,7 +74,27 @@ const imageService = {
 }
 
 const eventService = {
+    getAll: () => {
+        return api.get('/events', {
+            withCredentials: true
+        })
+    },
     create: (eventData) => api.post('/events', eventData, { withCredentials: true }),
+    update: (id, updatedData) => {
+        return api.put(`/events`, {id, updatedData}, { withCredentials: true })
+    },
+    delete: (id) => api.delete(`/events/${id}`, { withCredentials: true }),
+
+    filter: (filter, checked) => { 
+        console.log('Enviando filter=', filter, ' y checked=', checked);
+        return api.get('/events/filter', {
+            params: {
+                status: filter,
+                fav: checked
+            },
+            withCredentials: true,
+        })
+    }
 }
 
 export {

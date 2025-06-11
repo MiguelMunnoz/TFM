@@ -3,10 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   events: [],
   isModalVisible: false,
-  visibleFields: ['title', 'status', ['date', 'time'], 'description', 'images'],
+  visibleFields: ['title', 'status', ['date', 'time'], 'details'],
 };
 
-const eventsSlice = createSlice({
+const eventSlice = createSlice({
 	name: 'events',
 	initialState,
 	reducers: {
@@ -31,12 +31,12 @@ const eventsSlice = createSlice({
 		},
 
 		/*Manejo de la visibilidad del modal*/ 
-		setModalVisibility: (state, action) => {
+		setEventModalVisibility: (state, action) => {
 			state.isModalVisible = action.payload;
 		},
 		 
 	}
 });
 
-export const { setEvents, addEvent, removeEvent, updateEvent, clearEvents, setModalVisibility } = eventsSlice.actions;
-export default eventsSlice.reducer;
+export const { setEvents, addEvent, removeEvent, updateEvent, clearEvents, setEventModalVisibility } = eventSlice.actions;
+export default eventSlice.reducer;
