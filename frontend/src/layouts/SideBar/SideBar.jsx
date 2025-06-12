@@ -1,35 +1,32 @@
-import { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import './SideBar.css';
 
-import { Link } from 'react-router-dom';
-
 const SideBar = () => {
-  const [active, setActive] = useState('notas');
+	const location = useLocation();
 
-  const items = [
-    { key: 'Tasks', label: 'Tasks', icon: '✏️' },
-    { key: 'Events', label: 'Events', icon: '🎉'},
-  ];
+	const items = [
+	{ key: 'Tasks', label: 'Tasks', icon: '✏️' },
+	{ key: 'Events', label: 'Events', icon: '🎉' },
+	];
 
-  const handleSelect = (key) => {
-    setActive(key);
-  };
+	const activeKey = items.find(item =>
+	location.pathname.startsWith(`/${item.key.toLowerCase()}`)
+	)?.key;
 
-  return (
-    <aside className="sidebar">
-      {items.map(item => (
-        <Link 
-          key={item.key}  
-          to={`/${item.key.toLowerCase()}`}
-          className={`link sidebar-item ${active === item.key ? 'active' : ''}`}
-          onClick={() => handleSelect(item.key)}
-        >  
-            <span className="icon">{item.icon}</span>
-            <span className="label">{item.label}</span>
-        </Link>
-      ))}
-    </aside>
-  );
+	return (
+	<aside className="sidebar">
+		{items.map(item => (
+		<Link 
+			key={item.key}  
+			to={`/${item.key.toLowerCase()}`}
+			className={`link sidebar-item ${activeKey === item.key ? 'active' : ''}`}
+		>  
+			<span className="icon">{item.icon}</span>
+			<span className="label">{item.label}</span>
+		</Link>
+		))}
+	</aside>
+	);
 };
 
 export default SideBar;
