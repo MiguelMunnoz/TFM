@@ -2,20 +2,26 @@ import './Panel.css';
 
 import ImageGallery from '../ImageGallery/ImageGallery';
 import taskSchema from '../Form/taskSchema';
+import eventSchema from '../Form/eventSchema';
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTask, removeTask } from '../../slices/taskSlice';
-import { taskService, imageService } from '../../services/api';
+import { updateEvent, removeEvent } from '../../slices/eventSlice';
+import { taskService, eventService, imageService } from '../../services/api';
 
 import Modal from '../Modal/Modal';
 import Form from '../Form/Form';
 
-const Panel = ({task}) => {
+const Panel = ({task, event}) => {
+    const item = task || event;
+    const isTask = !!task;
     const [isEdit, setEdit] = useState(false);
 
     const dispatch = useDispatch();
-    const visibleFields = useSelector(state => state.tasks.visibleFields);
+    const visibleFields = useSelector(state =>
+        isTask ? state.tasks.visibleFields : state.events.visibleFields
+    );
 
     const trashIcon = (
     <svg 
@@ -32,24 +38,29 @@ const Panel = ({task}) => {
         <path d="M9 6V4C9 3.45 9.45 3 10 3H14C14.55 3 15 3.45 15 4V6" 
     /></svg>)
 
-    const formattedDate = new Date(task.date).toLocaleDateString('es-ES', {
+    const formattedDate = new Date(item.date).toLocaleDateString('es-ES', {
                             day: '2-digit',
                             month: 'long',
                             year: 'numeric',
                         });
 
-    const handleDelete = (taskId) => {
+    const handleDelete = (id) => {
+        const service = isTask ? taskService : eventService;
+        const action = isTask ? removeTask : removeEvent;
+
         setTimeout(() => {
-            taskService.delete(taskId);
-            dispatch(removeTask(taskId));
-        }, 500); // Debe coincidir con la duracion en CSS
+            service.delete(id);
+            dispatch(action(id));
+        }, 500);
     };
 
     const handleEdit = () => {
         setEdit(true);
     }
 
-    const handleSave = async (taskData, imageData=undefined) => {
+    const handleSave = async (data, imageData=undefined) => {
+        const service = isTask ? taskService : eventService;
+        const updateAction = isTask ? updateTask : updateEvent;
         try {
             if(imageData) {
                 const dataImage = await imageService.upload(imageData);
@@ -59,15 +70,15 @@ const Panel = ({task}) => {
             }
             
             /*Controlamos duplicados y nos aseguramos de actualizar toda la lista de imagenes*/
-            taskData = {
-                ...taskData, 
-                images: [...new Set([...taskData.images, ...task.images])]
-            }
-
-            const res = await taskService.update(task._id, taskData);
-            console.log('Tarea actualizada: ', res.data);
-            dispatch(updateTask(res.data));
+            data = {
+                ...data,
+                images: [...new Set([...(data.images || []), ...(item.images || [])])]
+            };
+            
+            const res = await service.update(item._id, data);
+            dispatch(updateAction(res.data));
             setEdit(false);
+            console.log('Tarea actualizada: ', res.data);
         } catch (error) {
             console.error('[ERROR] Error updating task.', error);
         }
@@ -76,48 +87,67 @@ const Panel = ({task}) => {
 
     return (
         <div className="panel-task-card">
-            {isEdit ? (<Form 
-                            title='Edit Task Form' 
-                            initialData={task} 
-                            fields={visibleFields} 
-                            schema={taskSchema} 
-                            onSubmit={(taskData, imageData)=>handleSave(taskData, imageData)}
-            />):(
+            {isEdit ? (
+                <Form
+                    title={`Edit ${isTask ? 'Task' : 'Event'} Form`}
+                    initialData={item}
+                    fields={visibleFields}
+                    schema={isTask ? taskSchema : eventSchema}
+                    onSubmit={handleSave}
+                />
+            ):(
                 <>
                     <section className="task-header">
                         <div className="task-title-status">
-                            <h3 className="task-title">{task.title}</h3>
-                            <span className={`task-status status-${task.status}`}>
-                                {task.status}
+                            <h3 className="task-title">{item.title}</h3>
+                            <span className={`task-status status-${item.status}`}>
+                                {item.status}
                             </span>
                         </div>
 
                         <div className="task-datetime-container">
                             <div className="datetime-item">
                                 <span role="img" aria-label="calendar">📅</span>
-                                {formattedDate} {/* ejemplo: '05 de junio de 2024' */}
+                                {formattedDate} 
                             </div>
                             <div className="datetime-item">
                                 <span role="img" aria-label="clock">🕒</span>
-                                {task.time} {/* ejemplo: '19:13' */}
+                                {item.time} 
                             </div>
                         </div>
                     </section>
 
                     <section>
                         <h4>Description</h4>
-                        <div className="task-description">
-                            <p className="task-description-content">{task.description}</p>
-                        </div>
+                        {isTask ? (
+                            <div className="task-description">
+                                <p className="task-description-content">{item.description}</p>
+                            </div>
+                        ) : (
+                            <div className="task-description">
+                                <p className="task-description-content">{item.details}</p>
+                            </div>
+                        )}
                     </section>
                     
-                    <section>
-                        <ImageGallery task={task}/>
-                    </section>
+                    {isTask &&
+                        <section>
+                            <ImageGallery task={item}/>
+                        </section>
+                     }
 
                     <div className="task-actions">
-                        <button className="update-task-button" onClick={ () => handleEdit(task._id) }>{isEdit ? 'Save' : 'Edit'}</button>
-                        <button className="delete-task-button" onClick={ () => handleDelete(task._id) }>{trashIcon}</button>
+                        <button 
+                            className="update-task-button" 
+                            onClick={ () => handleEdit() }
+                        >
+                            {isEdit ? 'Save' : 'Edit'}
+                        </button>
+
+                        <button 
+                            className="delete-task-button" 
+                            onClick={ () => handleDelete(item._id) }
+                        >{trashIcon}</button>
                     </div>
                 </>
             )
