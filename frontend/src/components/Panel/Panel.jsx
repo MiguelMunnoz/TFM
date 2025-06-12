@@ -23,6 +23,22 @@ const Panel = ({task, event}) => {
         isTask ? state.tasks.visibleFields : state.events.visibleFields
     );
 
+    const mapIcon = (
+        <svg className="map-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            >
+            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+            <line x1="8" y1="2" x2="8" y2="18" />
+            <line x1="16" y1="6" x2="16" y2="22" />
+        </svg>
+        )
     const trashIcon = (
     <svg 
         xmlns="http://www.w3.org/2000/svg"

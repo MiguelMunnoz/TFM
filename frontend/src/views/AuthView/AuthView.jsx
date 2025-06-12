@@ -68,6 +68,7 @@ const AuthView = () => {
                 <Form
                     key={isLogin ? 'login' : 'register'}
                     title={isLogin ? 'Log In' : 'Register User'}
+                    type={'auth'}
                     fields={isLogin ? ['username', 'password'] : ['username', 'password', 'role'] }
                     schema={isLogin ? loginUserSchema : registerUserSchema}
                     onSubmit={isLogin ? (userData) => handleLogin(userData) : (userData) => handleRegister(userData)}

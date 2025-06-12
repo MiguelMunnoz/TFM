@@ -3,11 +3,23 @@ import * as yup from 'yup';
 const eventSchema = yup.object({
     title: yup
         .string()
-        .required('El titulo es obligatorio'),
+        .required('This field is mandatory'),
     
     details: yup
         .string()
-        .required('La descripcion es obligatoria'),
+        .required('This field is mandatory'),
+
+    date: yup
+        .date()
+        .required('This field is mandatory'),
+
+    country: yup
+        .string()
+        .required('This field is mandatory'),
+
+    city: yup
+        .string()
+        .required('This field is mandatory'),
 
     /*images: yup
         .mixed()

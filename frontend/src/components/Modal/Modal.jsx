@@ -67,13 +67,13 @@ const Modal = ({type='task', taskId=null, eventId=null, onClose}) => {
                 </button>
 
                 {type === 'event' ? (
-                    <Form title='Create Event Form' initialData={null} fields={visibleFields} schema={eventSchema} onSubmit={(eventData, imageData) => handleSubmit(eventData, imageData)}/>
+                    <Form title='Create Event Form' type={'event'} initialData={null} fields={visibleFields} schema={eventSchema} onSubmit={(eventData, imageData) => handleSubmit(eventData, imageData)}/>
                     ) : (event ? (
                         <Panel event={event} onClose={() => handleClose()}/>
                     ) : (task ? (
                         <Panel task={task} onClose={() => handleClose()}/>
                     ) : (
-                        <Form title='Create Task Form' initialData={null} fields={visibleFields} schema={taskSchema} onSubmit={(taskData, imageData)=>handleSubmit(taskData, imageData)}/>    
+                        <Form title='Create Task Form' type={'task'} initialData={null} fields={visibleFields} schema={taskSchema} onSubmit={(taskData, imageData)=>handleSubmit(taskData, imageData)}/>    
                     )))}
             </div>
         </div>

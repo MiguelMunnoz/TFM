@@ -1,18 +1,33 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react';
+import { FormProvider, useForm, Controller } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Select from 'react-select';
+import { CountryRegionData } from '../../utils/CountryRegionData';
 import './Form.css';
 
-const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
-    const isLoading = useSelector(state => state.loading.isLoading);
-
-    const { register, handleSubmit, formState: { errors }, reset, watch } = useForm({
-        resolver: yupResolver(schema)
+const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
+    const methods = useForm({
+        resolver: yupResolver(schema),
     });
+    const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = methods;
     const status = watch('status');
 
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [cityOptions, setCityOptions] = useState([]);
+    //const [selectedCity, setSelectedCity] = useState(null);
+    
+    const countryOptions = CountryRegionData.map(([countryName, countryCode, regions]) => ({
+        label: countryName,
+        value: countryCode,
+        regions: Array.isArray(regions) ? regions.map(region => region.name) : [],
+    }));
+    const isLoading = useSelector(state => state.loading.isLoading);
+
+    
+
     useEffect(() => {
+        console.log('Form type: ', type);
         if (initialData){
             const formattedData = {
                 ...initialData,
@@ -21,6 +36,12 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
                     ? new Date(initialData.date).toISOString().split('T')[0]
                     : null
             };
+
+            const foundCountry = countryOptions.find(c => c.value === initialData.country);
+            if (foundCountry) {
+                setSelectedCountry(foundCountry);
+                setCityOptions(foundCountry.regions.map(city => ({ label: city, value: city })));
+            }
 
             reset(formattedData);
         } 
@@ -62,8 +83,31 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
 
+    const handleCountryChange = (option) => {
+        console.log('Opcion seleccionada: ', option);
+        if (!option || !option.regions) {
+            setSelectedCountry(null);
+            setCityOptions([]);
+            setValue('country', '');
+            setValue('city', '');
+            return;
+        }
+
+        setSelectedCountry(option);
+        setCityOptions(option.regions.map(city => ({ label: city, value: city })));
+        setValue('country', option.value);
+        setValue('city', '');
+    };
+
+    const handleCityChange = (option) => {
+        setValue('city', option.value); // Registramos ciudad en el form
+    };
+
+    const isDateTimeField = (field) => Array.isArray(field) && field.includes('date') && field.includes('time');
+    const isLocationField = (field) => Array.isArray(field) && field.includes('country') && field.includes('city');
+    
     const formField = (field) => {
-        const isArrayField = Array.isArray(field); 
+        const isArrayField = Array.isArray(field);
 
         const statusField = isArrayField ? null : (
             <select className={`form-select-input status-${status}`} {...register(field)}>
@@ -79,8 +123,8 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
                 <option value="admin">Admin</option>
             </select>
         );
-
-        const dateTimeField = isArrayField ? (
+        
+        const dateTimeField = isDateTimeField(field) && (
             <div className="date-time-wrapper">
                 {field.map(name => (
                     <div key={name} className="form-group">
@@ -96,7 +140,64 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
                     </div>
                 ))}
             </div>
-        ) : null;
+        );
+            
+        const locationField = isLocationField(field) && (
+            <div className="location-wrapper">
+                <div className="form-group">
+                    <label className="form-label">{capitalize(field[0])}</label>
+
+                    <Controller
+                        control={methods.control}
+                        name={field[0]}
+                        render={({ field: { onChange, value } }) => (
+                            <Select
+                                options={countryOptions}
+                                value={countryOptions.find(opt => opt.value === value)}
+                                onChange={(selectedOption) => {
+                                    handleCountryChange(selectedOption);
+                                    onChange(selectedOption?.value || '');
+                                }}
+                                placeholder="Select a country"
+                                className="form-select"
+                            />
+                        )}
+                    />
+
+                    {errors[field[0]] && <p className="form-errors">{errors[field[0]].message}</p>}
+                </div>
+
+                {selectedCountry && (
+                    <div className="form-group">
+                        <label className="form-label">{capitalize(field[1])}</label>
+                        <Controller
+                            control={methods.control}
+                            name={field[1]}
+                            render={({ field: { onChange, value } }) => (
+                                <Select
+                                    options={cityOptions}
+                                    value={cityOptions.find(opt => opt.value === value)}
+                                    onChange={(selectedOption) => {
+                                        handleCityChange(selectedOption);
+                                        onChange(selectedOption?.value || '');
+                                    }}
+                                    placeholder="Select a city"
+                                    className="form-select"
+                                />
+                            )}
+                        />
+                        {errors[field[1]] && <p className="form-errors">{errors[field[1]].message}</p>}
+                    </div>
+                )}
+            </div>
+        );
+
+        let compoundField = null;
+        if (isDateTimeField(field)) {
+            compoundField = dateTimeField;
+        } else if (isLocationField(field)) {
+            compoundField = locationField;
+        }
 
         const imageField = isArrayField ? null : (
             <input
@@ -108,7 +209,7 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
             />
         )
 
-        const newField = isArrayField ? dateTimeField :
+        const newField = isArrayField ? compoundField :
             field === 'status' ? statusField :
             field === 'role' ? roleField :  
             field === 'images' ? imageField : (
@@ -131,27 +232,30 @@ const Form = ({title, fields, initialData = null, schema, onSubmit}) => {
 
 
     return (
-        <div className='form-container'>
-            <h2>{title}</h2>
-            <form onSubmit={handleSubmit(submit)}>
-                {fields.map(formField)}
-                <button 
-                    type="submit"
-                    className="nav-button submit"
-                    disabled={isLoading}
-                > 
-                    {isLoading ? 'Cargando...' : 'Enviar'}
-                </button>
+        <FormProvider {...methods}>
+            <div className='form-container'>
+                <h2>{title}</h2>
+                <form onSubmit={handleSubmit(submit)}>
+                    {fields.map(formField)}
 
-                <button 
-                    type="button"
-                    className="nav-button reset"
-                    onClick={()=>handleReset()}
-                > 
-                    Clear
-                </button>
-            </form>
-        </div>
+                    <button 
+                        type="submit"
+                        className="nav-button submit"
+                        disabled={isLoading}
+                    > 
+                        {isLoading ? 'Cargando...' : 'Enviar'}
+                    </button>
+
+                    <button 
+                        type="button"
+                        className="nav-button reset"
+                        onClick={()=>handleReset()}
+                    > 
+                        Clear
+                    </button>
+                </form>
+            </div>
+        </FormProvider>
     );
 }
 

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   events: [],
   isModalVisible: false,
-  visibleFields: ['title', 'status', ['date', 'time'], 'details'],
+  visibleFields: ['title', 'status', ['date', 'time'], ['country', 'city'], 'details'],
 };
 
 const eventSlice = createSlice({
