@@ -8,6 +8,7 @@ const NavBar = () => {
 	return (
 		<nav className="nav-bar">
 			<div className="navMenu-container">
+				<h2>TaskAPI</h2>
 				<ProfileButton/>
 			</div>
 		</nav>

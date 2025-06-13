@@ -6,16 +6,18 @@ const api = axios.create({
     baseURL: URL_API,
     timeout: 10000,
     withCredentials: true,
-    /*
-    withCredentials: true,
-    responseType: 'json',
-    params: {
-        'api_key': 'TU_API_KEY'
-    },
-    */
-    //maxContentLength: 20000, //20KB
-    //maxRedirects: 3
 });
+
+/*Volvemos al login si hay un 403*/
+api.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response?.status === 403 || error.response?.status === 401) {
+      window.location.href = '/';
+    }
+    return Promise.reject(error);
+  }
+);
 
 const taskService = {
     getAll: () => {

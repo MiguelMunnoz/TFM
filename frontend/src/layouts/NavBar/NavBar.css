@@ -19,8 +19,11 @@
 
 .navMenu-container {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
+}
+
+.navMenu-container h2{
+  color: #d6e8f9;
 }
 
 .navMenu-container ul {

@@ -1,22 +1,25 @@
 import './Panel.css';
-
-import ImageGallery from '../ImageGallery/ImageGallery';
 import taskSchema from '../Form/taskSchema';
 import eventSchema from '../Form/eventSchema';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTask, removeTask } from '../../slices/taskSlice';
 import { updateEvent, removeEvent } from '../../slices/eventSlice';
 import { taskService, eventService, imageService } from '../../services/api';
+import { weatherService } from '../../services/weatherApi';
 
 import Modal from '../Modal/Modal';
 import Form from '../Form/Form';
+import ImageGallery from '../ImageGallery/ImageGallery';
+import WeatherInfo from '../WeatherInfo/WeatherInfo';
 
 const Panel = ({task, event}) => {
     const item = task || event;
     const isTask = !!task;
     const [isEdit, setEdit] = useState(false);
+    const [weather, setWeather] = useState(null);
+    const [weatherError, setWeatherError] = useState(null);
 
     const dispatch = useDispatch();
     const visibleFields = useSelector(state =>
@@ -24,21 +27,21 @@ const Panel = ({task, event}) => {
     );
 
     const mapIcon = (
-        <svg className="map-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            >
-            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-            <line x1="8" y1="2" x2="8" y2="18" />
-            <line x1="16" y1="6" x2="16" y2="22" />
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="location-icon">
+
+            <rect x="10" y="10" width="80" height="80" rx="10" ry="10" fill="#4CAF50" />
+            <polygon points="10,60 90,10 90,40 40,90 10,90" fill="#2196F3" opacity="0.7"/>
+            <line x1="10" y1="90" x2="90" y2="10" stroke="#FFEB3B" stroke-width="6" />
+            
+            <path d="M50,20 
+                    C40,20 32,28 32,38 
+                    C32,52 50,72 50,72 
+                    C50,72 68,52 68,38 
+                    C68,28 60,20 50,20 Z" 
+                    fill="#F44336" />
+            <circle cx="50" cy="38" r="6" fill="#B71C1C" />
         </svg>
-        )
+    )
     const trashIcon = (
     <svg 
         xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +62,27 @@ const Panel = ({task, event}) => {
                             month: 'long',
                             year: 'numeric',
                         });
+
+    const formattedLocation = !isTask && (event.country + "/" + event.city);
+
+    useEffect(() => {
+        const fetchWeather = async () => {
+            console.log('Renderizando el weather...')
+            try {
+                const response = await weatherService.getCityWeather(event?.city);
+                setWeather(response.data);
+                setWeatherError(null);
+            } catch (error) {
+                console.error('[ERROR] Error getting weather.', error);
+                setWeather(null);
+                setWeatherError('No weather data for this city!');
+            }
+        };
+
+        if (!isTask && event?.city) {
+            fetchWeather();
+        }
+    }, [isTask, event?.city]);
 
     const handleDelete = (id) => {
         const service = isTask ? taskService : eventService;
@@ -102,7 +126,7 @@ const Panel = ({task, event}) => {
     }
 
     return (
-        <div className="panel-task-card">
+        <div className="panel-item-card">
             {isEdit ? (
                 <Form
                     title={`Edit ${isTask ? 'Task' : 'Event'} Form`}
@@ -113,35 +137,68 @@ const Panel = ({task, event}) => {
                 />
             ):(
                 <>
-                    <section className="task-header">
-                        <div className="task-title-status">
-                            <h3 className="task-title">{item.title}</h3>
-                            <span className={`task-status status-${item.status}`}>
+                    <section className="item-header">
+                        <div className="item-title-status">
+                            <h3 className="item-title">{item.title}</h3>
+                            <span className={`item-status status-${item.status}`}>
                                 {item.status}
                             </span>
                         </div>
 
-                        <div className="task-datetime-container">
-                            <div className="datetime-item">
-                                <span role="img" aria-label="calendar">📅</span>
-                                {formattedDate} 
+                        <div className="item-datetime-container">
+                            <div className="datetime-wrapper">
+                                <div className="datetime-item">
+                                    <span role="img" aria-label="calendar">📅</span>
+                                    {formattedDate} 
+                                </div>
+                                <div className="datetime-item">
+                                    <span role="img" aria-label="clock">🕒</span>
+                                    {item.time} 
+                                </div>
                             </div>
-                            <div className="datetime-item">
-                                <span role="img" aria-label="clock">🕒</span>
-                                {item.time} 
-                            </div>
+                            {!isTask &&
+                                <div className="location-wrapper">
+                                    <div className="event-location-item" >
+                                        <span role="img" aria-label="calendar">{mapIcon}</span>
+                                        {formattedLocation}
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </section>
 
+                    {weather && 
+                        <section className="weather-section">
+                            <h4>Weather</h4>
+                            <div className="weather-container">
+                                <WeatherInfo
+                                    temp={weather.main.temp}
+                                    desc={weather.weather[0].description}
+                                    icon={weather.weather[0].icon}
+                                />
+                            </div>
+ 
+                        </section>
+                    }
+       
+                    {weatherError && (
+                            <section className="weather-section">
+                                <h4>Weather data:</h4>
+                                <div className="weather-container">
+                                    <WeatherInfo errorMessage={weatherError} />
+                                </div>
+                            </section>
+                    )}
+                        
                     <section>
                         <h4>Description</h4>
                         {isTask ? (
-                            <div className="task-description">
-                                <p className="task-description-content">{item.description}</p>
+                            <div className="item-description">
+                                <p className="item-description-content">{item.description}</p>
                             </div>
                         ) : (
-                            <div className="task-description">
-                                <p className="task-description-content">{item.details}</p>
+                            <div className="item-description">
+                                <p className="item-description-content">{item.details}</p>
                             </div>
                         )}
                     </section>
@@ -152,16 +209,16 @@ const Panel = ({task, event}) => {
                         </section>
                      }
 
-                    <div className="task-actions">
+                    <div className="item-actions">
                         <button 
-                            className="update-task-button" 
+                            className="update-item-button" 
                             onClick={ () => handleEdit() }
                         >
                             {isEdit ? 'Save' : 'Edit'}
                         </button>
 
                         <button 
-                            className="delete-task-button" 
+                            className="delete-item-button" 
                             onClick={ () => handleDelete(item._id) }
                         >{trashIcon}</button>
                     </div>

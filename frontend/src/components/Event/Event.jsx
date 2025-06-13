@@ -73,7 +73,6 @@ const Event = ({event, onDelete}) => {
                         });
 
     const formattedLocation = event.country + "/" + event.city;
-    console.log(formattedLocation);
 
     return (
         <>
@@ -82,7 +81,7 @@ const Event = ({event, onDelete}) => {
                     <h3>{event.title}</h3>
                     <span className={`event-status status-${event.status}`}>{event.status}</span>
                     <div className="event-location-container">
-                        <div className="event-location-item">
+                        <div className="event-location-item" >
                             <span role="img" aria-label="calendar">{mapIcon}</span>
                             {formattedLocation}
                         </div>
