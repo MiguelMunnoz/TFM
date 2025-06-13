@@ -48,10 +48,10 @@ const Task = ({task, onDelete}) => {
                             {task.time} {/* ejemplo: '19:13' */}
                         </div>
                     </div> 
-                    <div className='description'>{task.description}</div>
+                    <div className="description">{task.description}</div>
                 </div>
                 <FavIcon className="fav-icon" task={task}/>
-                <button className='delete-button' onClick={(e)=> {
+                <button className="delete-button" onClick={(e)=> {
                         e.stopPropagation();
                         onDelete(task._id);
                     }}>

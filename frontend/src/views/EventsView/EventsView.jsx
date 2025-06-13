@@ -9,10 +9,8 @@ import Event from '../../components/Event/Event'; // Asegúrate de que este comp
 import EventGallery from '../../components/EventGallery/EventGallery';
 import Modal from '../../components/Modal/Modal';
 
-/*Servides*/
+/*Services*/
 import { eventService } from '../../services/api';
-
-/*Redux Toolkit*/
 import { setEvents, setEventModalVisibility } from '../../slices/eventSlice';
 
 const EventsView = () => {
@@ -34,6 +32,20 @@ const EventsView = () => {
 		dispatch(setEventModalVisibility(true))
 	}
 
+	const handleFilter = (statusFilter, favFilter) => {
+		const fetchFilter = async () => {
+			const res = await eventService.filter(statusFilter, favFilter);
+			dispatch(setEvents(res.data));
+		};
+		fetchFilter();
+	}
+
+	const handleFav = (e) => {
+		setChecked(e.target.checked);
+		const statusValue = document.getElementById('status-filter').value;
+		handleFilter(statusValue, e.target.checked);
+	}
+
 	return (
 		<div className="view">
 
@@ -45,7 +57,7 @@ const EventsView = () => {
 				<div className="filter-container">
 					<div className="wrapper status-filter-wrapper">
 						<label className="status-label" htmlFor="status-filter">🔍 Status Filter: </label>
-						<select id="status-filter" className="input">
+						<select id="status-filter" className="input" onChange={(e)=>handleFilter(e.target.value, checked)}>
 							<option value="all">All</option>
 							<option className="status-pending" value="pending">Pending</option>
 							<option className="status-in-progress" value="in-progress">In Progress</option>
@@ -54,7 +66,7 @@ const EventsView = () => {
 					</div>
 					<div className="wrapper fav-filter-wrapper">
 						<label className="fav-label" htmlFor="fav-filter">🌟 Favorites: </label>
-						<input type="checkbox" className="checkbox" name="fav-filter"/>
+						<input type="checkbox" className="checkbox" name="fav-filter" onChange={(e)=>handleFav(e)}/>
 					</div>
 				</div>
 			</section>

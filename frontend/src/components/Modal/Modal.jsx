@@ -7,7 +7,7 @@ import eventSchema from '../Form/eventSchema';
 
 import {useDispatch, useSelector } from 'react-redux';
 import { addTask, setModalVisibility } from '../../slices/taskSlice';
-import { setEventModalVisibility } from '../../slices/eventSlice';
+import { addEvent, setEventModalVisibility } from '../../slices/eventSlice';
 import { taskService, eventService, imageService } from '../../services/api';
 import { useEffect } from 'react';
 
@@ -44,7 +44,7 @@ const Modal = ({type='task', taskId=null, eventId=null, onClose}) => {
         if(type === 'event') {
             console.log('Enviando info del event...');
             const res = await eventService.create(createData);
-            dispatch(addTask(res.data));
+            dispatch(addEvent(res.data));
             dispatch(setEventModalVisibility(false));
         } else {
             const res = await taskService.create(createData);
@@ -68,7 +68,7 @@ const Modal = ({type='task', taskId=null, eventId=null, onClose}) => {
                 </button>
 
                 {type === 'event' ? (
-                    <Form title='Create Event Form' type={'event'} initialData={null} fields={visibleFields} schema={eventSchema} onSubmit={(eventData, imageData) => handleSubmit(eventData, imageData)}/>
+                        <Form title='Create Event Form' type={'event'} initialData={null} fields={visibleFields} schema={eventSchema} onSubmit={(eventData, imageData) => handleSubmit(eventData, imageData)}/>
                     ) : (event ? (
                         <Panel event={event} onClose={() => handleClose()}/>
                     ) : (task ? (

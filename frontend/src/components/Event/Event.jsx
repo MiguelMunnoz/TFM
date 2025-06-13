@@ -115,7 +115,7 @@ const Event = ({event, onDelete}) => {
                     <div className='details'>{event.details}</div>
                 </div>
                 <FavIcon className="fav-icon" event={event}/>
-                <button className='delete-button' onClick={(e)=> {
+                <button className="delete-button" onClick={(e)=> {
                         e.stopPropagation();
                         onDelete(event._id);
                     }}>
