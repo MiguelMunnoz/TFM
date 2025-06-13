@@ -1,0 +1,11 @@
+.dark-wrapper {
+  background-color: grey;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.weather-icon {
+    width: 48px;
+    height: 48px;
+    vertical-align: middle;
+}

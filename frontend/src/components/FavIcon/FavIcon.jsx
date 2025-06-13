@@ -8,6 +8,7 @@ const FavIcon = ({task = null, event = null}) => {
     const [justClicked, setJustClicked] = useState(false);  //Estado que maneja si el icono debe renderizar la animacion de recien clickado
 
     const handleClick = (e) => {
+        console.log('Click');
         e.stopPropagation();
         const newFilled = !filled;
         setFilled(newFilled);

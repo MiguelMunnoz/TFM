@@ -46,7 +46,7 @@ const EventGallery = ({events}) => {
                         <Event key={event._id} event={event} onDelete={()=>handleDelete(event._id)}/>
                     </div>
                 ))) : (
-                    <p>There are no events yet...</p>
+                    <p>There are no matching events...</p>
             )}
         </div>
         

@@ -88,7 +88,7 @@ const taskController = {
                 
                 const { status, fav } = req.query;
                 console.log('STATUS: ', status);
-                console.log('Favosritos: ', fav);
+                console.log('Favoritos: ', fav);
                 console.log(typeof fav);
                 let filter = {};
                 //Añadimos el filtro de status

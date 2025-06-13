@@ -40,16 +40,35 @@
   margin-bottom: 12px;
 }
 
-.event-datetime-container {
+.event-location-item {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Espacio entre el ícono y el texto */
+}
+
+.location-icon {
+  height: 32px;
+  width: 32px;
+}
+
+.event-general-info-container {
   display: flex;
   gap: 20px;
   margin-bottom: 12px;
   font-size: 0.95rem;
 }
 
+.datetime-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .datetime-item {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
 }
 
@@ -86,3 +105,5 @@
 .delete-button:hover {
   transform: scale(1.1); /* Opcional: pequeño zoom al pasar el ratón */
 }
+
+

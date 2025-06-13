@@ -45,6 +45,7 @@ const eventController = {
     updateEventController: [
         async (req, res) => {
             try {
+                console.log('Actualizando evento...');
                 const { id, updatedData } = req.body;
                 const response = await updateEvent(id, updatedData);
                 res.status(200).json(response);
@@ -71,7 +72,10 @@ const eventController = {
     filterEventsController: [
         async (req, res) => {
             try {
-                const { status } = req.query;
+                const { status, fav } = req.query;
+                console.log('STATUS: ', status);
+                console.log('Favoritos: ', fav);
+                console.log(typeof fav);
                 let filter = {};
 
                 //Añadimos el filtro de status
@@ -89,6 +93,12 @@ const eventController = {
                 if (role !== 'admin') {
                     filter.userID = cookie.userId;
                 }*/
+
+                if(fav === 'true') {
+                    console.log('Hemos encontrado un fav verdadero');
+                    filter.fav = fav
+                }
+                console.log('FILTRO despues de fav: ', filter);
 
                 const data = await filterEvents(filter);
                 res.status(200).json(data);

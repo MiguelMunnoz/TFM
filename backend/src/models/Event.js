@@ -36,6 +36,10 @@ const eventSchema = new mongoose.Schema({
     trelloID: {
         type: String,
         require: true,
+    },
+    fav: {
+        type: Boolean,
+        default: false
     }
 });
 

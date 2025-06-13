@@ -46,7 +46,7 @@ const TaskGallery = ({tasks}) => {
                         <Task key={task._id} task={task} onDelete={()=>handleDelete(task._id)}/>
                     </div>
                 ))) : (
-                    <p>No se encontraron tareas</p>
+                    <p>There are no matching tasks...</p>
             )}
         </div>
         

@@ -3,7 +3,7 @@ import './Event.css';
 import Modal from '../Modal/Modal';
 import FavIcon from '../FavIcon/FavIcon';
 import { weatherService } from '../../services/weatherApi';
-import { WeatherInfo } from '../../utils/paintWeatherInfo';
+import WeatherInfo from '../WeatherInfo/WeatherInfo';
 
 const Event = ({event, onDelete}) => {
     const [showModal, setShowModal] = useState(false);
@@ -27,20 +27,21 @@ const Event = ({event, onDelete}) => {
     )
 
     const mapIcon = (
-        <svg className="map-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            >
-            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-            <line x1="8" y1="2" x2="8" y2="18" />
-            <line x1="16" y1="6" x2="16" y2="22" />
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="location-icon">
+
+            <rect x="10" y="10" width="80" height="80" rx="10" ry="10" fill="#4CAF50" />
+            <polygon points="10,60 90,10 90,40 40,90 10,90" fill="#2196F3" opacity="0.7"/>
+            <line x1="10" y1="90" x2="90" y2="10" stroke="#FFEB3B" stroke-width="6" />
+            
+            <path d="M50,20 
+                    C40,20 32,28 32,38 
+                    C32,52 50,72 50,72 
+                    C50,72 68,52 68,38 
+                    C68,28 60,20 50,20 Z" 
+                    fill="#F44336" />
+            <circle cx="50" cy="38" r="6" fill="#B71C1C" />
         </svg>
+
     )
 
     useEffect(() => {
@@ -80,15 +81,24 @@ const Event = ({event, onDelete}) => {
                 <div className='event-info'>
                     <h3>{event.title}</h3>
                     <span className={`event-status status-${event.status}`}>{event.status}</span>
-                    <div className="event-datetime-container">
-                        <div className="datetime-item">
-                            <span role="img" aria-label="calendar">📅</span>
-                            {formattedDate}
+                    <div className="event-location-container">
+                        <div className="event-location-item">
+                            <span role="img" aria-label="calendar">{mapIcon}</span>
+                            {formattedLocation}
                         </div>
-                        <div className="datetime-item">
-                            <span role="img" aria-label="clock">🕒</span>
-                            {event.time} 
+                    </div>
+                    <div className="event-general-info-container">
+                        <div className="datetime-container">
+                            <div className="datetime-item">
+                                <span role="img" aria-label="calendar">📅</span>
+                                {formattedDate}
+                            </div>
+                            <div className="datetime-item">
+                                <span role="img" aria-label="clock">🕒</span>
+                                {event.time} 
+                            </div>
                         </div>
+                        
 
                         {weather && (
                             <div className="datetime-item weather-info">
@@ -105,12 +115,6 @@ const Event = ({event, onDelete}) => {
                             </div>
                         )}
                         
-                    </div>
-                    <div className="location-container">
-                        <div className="location-item">
-                            <span role="img" aria-label="calendar">{mapIcon}</span>
-                            {formattedLocation}
-                        </div>
                     </div>
                     <div className='details'>{event.details}</div>
                 </div>

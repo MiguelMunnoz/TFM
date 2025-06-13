@@ -15,6 +15,7 @@ import { setEvents, setEventModalVisibility } from '../../slices/eventSlice';
 
 const EventsView = () => {
 	const [checked, setChecked] = useState(false);
+	const [status, setStatus] = useState('all');
 	const dispatch = useDispatch();
 	const events = useSelector((state) => state.events.events);
 	const isModalVisible = useSelector((state) => state.events.isModalVisible);
@@ -42,9 +43,21 @@ const EventsView = () => {
 
 	const handleFav = (e) => {
 		setChecked(e.target.checked);
-		const statusValue = document.getElementById('status-filter').value;
-		handleFilter(statusValue, e.target.checked);
+		handleFilter(status, e.target.checked);
 	}
+
+	const getStatusClass = (value) => {
+		switch (value) {
+			case 'pending':
+				return 'status-pending';
+			case 'in-progress':
+				return 'status-in-progress';
+			case 'completed':
+				return 'status-completed';
+			default:
+				return 'status-all';
+		}
+	};
 
 	return (
 		<div className="view">
@@ -57,7 +70,14 @@ const EventsView = () => {
 				<div className="filter-container">
 					<div className="wrapper status-filter-wrapper">
 						<label className="status-label" htmlFor="status-filter">🔍 Status Filter: </label>
-						<select id="status-filter" className="input" onChange={(e)=>handleFilter(e.target.value, checked)}>
+						<select 
+							id="status-filter" 
+							className={`input ${getStatusClass(status)}`} 
+							onChange={(e)=>{
+								setStatus(e.target.value);
+								handleFilter(e.target.value, checked);
+							}}
+						>
 							<option value="all">All</option>
 							<option className="status-pending" value="pending">Pending</option>
 							<option className="status-in-progress" value="in-progress">In Progress</option>
