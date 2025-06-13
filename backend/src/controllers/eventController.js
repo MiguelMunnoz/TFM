@@ -31,6 +31,7 @@ const eventController = {
     createEventController: [
         async (req, res) => {
             try {
+                console.log('Datos que llegan al servidor: ', req.body);
                 const eventData = req.body;
                 const response = await createEvent(eventData);
                 res.status(201).json(response);
