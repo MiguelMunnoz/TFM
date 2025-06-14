@@ -55,21 +55,21 @@ const imageController = {
         }
     ],
     getImage: [
-    async (req, res) => {
-        const { filename } = req.params;
+        async (req, res) => {
+            const { filename } = req.params;
 
-        try {
-            const info = await imageService.getFile(filename);
-            console.log('Info tras obtener la imagen en el server: ', info);
+            try {
+                const info = await imageService.getFile(filename);
+                console.log('Info tras obtener la imagen en el server: ', info);
 
-            res.set('Content-Type', info.contentType);
-            res.send(info.imageBuffer);
-        } catch (error) {
-            console.log('[ERROR] Error getting files: ', error);
-            res.status(500).json({ error: 'Error getting files' });
+                res.set('Content-Type', info.contentType);
+                res.send(info.imageBuffer);
+            } catch (error) {
+                console.log('[ERROR] Error getting files: ', error);
+                res.status(500).json({ error: 'Error getting files' });
+            }
         }
-    }
-],
+    ],
     deleteImage: [
         async (req, res) => {
             try {
@@ -82,7 +82,7 @@ const imageController = {
                 res.status(404).json({ error: 'Archivo no encontrado' });
             }
         }
-    ]
+    ],
 }
 
 module.exports = imageController;

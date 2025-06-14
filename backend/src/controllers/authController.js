@@ -95,7 +95,7 @@ const authController = {
                 res.status(500).json({ error: '[ERROR] Error logging out ' });
             }
         }
-    ]
+    ],
 };
 
 module.exports = authController;

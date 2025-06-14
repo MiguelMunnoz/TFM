@@ -25,7 +25,11 @@ const ImageGallery = ({ task }) => {
                         return url;
                     })
                 );
-                if (active) setImageUrls(urls);
+                
+                if (active) {
+                    setImageUrls(urls);
+                }
+
             } catch (err) {
                 console.error('Error cargando imágenes:', err);
             }
