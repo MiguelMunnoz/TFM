@@ -37,7 +37,6 @@ const AuthView = () => {
             console.log('Usuario registrado: ', userRegistered.data);
             setLogin(true);  
         }
-        
     }
      
     const handleLogin = async (userData) => {
@@ -48,8 +47,6 @@ const AuthView = () => {
             if (response.status === 200) {
                 dispatch(setUser(response.data));
 
-                console.log('Login exitoso. Redirigiendo...');
-                //window.location.href = '/tasks'; // Fuerza recarga para que se reconozca la cookie
                 setTimeout(() => {
                     dispatch(stopLoading());
                     navigate('tasks');

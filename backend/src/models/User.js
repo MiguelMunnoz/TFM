@@ -12,11 +12,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    role: {
+    profilePic: {
         type: String,
-        enum: ['user', 'admin'],
-        default: 'user',
-        required: true,
+        default: 'profilePic.png',
+        required: true
     }
     
 });

@@ -87,18 +87,20 @@ const eventController = {
                     }
                 }
 
-                //A los usuarios sin permisos les impedimos ver otras tareas que no sean las suyas
-                /*const cookie = getCookieInfo(req);
-                const role = cookie.role;
-                if (role !== 'admin') {
-                    filter.userID = cookie.userId;
-                }*/
-
                 if(fav === 'true') {
                     console.log('Hemos encontrado un fav verdadero');
                     filter.fav = fav
                 }
                 console.log('FILTRO despues de fav: ', filter);
+
+                //A los usuarios sin permisos les impedimos ver otras tareas que no sean las suyas
+                const cookie = getCookieInfo(req);
+                filter.userID = cookie.userId;
+                /*const role = cookie.role;
+                if (role !== 'admin') {
+                    
+                }*/
+                console.log('Filtro despues de recoger el userId: ' , filter);
 
                 const data = await filterEvents(filter);
                 res.status(200).json(data);

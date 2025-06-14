@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
 import './ProfileMenu.css';
 
+import { clearUser } from '../../slices/userSlice';
+import { useDispatch } from 'react-redux';
+
 const menuItems = [
   { to: '/', label: 'Cerrar Sesión', modifier: 'logout' },
 ];
 
 const ProfileMenu = () => {
+    const dispatch = useDispatch();
 
     return (
         <nav className="profile-menu">
@@ -18,7 +22,11 @@ const ProfileMenu = () => {
                 </div>
             {menuItems.map(({ to, label, modifier }) => (
                 <li key={to} className={`dropdown-item dropdown-item--${modifier}`}>
-                    <Link to={to} className="dropdown-item__link" >{label}</Link>
+                    <Link 
+                        to={to} 
+                        className="dropdown-item__link"
+                        onClick={()=>dispatch(clearUser())} 
+                    >{label}</Link>
                 </li>
             ))}
             </ul>

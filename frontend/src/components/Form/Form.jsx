@@ -7,6 +7,7 @@ import { CountryRegionData } from '../../utils/CountryRegionData';
 import './Form.css';
 
 const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
+    const selectedUser = useSelector(state => state.user.selectedUser);
     const methods = useForm({
         resolver: yupResolver(schema),
     });
@@ -23,8 +24,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
         regions: Array.isArray(regions) ? regions.map(region => region.name) : [],
     }));
     const isLoading = useSelector(state => state.loading.isLoading);
-
-    
 
     useEffect(() => {
         console.log('Form type: ', type);
@@ -54,15 +53,21 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     const submit = (data) => {
         const files = data.images ? Array.from(data.images) : [];
         let filenames = readInputFiles(files);
+        console.log('ID del usuario que crea el evento/tarea: ', selectedUser);
 
-        const formData = {
-            ...data,
-            images: filenames,
+        let formData = {
+            ...data
         };
+        if(type !== 'auth') {
+            formData = {
+                ...formData,
+                userID: selectedUser.userId,
+                images: filenames,
+            }
+        }
 
-        console.log('Recogiendo datos del formulario: ', data);
+        console.log('Enviando info: ', formData);
         if(data.images && data.images.length > 0) {
-            console.log('Entramos aqui si hay iamgenes...');
             
             //Costruimos los datos de los archivos para enviarlos al servidor
             const imageData = new FormData();
@@ -74,7 +79,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
         } else {
             onSubmit(formData);
         }
-        
     };
 
     const readInputFiles = files => Array.from(files).map(file => file.name);
@@ -218,7 +222,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
                     className="form-input"
                 />
             );
-
+        
         return (
             <div className="form-group" key={isArrayField ? field.join('-') : field}>
                 <label className="form-label">
@@ -229,7 +233,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
             </div>
         );
     };
-
 
     return (
         <FormProvider {...methods}>

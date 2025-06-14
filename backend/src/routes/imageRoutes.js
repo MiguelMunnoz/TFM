@@ -7,10 +7,10 @@ const imageController = require('../controllers/imageController');
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.post('/upload', authenticate, authorizeRole('admin'), upload.array('file'), imageController.uploadImage);
-router.get('/download/:filename', authenticate, authorizeRole('user', 'admin'), imageController.downloadImage);
-router.get('/list', authenticate, authorizeRole('user', 'admin'), imageController.listImages);
-router.get('/list/:filename', authenticate, authorizeRole('user', 'admin'), imageController.getImage);
-router.delete('/delete/:filename', authenticate, authorizeRole('admin'), imageController.deleteImage);
+router.post('/upload', authenticate, upload.array('file'), imageController.uploadImage);
+router.get('/download/:filename', authenticate, imageController.downloadImage);
+router.get('/list', authenticate, imageController.listImages);
+router.get('/list/:filename', authenticate, imageController.getImage);
+router.delete('/delete/:filename', authenticate, imageController.deleteImage);
 
 module.exports = router; 

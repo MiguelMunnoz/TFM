@@ -31,7 +31,7 @@ const taskService = {
     },
     delete: (id) => api.delete(`/tasks/${id}`, { withCredentials: true }),
 
-    filter: (filter, checked) => { 
+    filter: (filter=null, checked=null) => { 
         console.log('Enviando filter=', filter, ' y checked=', checked);
         return api.get('/tasks/filter', {
             params: {

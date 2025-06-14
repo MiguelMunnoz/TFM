@@ -89,7 +89,8 @@ const taskController = {
                 const { status, fav } = req.query;
                 console.log('STATUS: ', status);
                 console.log('Favoritos: ', fav);
-                console.log(typeof fav);
+                const cookie = getCookieInfo(req);
+                console.log('UserId: ', cookie.userId);
                 let filter = {};
                 //Añadimos el filtro de status
                 if(status) { 
@@ -108,11 +109,13 @@ const taskController = {
                 console.log('FILTRO despues de fav: ', filter);
 
                 //A los usuarios sin permisos les impedimos ver otras tareas que no sean las suyas
-                /*const cookie = getCookieInfo(req);
-                const role = cookie.role;
+                
+                filter.userID = cookie.userId;
+                /*const role = cookie.role;
                 if (role !== 'admin') {
-                    filter.userID = cookie.userId;
+                    
                 }*/
+               console.log('Filtro despues de recoger el userId: ' , filter);
 
                 const data = await filterTasks(filter);
                 res.status(200).json(data);

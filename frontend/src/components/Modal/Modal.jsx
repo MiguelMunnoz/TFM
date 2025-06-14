@@ -42,7 +42,6 @@ const Modal = ({type='task', taskId=null, eventId=null, onClose}) => {
 
         console.log('Enviando info...');
         if(type === 'event') {
-            console.log('Enviando info del event...');
             const res = await eventService.create(createData);
             dispatch(addEvent(res.data));
             dispatch(setEventModalVisibility(false));

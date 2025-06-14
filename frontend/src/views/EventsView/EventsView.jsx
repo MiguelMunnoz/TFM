@@ -23,7 +23,7 @@ const EventsView = () => {
 	/*Recargamos la lista cada vez que se modifique el array de eventos*/
 	useEffect(() => {
 		const fetchEvents = async () => {
-			const res = await eventService.getAll();
+			const res = await eventService.filter();
 			dispatch(setEvents(res.data));
 		};
 		fetchEvents();

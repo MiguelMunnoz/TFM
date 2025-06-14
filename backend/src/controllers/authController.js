@@ -73,7 +73,8 @@ const authController = {
 
                 res.json({
                     message: 'Login success',
-                    role: user.role,
+                    userId: user._id,
+                    profilePic: user.profilePic,
                     jwt: token
                 });
             } catch (error) {

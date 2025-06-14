@@ -19,11 +19,20 @@ const TasksView = () => {
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks.tasks);
 	const isModalVisible = useSelector((state) => state.tasks.isModalVisible);
+	const user = useSelector(state => state.user.selectedUser); // O como se llame tu estado
+
+	useEffect(() => {
+		if (user) {
+			console.log('✅ Usuario cargado:', user);
+		} else {
+			console.warn('❌ Usuario no está en el estado aún');
+		}
+	}, [user]);
 
 	/*Recargamos la lista cada vez que se modifique el array de tareas*/
 	useEffect(() => {
 		const fetchTasks = async () => {
-			const res = await taskService.getAll();
+			const res = await taskService.filter();
 			dispatch(setTasks(res.data));
 		};
 		fetchTasks();
