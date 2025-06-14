@@ -9,13 +9,15 @@ const menuItems = [
 ];
 
 const ProfileMenu = () => {
+    const user = JSON.parse(localStorage.getItem('loggedUser'));
+    console.log('Email del usuario loggeado: ', user.userMail);
     const dispatch = useDispatch();
 
     return (
         <nav className="profile-menu">
             <ul className="dropdown-content">
                 <div className="username-container">
-                    Nombre: Miguel
+                    {user.userMail}
                 </div>
                 <div className="profile-image-container">
 

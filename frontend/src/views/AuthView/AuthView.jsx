@@ -45,6 +45,7 @@ const AuthView = () => {
             const response = await userService.login(userData);
 
             if (response.status === 200) {
+                localStorage.setItem('loggedUser', JSON.stringify(response.data));
                 dispatch(setUser(response.data));
 
                 setTimeout(() => {

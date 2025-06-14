@@ -74,6 +74,7 @@ const authController = {
                 res.json({
                     message: 'Login success',
                     userId: user._id,
+                    userMail: user.email,
                     profilePic: user.profilePic,
                     jwt: token
                 });
