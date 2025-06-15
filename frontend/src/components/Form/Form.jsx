@@ -16,7 +16,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
 
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [cityOptions, setCityOptions] = useState([]);
-    //const [selectedCity, setSelectedCity] = useState(null);
     
     const countryOptions = CountryRegionData.map(([countryName, countryCode, regions]) => ({
         label: countryName,
@@ -121,12 +120,12 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
             </select>
         );
 
-        const roleField = isArrayField ? null : (
+        /*const roleField = isArrayField ? null : (
             <select className="form-select-input" {...register(field)}>
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
             </select>
-        );
+        );*/
         
         const dateTimeField = isDateTimeField(field) && (
             <div className="date-time-wrapper">
@@ -215,7 +214,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
 
         const newField = isArrayField ? compoundField :
             field === 'status' ? statusField :
-            field === 'role' ? roleField :  
+            //field === 'role' ? roleField :  
             field === 'images' ? imageField : (
                 <input
                     {...register(field)}

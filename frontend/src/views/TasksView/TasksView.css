@@ -15,7 +15,9 @@
 
 /* Sección superior con filtros y botones */
 .header-section {
-    position: static;
+    position: sticky;
+    top: 5rem;
+    z-index: 100; /* Asegura que quede por encima de otros elementos */
 
     display: flex;
     flex-direction: row;
@@ -158,6 +160,12 @@
     margin-top: 0.5rem;
     border-top: 1px solid grey;
     padding-top: 1rem;
+  }
+}
+
+@media (max-width: 730px) {
+  .view {
+    margin-left: 60px;
   }
 }
 

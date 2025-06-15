@@ -35,6 +35,20 @@
   color: #374151;
 }
 
+.form-group .form-select {
+  border-radius: 6px;
+}
+
+.form-group .form-select:hover {
+  box-shadow: (37, 99, 235, 0.2) 0px 0px 0px 3px;
+  outline: none;
+  border-color: #2563eb;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  background-color: black;
+}
+
+
 .form-input {
   padding: 0.6rem 0.75rem;
   font-size: 1rem;
