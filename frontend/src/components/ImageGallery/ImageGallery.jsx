@@ -70,9 +70,6 @@ const ImageGallery = ({ task }) => {
             dispatch(updateTask(res.data));
 
             await imageService.deleteImage(deletedImage);
-
-            
-
         } catch (error) {
             console.error('[ERROR] Error deleting image:', error);
         } finally {

@@ -18,6 +18,8 @@ const Panel = ({task, event}) => {
     const item = task || event;
     const isTask = !!task;
     const [isEdit, setEdit] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
     const [weather, setWeather] = useState(null);
     const [weatherError, setWeatherError] = useState(null);
 
@@ -84,19 +86,33 @@ const Panel = ({task, event}) => {
         }
     }, [isTask, event?.city]);
 
-    const handleDelete = (id) => {
-        const service = isTask ? taskService : eventService;
-        const action = isTask ? removeTask : removeEvent;
-
-        setTimeout(() => {
-            service.delete(id);
-            dispatch(action(id));
-        }, 500);
-    };
-
     const handleEdit = () => {
         setEdit(true);
     }
+
+    const handleDelete = () => {
+        setDeleteId(item._id);
+        setShowConfirm(true);
+    }
+
+    const confirmDelete = async () => {
+        if (!deleteId){
+            return;
+        } 
+
+        const service = isTask ? taskService : eventService;
+        const action = isTask ? removeTask : removeEvent;
+
+        try {
+            await service.delete(deleteId);
+            dispatch(action(deleteId));
+        } catch (error) {
+            console.error('[ERROR] Error deleting item:', error);
+        } finally {
+            setShowConfirm(false);
+            setDeleteId(null);
+        }
+    };
 
     const handleSave = async (data, imageData=undefined) => {
         const service = isTask ? taskService : eventService;
@@ -217,11 +233,18 @@ const Panel = ({task, event}) => {
                             {isEdit ? 'Save' : 'Edit'}
                         </button>
 
-                        <button 
-                            className="delete-item-button" 
-                            onClick={ () => handleDelete(item._id) }
-                        >{trashIcon}</button>
+                        <button className="delete-item-button" onClick={() => handleDelete()}> 
+                            {trashIcon} 
+                        </button>
                     </div>
+
+                    {showConfirm && (
+                        isTask ? (
+                            <Modal type='task' mode='delete' taskId={task._id} onClose={() => setShowConfirm(false)} onDeleteConfirm={confirmDelete}/>
+                        ) : (
+                            <Modal type='event' mode='delete' taskId={event._id} onClose={() => setShowConfirm(false)} onDeleteConfirm={confirmDelete}/>
+                        )
+                    )}
                 </>
             )
         }            
