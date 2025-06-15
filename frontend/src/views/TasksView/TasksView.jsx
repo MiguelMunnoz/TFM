@@ -88,7 +88,7 @@ const TasksView = () => {
 					</div>
 					<div className="wrapper fav-filter-wrapper">
 						<label className="fav-label" htmlFor="fav-filter">🌟 Favorites: </label>
-						<input type="checkbox" className="checkbox" name="fav-filter" onChange={(e)=>handleFav(e)} />
+						<input type="checkbox" className="checkbox" id="fav-filter" onChange={(e)=>handleFav(e)} />
 					</div>
 				</div>
 			</section>
@@ -97,7 +97,7 @@ const TasksView = () => {
 				<TaskGallery tasks={tasks}/>
 			</section>
 
-			{ isModalVisible && <Modal onClose={()=> dispatch(setModalVisibility(false))}/>}
+			{ isModalVisible && <Modal type='task' mode='create' onClose={()=> dispatch(setModalVisibility(false))}/>}
 
 		</div>
 	);

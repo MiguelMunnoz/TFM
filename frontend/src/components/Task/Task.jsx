@@ -2,9 +2,11 @@ import { useState } from 'react';
 import './Task.css';
 import Modal from '../Modal/Modal';
 import FavIcon from '../FavIcon/FavIcon';
+import ConfirmMessage from '../ConfirmMessage/ConfirmMessage';
 
 const Task = ({task, onDelete}) => {
     const [showModal, setShowModal] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const trashIcon = (
     <svg 
@@ -25,6 +27,16 @@ const Task = ({task, onDelete}) => {
     const handleEdit = () => {
         setShowModal(true);
     }
+
+    const handleDelete = (e) => {
+        e.stopPropagation();
+        setShowConfirm(true); // Muestra el modal de confirmación
+    };
+
+    const confirmDelete = () => {
+        onDelete(task._id);    // Llama al padre para eliminar la tarea
+        setShowConfirm(false); // Cierra el modal de confirmación
+    };
 
     const formattedDate = new Date(task.date).toLocaleDateString('es-ES', {
                             day: '2-digit',
@@ -51,15 +63,16 @@ const Task = ({task, onDelete}) => {
                     <div className="description">{task.description}</div>
                 </div>
                 <FavIcon className="fav-icon" task={task}/>
-                <button className="delete-button" onClick={(e)=> {
-                        e.stopPropagation();
-                        onDelete(task._id);
-                    }}>
+                <button className="delete-button" onClick={(e) => handleDelete(e)}>
                     {trashIcon}
                 </button>
             </div>
 
-            { showModal && <Modal taskId={task._id} onClose={ () => setShowModal(false) }/>}
+            { showModal && <Modal type='task' mode='view' taskId={task._id} onClose={ () => setShowModal(false) }/>}
+
+            { showConfirm && (
+                <Modal type='task' mode='delete' taskId={task._id} onClose={() => setShowConfirm(false)} onDeleteConfirm={confirmDelete}/>
+            )}
         </>
     )
 }

@@ -95,7 +95,7 @@ const EventsView = () => {
 				<EventGallery events={events}/>
 			</section>
 
-			{ isModalVisible && <Modal type={'event'} onClose={()=> dispatch(setEventModalVisibility(false))}/>}
+			{ isModalVisible && <Modal type='event' mode='create' onClose={()=> dispatch(setEventModalVisibility(false))}/>}
 
 		</div>
 	);

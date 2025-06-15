@@ -7,6 +7,7 @@ import WeatherInfo from '../WeatherInfo/WeatherInfo';
 
 const Event = ({event, onDelete}) => {
     const [showModal, setShowModal] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const [weather, setWeather] = useState(null);
     const [weatherError, setWeatherError] = useState(null);
 
@@ -64,6 +65,15 @@ const Event = ({event, onDelete}) => {
     const handleEdit = () => {
         setShowModal(true);
     }
+    const handleDelete = (e) => {
+        e.stopPropagation();
+        setShowConfirm(true); 
+    };
+
+    const confirmDelete = () => {
+        onDelete(event._id);
+        setShowConfirm(false); 
+    };
 
     const formattedDate = new Date(event.date).toLocaleDateString('es-ES', {
                             day: '2-digit',
@@ -117,15 +127,15 @@ const Event = ({event, onDelete}) => {
                     <div className='details'>{event.details}</div>
                 </div>
                 <FavIcon className="fav-icon" event={event}/>
-                <button className="delete-button" onClick={(e)=> {
-                        e.stopPropagation();
-                        onDelete(event._id);
-                    }}>
+                <button className="delete-button" onClick={(e) => handleDelete(e)}>
                     {trashIcon}
                 </button>
             </div>
 
-            { showModal && <Modal eventId={event._id} onClose={ () => setShowModal(false) }/>}
+            { showModal && <Modal type='event' mode='view' eventId={event._id} onClose={ () => setShowModal(false) }/>}
+            { showConfirm && (
+                <Modal type='event' mode='delete' taskId={event._id} onClose={() => setShowConfirm(false)} onDeleteConfirm={confirmDelete}/>
+            )}
         </>
     )
 }

@@ -11,9 +11,6 @@ const EventGallery = ({events}) => {
 
     const handleDelete = (eventId) => {
         const images = events.find(event => event._id === eventId).images;
-        console.log('Id de la tarea que quiero eliminar: ', eventId);
-
-        // Marcar como en proceso de eliminación
         setDeletingEvents((prev) => [...prev, eventId]);
 
         // Esperar a que la animación termine
@@ -22,11 +19,8 @@ const EventGallery = ({events}) => {
             dispatch(removeEvent(eventId));
             setDeletingEvents((prev) => prev.filter((id) => id !== eventId));
             
-            //Rutina para la eliminacion de imagenes en el servidor
             deleteImages(images);
-        }, 500); // Debe coincidir con la duracion en CSS
-
-        
+        }, 500); 
     };
 
     const deleteImages = (images) => {

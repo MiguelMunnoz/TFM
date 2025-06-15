@@ -1,9 +1,11 @@
+@import url('../../styles/colors.css');
+
 .task-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
   padding: 24px;
-  background-color: #f8f9fa;
+  background-color: var(--color-bg-modal);
 }
 
 /*Clases para animacion fade-out*/
