@@ -1,15 +1,16 @@
-const {registerUser, getUserByEmail, comparePass } = require('../services/authServices');
+const {registerUser, updateUser, getUserByEmail, comparePass } = require('../services/authServices');
 const { initializeWebSocket } = require('../websockets/websocket');
 
 const jwt = require('jsonwebtoken');
 const CONFIG = require('../config/config');
+const { request } = require('express');
 
 const authController = {
     registerUserController: [
         async (req, res) => {
             console.log('Enviando informacion de registro...');
             try {
-                const { username, password, role } = req.body;
+                const { username, password } = req.body;
                 console.log('Datos del body: ', req.body);
                 console.log('Username: ', username);
                 console.log('Password: ', password);
@@ -30,6 +31,21 @@ const authController = {
             } catch (error) {
                 console.log('[ERROR] Error registering new user: ', error);
                 res.status(500).json({ error: '[ERROR] Error registering new user. ' });
+            }
+        }
+    ],
+
+    updateUserController: [
+        async (req, res) => {
+            try {
+                const { id } = req.params;
+                const updatedFields = req.body;
+                
+                const updatedUser = await updateUser(id, updatedFields);
+                return res.status(200).json(updatedUser);
+            } catch (error) {
+                console.log('[ERROR] Error updating user. ', error);
+                res.status(500).json({ error: '[ERROR] Error updating user.' });
             }
         }
     ],

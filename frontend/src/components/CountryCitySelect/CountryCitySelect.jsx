@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import countryRegionData from 'country-region-data/data.json'; // ✅ Ruta correcta para Vite o bundlers modernos
+import countryRegionData from 'country-region-data/data.json';
 
 const CountryCitySelect = () => {
 const { register, setValue, watch } = useFormContext();

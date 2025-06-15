@@ -43,7 +43,7 @@ const ProfileButton = () => {
                     />
                 </div>
             </button>
-            {isVisible && <ProfileMenu />}
+            {isVisible && <ProfileMenu setNavBarIcon={(imageData) => setUserImage(imageData)}/>}
         </div>
     );
 };

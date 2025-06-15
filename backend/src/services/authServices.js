@@ -30,6 +30,28 @@ async function registerUser(username, pass, role) {
     }
 }
 
+async function updateUser(id, updatedFields) {
+    try {
+        const user = await User.findByIdAndUpdate(
+            id,
+            { $set: updatedFields },
+            { 
+                new: true,
+                runValidators: true // Ejecuta las validaciones del esquema
+            }
+        );
+
+        if (!user) {
+            throw new Error('[Error] User not found.');
+        }
+
+        return user;
+    } catch (error) {
+        console.log('[ERROR] Error updating user in DDBB:', error);
+        throw error;
+    }
+}
+
 const comparePass = async (user, actualPass) => {
     
     try {
@@ -48,5 +70,6 @@ const comparePass = async (user, actualPass) => {
 module.exports = {
     getUserByEmail,
     registerUser,
+    updateUser,
     comparePass,
 }
