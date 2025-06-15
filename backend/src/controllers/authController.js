@@ -14,11 +14,10 @@ const authController = {
                 console.log('Datos del body: ', req.body);
                 console.log('Username: ', username);
                 console.log('Password: ', password);
-                console.log('Role: ', role);
 
-                if (!username || !password || !role) {
+                if (!username || !password) {
                     console.log('Returning 400 Error...');
-                    return res.status(400).json({ error: 'Required fields are missing (username, password, role)' });
+                    return res.status(400).json({ error: 'Required fields are missing (username, password)' });
                 }
                 
                 const existingUser = await getUserByEmail(username);
@@ -26,7 +25,7 @@ const authController = {
                     return res.status(409).json({ error: 'User already exists' });
                 }
 
-                const data = await registerUser(username, password, role);
+                const data = await registerUser(username, password);
                 res.status(201).json(data);
             } catch (error) {
                 console.log('[ERROR] Error registering new user: ', error);
@@ -71,7 +70,6 @@ const authController = {
                     {
                         userId: user._id,
                         username: user.email,
-                        role: user.role,
                     },
                     CONFIG.SECRET_KEY,
                     { expiresIn: '1h'}

@@ -6,9 +6,6 @@ const registerUserSchema = yup.object({
     
     password: yup
         .string().required('La contraseña es obligatoria'),
-
-    role: yup
-        .string().required('El rol del usuario es obligatorio')
 });
 
 const loginUserSchema = yup.object({
