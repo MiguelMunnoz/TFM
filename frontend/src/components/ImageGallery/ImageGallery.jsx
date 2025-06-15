@@ -49,19 +49,25 @@ const ImageGallery = ({ task }) => {
 
     const handleDelete = async (index) => {
         
-        let updatedImages = Object.values(images);
-        updatedImages.splice(index);
+        try {
+            const updatedImages = [...task.images];
+            const [deletedImage] = updatedImages.splice(index, 1);
 
-        const taskData = {
-            ...task, 
-            images: updatedImages
+            const updatedTask = {
+                ...task,
+                images: updatedImages
+            };
+
+
+            dispatch(updateTask(updatedTask));
+            const res = await taskService.update(task._id, updatedTask);
+
+            dispatch(updateTask(res.data));
+            await imageService.deleteImage(deletedImage);
+
+        } catch (error) {
+            console.error('[ERROR] Error deleting image:', error);
         }
-
-        dispatch(updateTask(taskData))
-        const res = await taskService.update(task._id, taskData);
-
-        dispatch(updateTask(res.data));
-        imageService.deleteImage(images[index]);
     }
 
     return (
