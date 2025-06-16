@@ -4,7 +4,9 @@ const emailController = {
 	sendEmail: [
 		async (req, res) => {
 			try {
-				const result = await emailService.sendEmail(req.body);
+				console.log('Recibimos info del correo: ', req.body);
+				const { email } = req.body;
+				const result = await emailService.sendEmail(email);
 			
 				if (result.success) {
 					return res.status(200).json({ message: result.message });

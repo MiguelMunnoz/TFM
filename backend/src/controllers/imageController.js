@@ -60,7 +60,6 @@ const imageController = {
 
             try {
                 const info = await imageService.getFile(filename);
-                console.log('Info tras obtener la imagen en el server: ', info);
 
                 res.set('Content-Type', info.contentType);
                 res.send(info.imageBuffer);

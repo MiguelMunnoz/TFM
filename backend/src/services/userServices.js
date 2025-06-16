@@ -15,7 +15,7 @@ async function createUser(userData) {
 
 async function getUsers() {
     try {
-        const users = await User.find({}, 'email rol');
+        const users = await User.find({}, 'email profilePic');
         return users;
     } catch (error) {
         console.log('[ERROR] Error getting users:', error);

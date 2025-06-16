@@ -48,6 +48,7 @@ const userService = {
     login: (userData) => api.post('/login', userData, { withCredentials: true }),
     logout: () => api.get('/logout', { withCredentials: true }),
     update: (id, updatedData) => api.put(`/user/update/${id}`, updatedData, { withCredentials: true }),
+    email: (emailData) => api.post(`/email/send-email`, emailData, {withCredentials: true})
 }
 
 const imageService = {

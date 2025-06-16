@@ -1,4 +1,5 @@
 const { getTasks, getTaskById, updateTask } = require('./taskServices');
+const { getUsers } = require('./userServices');
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -63,24 +64,27 @@ async function getFile(filename) {
 async function deleteFile(filename) {
     try {
         const tasks = await getTasks();
+        const users = await getUsers();
+
         const isUsed = tasks.some(task => task.images.includes(filename));
+        const isUsedByUser = users.some(user => user.profilePic.includes(filename));
+
         const usedTasks = tasks.filter(task => task.images.includes(filename));
-        console.log('La imagen se esta usando en otras tareas: ', isUsed);
-        console.log('La imagen se esta usando en: ', usedTasks);
+        const usedUsers = users.filter(user => user.profilePic.includes(filename));
     
-        if (!isUsed) {
+        if (!isUsed && !isUsedByUser) {
             const filePath = path.join(uploadDir, filename);
             console.log('Accediendo al directorio donde esta la imagen: ', filePath);
             fs.unlink(filePath, (err) => {
                 if (err) {
-                    console.error('[ERROR] al eliminar el archivo:', err);
+                    console.error('[ERROR] Error deleting file:', err);
                 } else {
-                    console.log(`Archivo '${filename}' eliminado exitosamente.`);
+                    console.log(`File '${filename}' delete succsessfully.`);
                 }
             });
         }
     } catch (error) {
-        console.error('[ERROR] deleting fileen deleteFileIfUnused:', error);
+        console.error('[ERROR] deleting file:', error);
         throw error;
     }
     

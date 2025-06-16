@@ -62,25 +62,25 @@ const createEmailHtml = (name) => {
   `;
 };
 
-const sendEmail = async (data) => {
-  const { username } = data;
-  const transporter = createTransporter();
+const sendEmail = async (email) => {
+	console.log('Enviando correo a: ', email);
+	const transporter = createTransporter();
   
-  const mailOptions = {
-    from: config.EMAIL_USER,
-    to: username,
-    subject: `Asunto: 🎉 ¡Bienvenido/a a TaskAPI!`,
-    html: createEmailHtml(username),
-    text: `Hola ${username},\n¡Gracias por registrarte en TaskAPI!\nTu cuenta ha sido creada con éxito y ya puedes acceder a todos nuestros servicios.\n\nSi tienes alguna duda o necesitas ayuda, no dudes en contactarnos.\n\n¡Nos alegra tenerte con nosotros!\n\nSaludos,\nEl equipo de TaskAPI\n`,
-  };
+	const mailOptions = {
+		from: config.EMAIL_USER,
+		to: email,
+		subject: `Asunto: 🎉 ¡Bienvenido/a a TaskAPI!`,
+		html: createEmailHtml(email),
+		text: `Hola ${email},\n¡Gracias por registrarte en TaskAPI!\nTu cuenta ha sido creada con éxito y ya puedes acceder a todos nuestros servicios.\n\nSi tienes alguna duda o necesitas ayuda, no dudes en contactarnos.\n\n¡Nos alegra tenerte con nosotros!\n\nSaludos,\nEl equipo de TaskAPI\n`,
+	};
   
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    return { success: true, message: 'Email sent succesfully' };
-  } catch (error) {
-    console.log('[ERROR] Error sending email:', error);
-    return { success: false, error: 'Error sending email' };
-  }
+	try {
+		await transporter.sendMail(mailOptions);
+		return { success: true, message: 'Email sent succesfully' };
+	} catch (error) {
+		console.log('[ERROR] Error sending email:', error);
+		return { success: false, error: 'Error sending email' };
+	}
 };
 
 module.exports = {

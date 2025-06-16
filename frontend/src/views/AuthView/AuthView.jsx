@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AuthView = () => {
     const [isLogin, setLogin] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ const AuthView = () => {
         try {
             userService.logout();
         } catch (error) {
-            console.log('[ERROR] Error haciendo logout', error);
+            console.log('[ERROR] Error in logout', error);
         }
         
     }, [])
@@ -31,12 +32,19 @@ const AuthView = () => {
     }
     
     const handleRegister = async (userData) => {
-        const userRegistered = await userService.register(userData);
+        try {
+            const userRegistered = await userService.register(userData);
 
-        if(userRegistered.status === 201) {
-            console.log('Usuario registrado: ', userRegistered.data);
-            setLogin(true);  
+            if(userRegistered.status === 201) {
+                console.log('Usuario registrado: ', userRegistered.data);
+                setLogin(true);  
+
+                await userService.email(userRegistered.data);
+            }
+        } catch (error) {
+            console.error('[ERROR] Error registering user.', error);
         }
+        
     }
      
     const handleLogin = async (userData) => {
@@ -52,10 +60,14 @@ const AuthView = () => {
                     dispatch(stopLoading());
                     navigate('tasks');
                 }, 500)
+            } else {
+                setErrorMessage('Invalid Credentials')
             }
             
         } catch (error) {
-            console.error('Error en login:', error);
+            console.error('[ERROR] Error in login:', error);
+            setErrorMessage('Invalid email or password');
+            dispatch(stopLoading());
         }
     }
        
@@ -73,12 +85,12 @@ const AuthView = () => {
                 />
 
                 <p className="form-note">
-                        
                     {isLogin ? '¿No tienes una cuenta? ' : '¿Ya tienes cuenta? '} 
                     <a onClick={() => handleChange()}>{isLogin ? 'Regístrate aquí' : 'Inicia sesión'}</a>
                 </p> 
 
-                
+                {errorMessage && <p className="login-error-message">{errorMessage}</p>}
+
             </div>
         </div>
   );
