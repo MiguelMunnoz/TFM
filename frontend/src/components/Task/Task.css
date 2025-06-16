@@ -45,11 +45,14 @@
 }
 
 .task-info h3 {
+  width: 100%; 
+  word-break: break-word;
+  overflow-wrap: break-word;
+
   font-size: 18px;
   font-weight: 600;
   color: #1f2937;
   margin: 0;
-  max-width: 85%;
 }
 
 .task-status {
