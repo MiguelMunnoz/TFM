@@ -77,7 +77,7 @@ const Event = ({event, onDelete}) => {
 
     const formattedDate = new Date(event.date).toLocaleDateString('es-ES', {
                             day: '2-digit',
-                            month: 'short',
+                            month: 'numeric',
                             year: 'numeric',
                         });
 

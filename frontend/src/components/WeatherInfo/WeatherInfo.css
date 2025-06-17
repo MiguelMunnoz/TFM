@@ -1,4 +1,6 @@
-.dark-wrapper {
+.weather-wrapper {
+  display: flex;
+  align-items: center;
   background-color: #d6e8f9;
   border-radius: 8px;
   padding: 1rem;
@@ -8,4 +10,15 @@
     width: 48px;
     height: 48px;
     vertical-align: middle;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+  .weather-wrapper {
+    flex-direction: column;
+  }
+
+  .weather-icon {
+    align-self: center;
+  }
 }

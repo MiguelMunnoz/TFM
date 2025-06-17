@@ -12,7 +12,7 @@ const WeatherInfo = ({ temp, desc, icon, errorMessage }) => {
             {errorMessage ? (
                 <span>{errorMessage}</span>
             ) : (
-                <div className="dark-wrapper">
+                <div className="weather-wrapper">
                     <img
                         className="weather-icon"
                         src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
@@ -20,7 +20,7 @@ const WeatherInfo = ({ temp, desc, icon, errorMessage }) => {
                         style={{ verticalAlign: 'middle' }}
                     />
 
-                    <span style={{ marginLeft: '8px' }}>
+                    <span className="weather-info" style={{ marginLeft: '8px' }}>
                     🌡️ {Math.round(temp)}°C - {capitalizedDesc}
                 </span>
                 </div>

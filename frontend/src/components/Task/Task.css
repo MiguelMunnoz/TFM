@@ -5,15 +5,19 @@
   justify-content: space-between;
   gap: 20px;
 
+  width: 100%;
   max-width: 320px;
-  background-color: #ffffff;
   padding: 20px;
+  overflow: hidden; 
+  box-sizing: border-box;
+  
+  border-left: 6px solid #3b82f6; /* azul para identificar */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-left: 6px solid #3b82f6; /* azul para identificar */
+  background-color: #ffffff;
+  
   transition: box-shadow 0.2s ease;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-sizing: border-box;
 }
 
 .task:hover {

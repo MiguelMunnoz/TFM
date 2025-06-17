@@ -2,19 +2,32 @@
 
 .task-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
   gap: 20px;
   padding: 24px;
   background-color: var(--color-bg-modal);
   border-radius: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden; /* Previene que elementos se desborden */
 }
 
 /*Clases para animacion fade-out*/
 .task-gallery-wrapper {
+  width: 100%; /* ✅ Asegura que la tarjeta no se pase del grid cell */
+  max-width: 100%; /* ✅ Protección adicional */
+  box-sizing: border-box;
   transition: opacity 500ms ease;
   opacity: 1;
 }
 
 .task-gallery-wrapper.exit {
   opacity: 0;
+}
+
+@media (max-width: 480px) {
+  .task-gallery {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
 }

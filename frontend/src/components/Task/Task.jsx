@@ -40,7 +40,7 @@ const Task = ({task, onDelete}) => {
 
     const formattedDate = new Date(task.date).toLocaleDateString('es-ES', {
                             day: '2-digit',
-                            month: 'short',
+                            month: 'numeric',
                             year: 'numeric',
                         });
 

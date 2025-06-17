@@ -194,6 +194,10 @@
 }
 
 @media (max-width: 480px) {
+  .header-section {
+    padding: 10px 12px;
+  }
+  
   .filter-container {
     flex-direction: row;
     gap: 1rem;
