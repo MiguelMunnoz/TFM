@@ -19,6 +19,12 @@ const TasksView = () => {
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks.tasks);
 	const isModalVisible = useSelector((state) => state.tasks.isModalVisible);
+	const selectedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+	useEffect(()=> {
+		console.log('Instanciada la vista de eventos.');
+		console.log('Usuario loggeado: ', selectedUser);
+	},[]);
 
 	/*Recargamos la lista cada vez que se modifique el array de tareas*/
 	useEffect(() => {

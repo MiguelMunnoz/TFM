@@ -7,7 +7,7 @@ import { CountryRegionData } from '../../utils/CountryRegionData';
 import './Form.css';
 
 const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
-    const selectedUser = useSelector(state => state.user.selectedUser);
+    const selectedUser = JSON.parse(localStorage.getItem('loggedUser'));
     const methods = useForm({
         resolver: yupResolver(schema),
     });
@@ -53,12 +53,12 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     const submit = (data) => {
         const files = data.images ? Array.from(data.images) : [];
         let filenames = readInputFiles(files);
-        console.log('ID del usuario que crea el evento/tarea: ', selectedUser);
 
         let formData = {
             ...data
         };
         if(type !== 'auth') {
+            console.log('ID del usuario que crea el evento/tarea: ', selectedUser);
             formData = {
                 ...formData,
                 userID: selectedUser.userId,

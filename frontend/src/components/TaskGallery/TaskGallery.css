@@ -2,9 +2,10 @@
 
 .task-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
   gap: 20px;
   padding: 24px;
+  
   background-color: var(--color-bg-modal);
   border-radius: 12px;
   box-sizing: border-box;
@@ -15,7 +16,7 @@
 /*Clases para animacion fade-out*/
 .task-gallery-wrapper {
   width: 100%; /* ✅ Asegura que la tarjeta no se pase del grid cell */
-  max-width: 100%; /* ✅ Protección adicional */
+  max-width: 320px; 
   box-sizing: border-box;
   transition: opacity 500ms ease;
   opacity: 1;

@@ -33,7 +33,7 @@ const Panel = ({task, event}) => {
 
             <rect x="10" y="10" width="80" height="80" rx="10" ry="10" fill="#4CAF50" />
             <polygon points="10,60 90,10 90,40 40,90 10,90" fill="#2196F3" opacity="0.7"/>
-            <line x1="10" y1="90" x2="90" y2="10" stroke="#FFEB3B" stroke-width="6" />
+            <line x1="10" y1="90" x2="90" y2="10" stroke="#FFEB3B" strokeWidth="6" />
             
             <path d="M50,20 
                     C40,20 32,28 32,38 

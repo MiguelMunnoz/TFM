@@ -19,6 +19,12 @@ const EventsView = () => {
 	const dispatch = useDispatch();
 	const events = useSelector((state) => state.events.events);
 	const isModalVisible = useSelector((state) => state.events.isModalVisible);
+	const selectedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+	useEffect(()=> {
+		console.log('Instanciada la vista de eventos.');
+		console.log('Usuario loggeado: ', selectedUser);
+	},[]);
 
 	/*Recargamos la lista cada vez que se modifique el array de eventos*/
 	useEffect(() => {
