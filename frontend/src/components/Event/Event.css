@@ -111,4 +111,10 @@
   transform: scale(1.1); /* Opcional: pequeño zoom al pasar el ratón */
 }
 
+@media (max-width: 500px) {
+  .event {
+    padding: 18px
+  }
+}
+
 

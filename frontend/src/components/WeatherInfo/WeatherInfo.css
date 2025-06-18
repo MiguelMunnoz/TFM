@@ -4,6 +4,8 @@
   background-color: #d6e8f9;
   border-radius: 8px;
   padding: 1rem;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .weather-icon {
@@ -13,7 +15,7 @@
     text-align: center;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 510px) {
   .weather-wrapper {
     flex-direction: column;
   }

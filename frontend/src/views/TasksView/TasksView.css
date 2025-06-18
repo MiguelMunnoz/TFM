@@ -193,7 +193,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .header-section {
     padding: 10px 12px;
   }

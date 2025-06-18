@@ -10,7 +10,6 @@
   border-radius: 12px;
   box-sizing: border-box;
   width: 100%;
-  overflow: hidden; /* Previene que elementos se desborden */
 }
 
 /*Clases para animacion fade-out*/
@@ -26,7 +25,7 @@
   opacity: 0;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .task-gallery {
     grid-template-columns: 1fr;
     padding: 12px;
