@@ -79,8 +79,8 @@ const authController = {
 
                 res.cookie('token', token, {
                     httpOnly: true,
-                    secure: false,               // 🔐 obligatorio con SameSite: 'None'
-                    sameSite: 'Lax',
+                    secure: true,               // 🔐 obligatorio con SameSite: 'None'
+                    sameSite: 'None',
                     maxAge: 3 * 60 * 60 * 1000
                 });
                 console.log('Enviando cookie');
