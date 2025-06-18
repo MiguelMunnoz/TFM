@@ -15,7 +15,7 @@ const startServer = async () => {
         initializeWebSocket(server);
 
         server.listen(config.PORT, ()=>{
-            console.log(`Server running at ${config.HOST}:${config.PORT}`);
+            console.log(`Server running at port: ${config.PORT}`);
         })
     } catch(error) {
         console.log('[ERROR] Error starting the server.', error);
