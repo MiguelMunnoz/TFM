@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config(); // ¡No olvides esto para cargar las variables .env!
+const config = require('../../config');
 
 const connectDB = async () => {
-    const url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.undzlhd.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority&appName=Cluster0`
+    const url = `mongodb+srv://${config.DB_USER}:${config.DB_PASS}@cluster0.undzlhd.mongodb.net/${config.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`
     try {
         await mongoose.connect(url);
         console.log('Database connected succesfully!');
