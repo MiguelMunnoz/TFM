@@ -14,6 +14,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = methods;
     const status = watch('status');
 
+    const [showPassword, setShowPassword] = useState(false);
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [cityOptions, setCityOptions] = useState([]);
     
@@ -24,6 +25,23 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     }));
     const isLoading = useSelector(state => state.loading.isLoading);
 
+    const openEye = ( 
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+        </svg>
+    )
+
+    const closeEye = (
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.8 21.8 0 0 1 5.17-6.19" />
+            <path d="M1 1l22 22" />
+            <path d="M10.58 10.58a3 3 0 0 0 4.24 4.24" />
+            <path d="M9.88 5.1a10.94 10.94 0 0 1 2.12-.1c7 0 11 8 11 8a21.77 21.77 0 0 1-2.87 4.17" />
+        </svg>
+    );
+
+
     useEffect(() => {
         console.log('Form type: ', type);
         console.log('Form fields: ', fields);
@@ -32,7 +50,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
                 ...initialData,
                 images: null,
                 date: initialData.date
-                    ? new Date(initialData.date).toISOString().split('T')[0]
+                    ? formatDateLocal(initialData.date)
                     : null
             };
 
@@ -85,6 +103,14 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     
     const capitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
+    const formatDateLocal = (dateInput) => {
+        const date = new Date(dateInput);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes es 0-indexed
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     };
 
     const handleCountryChange = (option) => {
@@ -196,12 +222,22 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
             compoundField = locationField;
         }
 
-        const roleField = isArrayField ? null : (
-            <select className="form-select-input" {...register(field)}>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-            </select>
-        );
+        const passwordField = field === 'password' ? (
+            <div className="password-wrapper" style={{ position: 'relative' }}>
+                <input
+                    type={showPassword ? 'text' : 'password'}
+                    {...register(field)}
+                    className="form-input"
+                />
+                <button
+                    type="button"
+                    onClick={() => setShowPassword(prev => !prev)}
+                    aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                >
+                {showPassword ? (closeEye) : (openEye)}
+                </button>
+            </div>
+        ) : null;
 
         const imageField = isArrayField ? null : (
             <input
@@ -214,13 +250,15 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
         )
 
         const newField = isArrayField ? compoundField :
-            field === 'status' ? statusField : 
-            field === 'role' ? roleField :  
+            field === 'status' ? statusField :  
             field === 'images' ? imageField : (
-                <input
-                    {...register(field)}
-                    className="form-input"
-                />
+            field === 'password' ? passwordField : (
+                    <input
+                        type="text"
+                        {...register(field)}
+                        className="form-input"
+                    />
+                )
             );
         
         return (

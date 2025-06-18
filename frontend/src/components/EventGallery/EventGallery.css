@@ -10,10 +10,18 @@
 
 /*Clases para animacion fade-out*/
 .event-gallery-wrapper {
+  width: 100%;
+  box-sizing: border-box;
   transition: opacity 500ms ease;
   opacity: 1;
 }
 
 .event-gallery-wrapper.exit {
   opacity: 0;
+}
+
+@media (max-width: 480px) {
+  .event-gallery {
+    padding: 12px;
+  }
 }
