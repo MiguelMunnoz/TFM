@@ -3,7 +3,7 @@ import { FormProvider, useForm, Controller } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Select from 'react-select';
-import { CountryRegionData } from '../../utils/CountryRegionData.js';
+import { CountryRegionData } from '../../utils/countryRegionData.js';
 import './Form.css';
 
 const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
