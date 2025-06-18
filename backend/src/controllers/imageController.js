@@ -1,8 +1,6 @@
-const path = require('path');
 const imageService = require('../services/imageServices');
 
 const imageController = {    
-
     uploadImage: [
         async (req, res) => {
             console.log('Info que me llega de las imagenes: ', req.files);

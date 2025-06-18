@@ -1,7 +1,7 @@
 const { getTasks, getTaskById, createTask, deleteTask, updateTask, filterTasks } = require('../services/taskServices');
 const { getTaskByIdValidations, filterTasksValidations, createTaskValidations, updateTaskValidations } = require('../validations/taskValidations');
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = require('../config/config');
+const config = require('../../config');
 
 const taskController = {
     getTasksController: [
@@ -126,7 +126,7 @@ const taskController = {
 
 function getCookieInfo(req) {
     const token = req.cookies.token;
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, config.SECRET_KEY);
     
     return decoded;
 }

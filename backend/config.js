@@ -5,6 +5,18 @@ dotenv.config({
   path: path.resolve(__dirname, 'prod.env')
 });
 
+const createTransporter = () => {
+  const nodemailer = require('nodemailer');
+  
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+};
+
 module.exports = {
   PORT: process.env.PORT || 5000,
   
@@ -15,5 +27,7 @@ module.exports = {
 
   DB_USER: process.env.MONGO_USER || 'usuario-desconocido',
   DB_PASS: process.env.MONGO_PASS || 'contraseña-desconocida',
-  DB_NAME: process.env.MONGO_DBNAME || 'DB-NAME'
+  DB_NAME: process.env.MONGO_DBNAME || 'DB-NAME',
+
+  createTransporter
 };

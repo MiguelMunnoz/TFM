@@ -1,7 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-
 async function createUser(userData) {
     try {
         const user = new User(userData);

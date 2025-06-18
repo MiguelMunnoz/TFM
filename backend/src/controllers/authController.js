@@ -2,7 +2,7 @@ const {registerUser, updateUser, getUserByEmail, comparePass } = require('../ser
 const { initializeWebSocket } = require('../websockets/websocket');
 
 const jwt = require('jsonwebtoken');
-const CONFIG = require('../config/config');
+const config = require('../../config');
 const { request } = require('express');
 
 const authController = {
@@ -71,7 +71,7 @@ const authController = {
                         userId: user._id,
                         username: user.email,
                     },
-                    CONFIG.SECRET_KEY,
+                    config.SECRET_KEY,
                     { expiresIn: '1h'}
                 );
 

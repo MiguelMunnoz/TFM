@@ -1,7 +1,7 @@
 const { getEvents, getEventById, createEvent, deleteEvent, updateEvent, filterEvents } = require('../services/eventServices');
 const { getEventByIdValidations, filterEventsValidations, createEventValidations, updateEventValidations, deleteEventValidations, filterEventValidations } = require('../validations/eventValidations');
 const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = require('../config/config');
+const config = require('../../config');
 
 const eventController = {
     getEventsController: [
@@ -122,7 +122,7 @@ const eventController = {
 
 function getCookieInfo(req) {
     const token = req.cookies.token;
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, config.SECRET_KEY);
     
     return decoded;
 }

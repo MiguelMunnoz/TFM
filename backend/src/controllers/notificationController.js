@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 const notificationService = require('../services/notificationServices');
-const config = require('../config/config');
+const config = require('../../config');
 
 function handleConnection(ws, req) {
     const cookies = cookie.parse(req.headers.cookie || '');

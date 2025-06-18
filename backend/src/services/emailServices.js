@@ -1,4 +1,4 @@
-const { createTransporter, config } = require('../config/config');
+const config = require('../../config');
 
 const createEmailHtml = (name) => {
   return `
@@ -64,7 +64,7 @@ const createEmailHtml = (name) => {
 
 const sendEmail = async (email) => {
 	console.log('Enviando correo a: ', email);
-	const transporter = createTransporter();
+	const transporter = config.createTransporter();
   
 	const mailOptions = {
 		from: config.EMAIL_USER,
