@@ -1,4 +1,5 @@
 const { getEvents, getEventById, createEvent, deleteEvent, updateEvent, filterEvents } = require('../services/eventServices');
+const { getEventByIdValidations, filterEventsValidations, createEventValidations, updateEventValidations, deleteEventValidations, filterEventValidations } = require('../validations/eventValidations');
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = require('../config/config');
 
@@ -16,6 +17,7 @@ const eventController = {
     ],
 
     getEventByIdController: [
+        ...getEventByIdValidations,
         async (req, res) => {
             try {
                 const { id } = req.params;
@@ -29,6 +31,7 @@ const eventController = {
     ],
 
     createEventController: [
+        ...createEventValidations,
         async (req, res) => {
             try {
                 console.log('Datos que llegan al servidor: ', req.body);
@@ -43,6 +46,7 @@ const eventController = {
     ],
 
     updateEventController: [
+        ...updateEventValidations,
         async (req, res) => {
             try {
                 console.log('Actualizando evento...');
@@ -59,6 +63,7 @@ const eventController = {
     ],
 
     deleteEventController: [
+        ...deleteEventValidations,
         async (req, res) => {
             try {
                 const { id } = req.params;
@@ -72,6 +77,7 @@ const eventController = {
     ],
 
     filterEventsController: [
+        ...filterEventValidations,
         async (req, res) => {
             try {
                 const { status, fav } = req.query;

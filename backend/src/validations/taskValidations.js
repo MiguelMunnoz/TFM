@@ -39,8 +39,9 @@ const createTaskValidations = [
         .isString().withMessage('Invalid status format'),
 
     body('date')
-        .notEmpty().withMessage('You must provide a date')
-        .isDate().withMessage('Wrong date format'),
+        .notEmpty().withMessage('Date is required.')
+        .isISO8601().withMessage('Date must be a valid ISO8601 string.')
+        .toDate(),
 
     body('time')
         .notEmpty().withMessage('You must provide a time')
@@ -73,8 +74,9 @@ const updateTaskValidations = [
         .isString().withMessage('Invalid status format'),
 
     body('updatedData.date')
-        .optional()
-        .isDate().withMessage('Wrong date format'),
+        .notEmpty().withMessage('Date is required.')
+        .isISO8601().withMessage('Date must be a valid ISO8601 string.')
+        .toDate(),
     
     body('updatedData.time')
         .optional()

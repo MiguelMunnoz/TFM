@@ -1,12 +1,10 @@
 const { getTasks, getTaskById, createTask, deleteTask, updateTask, filterTasks } = require('../services/taskServices');
-const { deleteFile } = require('../services/imageServices');
-const { createTaskValidations } = require('../validations/taskValidations');
+const { getTaskByIdValidations, filterTasksValidations, createTaskValidations, updateTaskValidations } = require('../validations/taskValidations');
 const jwt = require('jsonwebtoken');
 const { SECRET_KEY } = require('../config/config');
 
 const taskController = {
     getTasksController: [
-        
         async (req, res) => {
             try {
                 console.log('Recogiendo todas las tasks...')
@@ -21,7 +19,7 @@ const taskController = {
     ],
 
     getTaskByIdController: [
-
+        ...getTaskByIdValidations,
         async (req, res) => {
             try {
                 const { id } = req.params;
@@ -35,10 +33,17 @@ const taskController = {
     ],
 
     createTaskController: [
+        createTaskValidations,
         async (req, res) => {
             try {
                 console.log('Entrando en el manejador de tareas -> creando...');
                 const taskData = req.body;
+
+                // Convertir campo 'date' a objeto Date si existe
+                if (taskData.date && typeof taskData.date === 'string') {
+                    taskData.date = new Date(taskData.date);
+                }
+
                 console.log('Info que llega: ', taskData);
                 console.log('Info de las imagenes: ', taskData.images);
                 const response = await createTask(taskData);
@@ -51,7 +56,7 @@ const taskController = {
     ],
 
     updateTaskController: [
-
+        ...updateTaskValidations,
         async (req, res) => {
             try {
                 console.log('Body recibido:', req.body);
@@ -81,9 +86,9 @@ const taskController = {
     ],
 
     filterTasksController: [
+        ...filterTasksValidations,
         async (req, res) => {
             try {
-                
                 const { status, fav } = req.query;
                 console.log('STATUS: ', status);
                 console.log('Favoritos: ', fav);

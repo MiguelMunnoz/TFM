@@ -198,3 +198,9 @@
 .nav-button.reset:hover {
   background-color: #d1d5db;
 }
+
+@media (max-width: 535px){
+    .form-group {
+      margin-bottom: 0.5rem;
+    }
+}
