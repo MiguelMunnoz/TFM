@@ -4,7 +4,7 @@ const testingBar = "testing.............";
 console.log(testingBar);
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,/*'https://tfm-armw.onrender.com'*/
+    baseURL: 'https://tfm-armw.onrender.com', /*import.meta.env.VITE_API_URL,*//*'https://tfm-armw.onrender.com'*/
     timeout: 10000,
     withCredentials: true,
 });
