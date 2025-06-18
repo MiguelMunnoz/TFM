@@ -27,6 +27,10 @@ app.use(cors({
 }));
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+  res.send('Servidor backend desplegado correctamente');
+});
+
 app.use('/', authRoutes);
 app.use('/email', emailRoutes);
 app.use('/tasks', taskRoutes);     
