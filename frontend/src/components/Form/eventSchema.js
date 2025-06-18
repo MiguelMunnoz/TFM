@@ -1,34 +1,31 @@
 import * as yup from 'yup';
 
+const message = 'This field is required';
+
 const eventSchema = yup.object({
     title: yup
         .string()
-        .required('This field is mandatory'),
-    
-    details: yup
-        .string()
-        .required('This field is mandatory'),
+        .required(message),
 
     date: yup
         .date()
-        .required('This field is mandatory'),
+        .required(message),
+
+    time: yup
+        .string()
+        .required(message),
 
     country: yup
         .string()
-        .required('This field is mandatory'),
+        .required(message),
 
     city: yup
         .string()
-        .required('This field is mandatory'),
+        .required(message),
 
-    /*images: yup
-        .mixed()
-        .test("fileSize", "La imagen es demasiado grande", (value) => {
-            return !value || Array.from(value).every(file => file.size <= 5_000_000); // 5MB
-        })
-        .test("fileType", "Formato no soportado", (value) => {
-            return !value || Array.from(value).every(file => file.type.startsWith("image/"));
-        }),*/
+    details: yup
+        .string()
+        .required(message)
 });
 
 export default eventSchema;

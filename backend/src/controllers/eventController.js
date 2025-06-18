@@ -46,8 +46,10 @@ const eventController = {
         async (req, res) => {
             try {
                 console.log('Actualizando evento...');
+                console.log('Body recibido:', req.body);
                 const { id, updatedData } = req.body;
                 const response = await updateEvent(id, updatedData);
+                console.log('Respuesta del servidor: ', response);
                 res.status(200).json(response);
             } catch (error) {
                 console.log('[ERROR] Error updating event info: ', error);

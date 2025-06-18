@@ -57,10 +57,8 @@ const taskController = {
                 console.log('Body recibido:', req.body);
                 const { id, updatedData } = req.body;
                 const response = await updateTask(id, updatedData);
+                console.log('Respuesta del servidor: ', response);
                 res.status(200).json(response);
-
-
-
             } catch (error) {
                 console.log('[ERROR] Error updating task info: ', error);
                 res.status(500).json({ error: '[ERROR] Error updating task info.' });
@@ -92,6 +90,7 @@ const taskController = {
                 const cookie = getCookieInfo(req);
                 console.log('UserId: ', cookie.userId);
                 let filter = {};
+
                 //Añadimos el filtro de status
                 if(status) { 
                     if(status.toLowerCase() === 'all') {
@@ -108,14 +107,7 @@ const taskController = {
                 }
                 console.log('FILTRO despues de fav: ', filter);
 
-                //A los usuarios sin permisos les impedimos ver otras tareas que no sean las suyas
-                
                 filter.userID = cookie.userId;
-                /*const role = cookie.role;
-                if (role !== 'admin') {
-                    
-                }*/
-               console.log('Filtro despues de recoger el userId: ' , filter);
 
                 const data = await filterTasks(filter);
                 res.status(200).json(data);
