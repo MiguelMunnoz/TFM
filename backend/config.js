@@ -6,7 +6,7 @@ dotenv.config({
 });
 
 module.exports = {
-  PORT: process.env.PORT || 3000,
+  PORT: process.env.PORT || 5000,
   DB_NAME: process.env.DB_NAME || 'testing'
   // Elimina HOST si no lo necesitas directamente
 };
