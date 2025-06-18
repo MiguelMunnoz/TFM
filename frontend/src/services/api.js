@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const testingBar = "testing.............";
+console.log(testingBar);
+
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: 'https://tfm-6kd5.onrender.com',//*import.meta.env.VITE_API_URL,*/
     timeout: 10000,
     withCredentials: true,
 });
@@ -30,7 +33,7 @@ const taskService = {
     delete: (id) => api.delete(`/tasks/${id}`, { withCredentials: true }),
 
     filter: (filter=null, checked=null) => { 
-        console.log('Enviando filter=', filter, ' y checked=', checked);
+        console.log('Enviando filter=', filter, ' y checked=', checked, ' a la siguiente direccion del server: ',  api.defaults.baseURL);
         return api.get('/tasks/filter', {
             params: {
                 status: filter,
