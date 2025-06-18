@@ -2,7 +2,7 @@ const http = require('http');
 const app = require('./src/app');
 const connectDB = require('./src/config/databse');
 const { initializeWebSocket } = require('./src/websockets/websocket');
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {
     try {
