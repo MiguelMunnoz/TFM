@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-
-const USER = 'miguelmunnoz';
-const PASSWORD = 'admin1234';
-const DBNAME = 'TFM_DB';
+const dotenv = require('dotenv');
+dotenv.config(); // ¡No olvides esto para cargar las variables .env!
 
 const connectDB = async () => {
-    const url = `mongodb+srv://${USER}:${PASSWORD}@cluster0.undzlhd.mongodb.net/${DBNAME}?retryWrites=true&w=majority&appName=Cluster0`
+    const url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.undzlhd.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority&appName=Cluster0`
     try {
         await mongoose.connect(url);
         console.log('Database connected succesfully!');
