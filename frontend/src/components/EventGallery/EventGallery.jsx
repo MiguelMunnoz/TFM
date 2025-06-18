@@ -24,9 +24,11 @@ const EventGallery = ({events}) => {
     };
 
     const deleteImages = (images) => {
-        images.forEach(img => {
-            imageService.deleteImage(img);
-        });
+        if(images) {
+            images.forEach(img => {
+                imageService.deleteImage(img);
+            });
+        }
     }
 
     return (

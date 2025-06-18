@@ -39,7 +39,7 @@ const createEventValidations = [
   
   body('status')
     .notEmpty().withMessage('Status is required.')
-    .isIn(['pending', 'completed', 'cancelled']).withMessage('Invalid status.'),
+    .isIn(['pending', 'completed', 'in-progress', 'all']).withMessage('Invalid status.'),
 
   body('date')
     .notEmpty().withMessage('Date is required.')
@@ -81,7 +81,7 @@ const updateEventValidations = [
 
   body('updatedData.status')
     .optional()
-    .isIn(['pending', 'completed', 'cancelled']).withMessage('Invalid status.'),
+    .isIn(['pending', 'completed', 'in-progress', 'all']).withMessage('Invalid status.'),
 
   body('updatedData.date')
     .optional()
