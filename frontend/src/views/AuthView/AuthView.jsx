@@ -60,6 +60,7 @@ const AuthView = () => {
                     navigate('tasks');
                 }, 500)
             } else {
+                console.log(response);
                 setErrorMessage('Invalid Credentials')
             }
             
