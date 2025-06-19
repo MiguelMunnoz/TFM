@@ -1,3 +1,5 @@
+@import url('../../styles/colors.css');
+
 .task {
   position: relative;
   display: flex;
@@ -10,10 +12,10 @@
   overflow: hidden; 
   box-sizing: border-box;
   
-  border-left: 6px solid #3b82f6; 
+  border-left: 6px solid var(--color-checkbox-checked); 
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background-color: var(--color-bg-white);
   
   transition: box-shadow 0.2s ease;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -23,12 +25,6 @@
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-}
-
-.task-id,
-.task-user-id {
-  font-size: 12px;
-  color: #6b7280;
 }
 
 .task-id.hidden {
@@ -54,7 +50,7 @@
 
   font-size: 18px;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--color-text-default);
   margin: 0;
 }
 
@@ -69,18 +65,18 @@
 
 /* Colores por estado */
 .status-pending {
-    background-color: #fff7ed;
-    color: #f39c12;
+    background-color: var(--color-status-pending-bg);
+    color: var(--color-status-pending-text);
 }
 
 .status-in-progress {
-    background-color: #e6f0fa;
-    color: #3498db;
+    background-color: var(--color-status-progress-bg);
+    color: var(--color-status-progress-text);
 }
 
 .status-completed {
-    background-color: #eafaf1;
-    color: #2ecc71;
+    background-color: var(--color-status-completed-bg);
+    color: var(--color-status-completed-text);
 }
 
 /* Fecha y hora */
@@ -94,16 +90,16 @@
 
     font-size: 0.95rem;
     padding: 0.5rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-border-default);
     border-radius: 0.75rem;
-    background-color: #f9f9f9;
+    background-color: var(--color-bg-modal);
 }
 
 .description {
   font-size: 14px;
-  color: #374151;
+  color: var(--color-text-secondary);
   margin-top: 8px;
-  background-color: #f3f4f6;
+  background-color: var(--color-bg-modal);
   padding: 8px 12px;
   border-radius: 8px;
 }
@@ -124,8 +120,8 @@
   text-align: center;
   cursor: pointer;
   
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: var(--color-bg-delete);
+  color: var(--color-icon-delete);
   transition: background-color 0.2s ease;
 }
 
