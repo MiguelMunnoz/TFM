@@ -37,15 +37,23 @@ const AuthView = () => {
 
             if(userRegistered.status === 201) {
                 setLogin(true);  
-
                 await userService.email(userRegistered.data);
-            } else if (userRegistered.status === 409) {
-                setErrorMessage('This user already has an account')
             }
+
         } catch (error) {
+            if (error.response) {
+                const { status, data } = error.response;
+
+                if (status === 409) {
+                    alert(data.error || 'This user already have an account.');
+                } 
+
+            } else {
+                console.error('[ERROR] Network or unknown error:', error);
+            }
+
             console.error('[ERROR] Error registering user.', error);
         }
-        
     }
      
     const handleLogin = async (userData) => {
