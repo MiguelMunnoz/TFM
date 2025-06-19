@@ -1,261 +1,235 @@
-# TaskAPI - Full Stack Project
-
-TaskAPI is a full-stack web application developed as an evolution of the previous evaluation project TaskPlanner-Pro. It allows users to manage tasks and events, including filtering, favorites, image uploads, and email-based authentication, all with a more user-friendly design.
+# 📗 TaskAPI - Full Stack Project (ENGLISH)
 
 ## Table of Contents
-
-* Project Structure
-* Technologies Used
-* Environment Variables
-* Deployment
-* Features
-* Credits
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Environment Variables](#environment-variables)
+- [Deployment](#deployment)
+- [Features](#features)
+- [Credits](#credits)
 
 ## Project Structure
 
 This GitHub repository contains two main folders:
 
-* `/frontend`: React project with Vite
-* `/backend`: REST API built with Node.js and Express
+- `/frontend`: React project using Vite  
+- `/backend`: REST API built with Node.js and Express  
 
-This setup keeps both the frontend and backend in a single repository, making synchronization and deployment easier.
+This setup allows you to maintain both frontend and backend in a single repository, easing synchronization and deployment.
 
 ## Technologies Used
 
-### Frontend
+**Frontend**
 
-* React
-* Vite
-* Axios
+- React  
+- Vite  
+- Axios  
 
-### Backend
+**Backend**
 
-* Node.js
-* Express
-* MongoDB with Mongoose
+- Node.js  
+- Express  
+- MongoDB with Mongoose  
 
-### Deployment Tools
+**Deployment Tools**
 
-* Vercel (frontend)
-* Render (backend)
+- Vercel (frontend)  
+- Render (backend)  
 
 ## Environment Variables
 
 ### Frontend
 
-Currently, the project is deployed on Vercel and accessible at: [https://tfm-g2rw.vercel.app](https://tfm-g2rw.vercel.app). However, if you want to deploy it yourself, you must set the following environment variable:
+Currently, the project is deployed on Vercel and accessible at:  
+https://tfm-g2rw.vercel.app  
 
-```env
-VITE_API_URL={server-address} 
-# currently: https://tfm-6kd5.onrender.com
+If you want to deploy it yourself, define the following environment variable:
+
+```bash
+VITE_API_URL={server-address}
+// currently: https://tfm-6kd5.onrender.com
 ```
 
 ### Backend
 
-The backend is deployed at: [https://tfm-6kd5.onrender.com](https://tfm-6kd5.onrender.com)
+The backend is deployed at:  
+https://tfm-6kd5.onrender.com  
 
-To deploy it, define the following environment variables:
+Required environment variables for deployment:
 
-```env
+```bash
 CORS_ORIGIN={frontend-address} 
-# currently: https://tfm-g2rw.vercel.app
+// currently: https://tfm-g2rw.vercel.app
 
-EMAIL_PASS={email-manager-password} 
-# currently: "ddlo rkro bfab bgcp"
+EMAIL_PASS={email-provider-password} 
+// currently: "ddlo rkro bfab bgcp"
 
 EMAIL_USER={email-provider-user} 
-# currently: miguelmjimenez98@gmail.com
+// currently: miguelmjimenez98@gmail.com
 
-MONGO_DBNAME={mongo-database-name}
-# currently: TFM_DB
+MONGO_DBNAME={mongo-database-name} 
+// currently: TFM_DB
 
 MONGO_PASS={mongo-password} 
-# currently: admin1234
+// currently: admin1234
 
-MONGO_USER={mongo-username}
-# currently: miguelmunnoz
+MONGO_USER={mongo-username} 
+// currently: miguelmunnoz
 
-NODE_ENV={environment}
-# currently: prod
+NODE_ENV={environment} 
+// currently: prod
 
-PORT={port}
-# currently: 9999
+PORT={port} 
+// currently: 9999
 
-SECRET_KEY={your-own-secret-key}
-# currently: la-clave-ultra-super-mega-secreta
-# Used to encrypt the JWT authentication token
+SECRET_KEY={your-own-secret-key} 
+// currently: la-clave-ultra-super-mega-secreta
+// Used to encrypt JWT authentication token
 ```
 
 ## Deployment
 
 ### Frontend
 
-The frontend is deployed on Vercel, using Vite as the bundler. Current deployment URL:
+The frontend is deployed on Vercel using Vite as bundler. Current deployment URL:
 
-[https://tfm-g2rw.vercel.app](https://tfm-g2rw.vercel.app)
+https://tfm-g2rw.vercel.app
 
 ### Backend
 
 The server is deployed on Render and connected to MongoDB Atlas. Deployment URL:
 
-[https://tfm-6kd5.onrender.com](https://tfm-6kd5.onrender.com)
+https://tfm-6kd5.onrender.com
 
 ## Features
 
-* User authentication
-* Task and event management
-* Image upload and display
-* Filtering and favorites
-* Email confirmation on registration
+- User authentication  
+- Task and event management  
+- Image upload and display  
+- Filters and favorites  
+- Email confirmation on registration  
 
 ## Credits
 
-Developed by Miguel Muñoz Jiménez as the final project for the Full Stack Web Development Master's Degree at Evolve.
+Developed by Miguel Muñoz Jiménez as the final project for the Full Stack Web Development Master at Evolve.
 
-Got suggestions or want to contribute? Feel free to open an issue or pull request. Thanks for your interest in TaskAPI!
-
-
-
-
-# TaskAPI - Full Stack Project
-
-**TaskAPI** es una aplicación web full-stack desarrollada como un evolutivo de la anterior evaluación **TaskPlanner-Pro**. Permite a los usuarios gestionar tareas y eventos, incluyendo funcionalidades de filtrado, favoritos, subida de imágenes y sistema de autenticación por email, con un diseño más amigable para el usuario.
+Have suggestions or want to contribute? Feel free to open an issue or pull request. Thanks for your interest in TaskAPI!
 
 ---
 
-## 📁 Tabla de Contenidos
+# 📘 TaskAPI - Proyecto Full Stack (ESPAÑOL)
 
-* [Estructura del Proyecto](#estructura-del-proyecto)
-* [Tecnologías Utilizadas](#tecnologías-utilizadas)
-* [Variables de Entorno](#variables-de-entorno)
-* [Despliegue](#despliegue)
-* [Funcionalidades](#funcionalidades)
-* [Créditos](#créditos)
+## Tabla de Contenidos
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Variables de Entorno](#variables-de-entorno)
+- [Despliegue](#despliegue)
+- [Funcionalidades](#funcionalidades)
+- [Créditos](#créditos)
 
----
+## Estructura del Proyecto
 
-## 📂 Estructura del Proyecto
+Este repositorio de GitHub contiene dos carpetas principales:
 
-Este repositorio contiene dos carpetas principales:
-
-```
-/frontend  → Proyecto React con Vite  
-/backend   → API REST construida con Node.js y Express
-```
+- `/frontend`: Proyecto React con Vite
+- `/backend`: API REST construida con Node.js y Express
 
 Esto permite mantener tanto el frontend como el backend en un único repositorio, facilitando la sincronización y el despliegue.
 
----
+## Tecnologías Utilizadas
 
-## ⚙️ Tecnologías Utilizadas
+**Frontend**
 
-### Frontend
+- React  
+- Vite  
+- Axios  
 
-* React
-* Vite
-* Axios
+**Backend**
 
-### Backend
+- Node.js  
+- Express  
+- MongoDB con Mongoose  
 
-* Node.js
-* Express
-* MongoDB con Mongoose
+**Herramientas de despliegue**
 
-### Herramientas de despliegue
+- Vercel (frontend)  
+- Render (backend)  
 
-* Vercel (frontend)
-* Render (backend)
-
----
-
-## 🔐 Variables de Entorno
+## Variables de Entorno
 
 ### Frontend
 
-Actualmente, el proyecto está desplegado en Vercel:
-🔗 `https://tfm-g2rw.vercel.app`
+Actualmente, el proyecto está desplegado en Vercel y puede accederse desde:  
+https://tfm-g2rw.vercel.app  
 
-Si se quiere desplegar por uno mismo, es necesario definir la siguiente variable de entorno:
+Si quieres desplegarlo tú mismo, necesitas definir la siguiente variable de entorno:
 
-```env
+```bash
 VITE_API_URL={direccion-del-servidor}
-# actualmente: https://tfm-6kd5.onrender.com
+// actualmente: https://tfm-6kd5.onrender.com
 ```
 
----
-
 ### Backend
 
-Actualmente desplegado en Render:
-🔗 `https://tfm-6kd5.onrender.com`
+El backend está desplegado en:  
+https://tfm-6kd5.onrender.com  
 
-Variables necesarias:
+Las variables de entorno necesarias para desplegar son:
 
-```env
+```bash
 CORS_ORIGIN={direccion-del-frontend} 
-//actualmente: https://tfm-g2rw.vercel.app
+// actualmente: https://tfm-g2rw.vercel.app
 
 EMAIL_PASS={contraseña-gestor-email} 
-//actualmente "ddlo rkro bfab bgcp"
+// actualmente: "ddlo rkro bfab bgcp"
 
 EMAIL_USER={user-email-provider} 
-//actualmente: miguelmjimenez98@gmail.com
+// actualmente: miguelmjimenez98@gmail.com
 
-MONGO_DBNAME={mongo-database-name}
-//actualmente: TFM_DB
+MONGO_DBNAME={mongo-database-name} 
+// actualmente: TFM_DB
 
 MONGO_PASS={mongo-password} 
-//actualmente: admin1234
+// actualmente: admin1234
 
-MONGO_USER={mongo-username}
-//actualmente: miguelmunnoz
+MONGO_USER={mongo-username} 
+// actualmente: miguelmunnoz
 
-NODE_ENV={enviroment}
-//actualmente: prod
+NODE_ENV={environment} 
+// actualmente: prod
 
-PORT={port}
-//actualmente: 9999
+PORT={port} 
+// actualmente: 9999
 
-SECRET_KEY={your-ouw-secret-key}
-//actualmente: la-clave-ultra-super-mega-secreta
-//Permite cifrar el token de autenticacion JWT
+SECRET_KEY={your-own-secret-key} 
+// actualmente: la-clave-ultra-super-mega-secreta
+// Permite cifrar el token de autenticación JWT
 ```
 
-> `SECRET_KEY` permite cifrar el token JWT de autenticación.
-
----
-
-## 🚀 Despliegue
+## Despliegue
 
 ### Frontend
 
-* Desplegado en **Vercel** usando **Vite**
-* Dirección: [`https://tfm-g2rw.vercel.app`](https://tfm-g2rw.vercel.app)
+El frontend se despliega en Vercel, usando Vite como empaquetador. La dirección de despliegue actual es:
+
+https://tfm-g2rw.vercel.app
 
 ### Backend
 
-* Desplegado en **Render**
-* Conexión a base de datos **MongoDB Atlas**
-* Dirección: [`https://tfm-6kd5.onrender.com`](https://tfm-6kd5.onrender.com)
+El servidor se despliega en Render y se conecta a MongoDB Atlas. Dirección de despliegue:
 
----
+https://tfm-6kd5.onrender.com
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-* Autenticación de usuarios
-* Gestión de tareas y eventos
-* Subida y visualización de imágenes
-* Filtros y favoritos
-* Envío de emails de confirmación de registro
+- Autenticación de usuarios  
+- Gestión de tareas y eventos  
+- Subida y visualización de imágenes  
+- Filtros y favoritos  
+- Envío de emails de confirmación de registro  
 
----
+## Créditos
 
-## 👨‍💻 Créditos
+Desarrollado por Miguel Muñoz Jiménez como proyecto final del Máster en Desarrollo Web Full Stack de Evolve.
 
-Desarrollado por **Miguel Muñoz Jiménez** como proyecto final del
-**Máster en Desarrollo Web Full Stack** de **Evolve**.
-
-¿Tienes sugerencias o quieres contribuir?
-No dudes en abrir un *issue* o *pull request*.
-
-¡Gracias por tu interés en TaskAPI! 🚀
+¿Tienes sugerencias o quieres contribuir? No dudes en abrir un issue o pull request. ¡Gracias por tu interés en TaskAPI!
