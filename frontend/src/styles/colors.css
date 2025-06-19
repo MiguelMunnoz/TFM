@@ -5,7 +5,6 @@
   --color-bg-info: rgb(243, 244, 246);
   
   --color-bg-white: #ffffff;
-  --color-bg-checkbox: #f9fafb;
   --color-checkbox-checked: #3b82f6;
 
   --color-border-light: #d1d5db;
@@ -34,4 +33,6 @@
 
   --color-btn-delete: #cc3c3c;
   --color-btn-delete-hover: #a73232;
+
+  --color-fav-icon: #f5c518;
 }

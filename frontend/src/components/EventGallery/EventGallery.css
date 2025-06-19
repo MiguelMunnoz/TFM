@@ -5,7 +5,7 @@
   gap: 20px;
   padding: 24px;
   width: 100%;
-  background-color: #f8f9fa;
+  background-color: var(--color-bg-modal);
 }
 
 .event-gallery-wrapper {

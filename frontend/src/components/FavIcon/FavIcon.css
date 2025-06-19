@@ -1,3 +1,5 @@
+@import url('../../styles/colors.css');
+
 .fav-icon-wrapper {
   position: absolute;
   top: 0.5rem;
@@ -19,14 +21,14 @@
 
   font-size: 32px;
   cursor: pointer;
-  color: #ccc;
+  color: var(--color-border-default);
   user-select: none;
   transition: color 0.3s ease;
   transition: transform 0.2s ease;
 }
 
 .star.filled {
-  color: #f5c518;
+  color: var(--color-fav-icon);
 }
 
 .spark-container {
@@ -42,7 +44,7 @@
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #f5c518;
+  background: var(--color-fav-icon);
   border-radius: 50%;
   animation: explode 0.6s ease-out forwards;
   opacity: 0.8;
