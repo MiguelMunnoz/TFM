@@ -1,5 +1,4 @@
 const authenticate = require('../middlewares/authMiddleware');
-const authorizeRole = require('../middlewares/roleMiddleware');
 const express = require('express');
 const multer = require('multer');
 const imageController = require('../controllers/imageController');

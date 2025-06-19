@@ -1,5 +1,5 @@
 const { getEvents, getEventById, createEvent, deleteEvent, updateEvent, filterEvents } = require('../services/eventServices');
-const { getEventByIdValidations, filterEventsValidations, createEventValidations, updateEventValidations, deleteEventValidations, filterEventValidations } = require('../validations/eventValidations');
+const { getEventByIdValidations, createEventValidations, updateEventValidations, deleteEventValidations, filterEventValidations } = require('../validations/eventValidations');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
 

@@ -40,16 +40,16 @@ const createEmailHtml = (name) => {
     </head>
     <body>
       <div class="header">
-        <h1>¡Hola ${name}!</h1>
+        <h1>Hi ${name}!</h1>
       </div>
       <div class="content">
         <p>
-            ¡Gracias por registrarte en TaskAPI!<br>
-            Tu cuenta ha sido creada con éxito y ya puedes acceder a todos nuestros servicios.<br><br>
-            Si tienes alguna duda o necesitas ayuda, no dudes en contactarnos.<br><br>
-            ¡Nos alegra tenerte con nosotros!<br><br>
-            Saludos,<br>
-            El equipo de TaskAPI<br>
+            Thank you for registering with TaskAPI!<br>
+            Your account has been successfully created and you can now access all our services.<br><br>
+            If you have any questions or need assistance, feel free to contact us.<br><br>
+            We’re glad to have you with us!<br><br>
+            Best regards,<br>
+            The TaskAPI Team<br>
         </p>
         
       </div>
@@ -68,9 +68,14 @@ const sendEmail = async (email) => {
 	const mailOptions = {
 		from: config.EMAIL_USER,
 		to: email,
-		subject: `Asunto: 🎉 ¡Bienvenido/a a TaskAPI!`,
+		subject: `🎉 Welcome to TaskAPI!`,
 		html: createEmailHtml(email),
-		text: `Hola ${email},\n¡Gracias por registrarte en TaskAPI!\nTu cuenta ha sido creada con éxito y ya puedes acceder a todos nuestros servicios.\n\nSi tienes alguna duda o necesitas ayuda, no dudes en contactarnos.\n\n¡Nos alegra tenerte con nosotros!\n\nSaludos,\nEl equipo de TaskAPI\n`,
+		text: `Hi ${email},\nThank you for registering with TaskAPI!
+          \nYour account has been successfully created and you can now access all our services.
+          \n\nIf you have any questions or need assistance, feel free to contact us.
+          \n\nWe’re glad to have you with us!
+          \n\nBest regards,  
+          \nThe TaskAPI Team\n`,
 	};
   
 	try {

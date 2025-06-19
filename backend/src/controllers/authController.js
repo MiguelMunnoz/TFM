@@ -1,9 +1,6 @@
 const {registerUser, updateUser, getUserByEmail, comparePass } = require('../services/authServices');
-const { initializeWebSocket } = require('../websockets/websocket');
-
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
-const { request } = require('express');
 
 const authController = {
     registerUserController: [

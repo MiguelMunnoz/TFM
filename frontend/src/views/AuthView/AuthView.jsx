@@ -36,7 +36,6 @@ const AuthView = () => {
             const userRegistered = await userService.register(userData);
 
             if(userRegistered.status === 201) {
-                console.log('Usuario registrado: ', userRegistered.data);
                 setLogin(true);  
 
                 await userService.email(userRegistered.data);

@@ -1,17 +1,12 @@
 const http = require('http');
 const app = require('./src/app');
 const connectDB = require('./src/config/databse');
-const { initializeWebSocket } = require('./src/websockets/websocket');
 
 const config = require('./config');
 
 const startServer = async () => {
     try {
         await connectDB();
-
-        // Servidor HTTP
-        const server = http.createServer(app);
-        initializeWebSocket(server);
 
         server.listen(config.PORT, ()=>{
             console.log(`Server running at port: ${config.PORT}`);

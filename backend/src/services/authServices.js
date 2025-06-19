@@ -37,7 +37,7 @@ async function updateUser(id, updatedFields) {
             { $set: updatedFields },
             { 
                 new: true,
-                runValidators: true // Ejecuta las validaciones del esquema
+                runValidators: true
             }
         );
 
