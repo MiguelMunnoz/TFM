@@ -1,7 +1,9 @@
+@import url('../../styles/colors.css');
+
 .image-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--color-bg-black);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +19,7 @@
     max-width: 1000px;
     max-height: 90%;
     padding: 16px;
-    background-color: #1e1e1e;
+    background-color: var(--color-text-default);
     border-radius: 12px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
     cursor: default;
