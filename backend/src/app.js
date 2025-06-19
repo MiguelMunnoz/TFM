@@ -14,7 +14,7 @@ const notFoundHandler = require('./middlewares/notFoundMiddleware');
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://tfm-alpha.vercel.app'
+    'https://tfm-p3qa.vercel.app/',
 ];
 
 const app = express();
