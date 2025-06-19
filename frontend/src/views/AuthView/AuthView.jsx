@@ -42,10 +42,10 @@ const AuthView = () => {
 
         } catch (error) {
             if (error.response) {
-                const { status, data } = error.response;
+                const { status } = error.response;
 
                 if (status === 409) {
-                    alert(data.error || 'This user already have an account.');
+                    setErrorMessage('This user already have an account');
                 } 
 
             } else {
@@ -70,7 +70,7 @@ const AuthView = () => {
                     navigate('tasks');
                 }, 500)
             } else {
-                setErrorMessage('Invalid Credentials')
+                setErrorMessage('Invalid Credentials');
             }
             
         } catch (error) {
