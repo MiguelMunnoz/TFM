@@ -39,6 +39,8 @@ const AuthView = () => {
                 setLogin(true);  
 
                 await userService.email(userRegistered.data);
+            } else if (userRegistered.status === 409) {
+                setErrorMessage('This user already has an account')
             }
         } catch (error) {
             console.error('[ERROR] Error registering user.', error);
@@ -60,7 +62,6 @@ const AuthView = () => {
                     navigate('tasks');
                 }, 500)
             } else {
-                console.log(response);
                 setErrorMessage('Invalid Credentials')
             }
             
