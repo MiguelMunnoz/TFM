@@ -32,8 +32,14 @@
   --color-bg-delete: #fee2e2;
   --color-icon-delete: #b91c1c;
 
+  --color-fav-icon: #f5c518;
+
   --color-btn-delete: #cc3c3c;
   --color-btn-delete-hover: #a73232;
 
-  --color-fav-icon: #f5c518;
+  --color-btn-edit: #3ab150;
+  --color-btn-edit-hover: #2e8b3f;
+
+  --color-datetime-bg: #eef2f6;
+  --color-datetime-text: #333;
 }

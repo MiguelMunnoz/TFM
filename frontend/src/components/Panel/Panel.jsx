@@ -206,16 +206,10 @@ const Panel = ({task, event}) => {
                     )}
                         
                     <section>
-                        <h4>Description</h4>
-                        {isTask ? (
-                            <div className="item-description">
-                                <p className="item-description-content">{item.description}</p>
+                        <h4>{isTask ? 'Description' : 'Details'}</h4>
+                        <div className="item-description">
+                                <p className="item-description-content">{isTask ? item.description : item.details}</p>
                             </div>
-                        ) : (
-                            <div className="item-description">
-                                <p className="item-description-content">{item.details}</p>
-                            </div>
-                        )}
                     </section>
                     
                     {isTask &&
