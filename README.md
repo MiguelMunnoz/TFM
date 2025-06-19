@@ -73,15 +73,33 @@ Actualmente desplegado en Render:
 Variables necesarias:
 
 ```env
-CORS_ORIGIN=https://tfm-g2rw.vercel.app
-EMAIL_PASS="ddlo rkro bfab bgcp"
-EMAIL_USER=miguelmjimenez98@gmail.com
-MONGO_DBNAME=TFM_DB
-MONGO_PASS=admin1234
-MONGO_USER=miguelmunnoz
-NODE_ENV=prod
-PORT=9999
-SECRET_KEY=la-clave-ultra-super-mega-secreta
+CORS_ORIGIN={direccion-del-frontend} 
+//actualmente: https://tfm-g2rw.vercel.app
+
+EMAIL_PASS={contraseña-gestor-email} 
+//actualmente "ddlo rkro bfab bgcp"
+
+EMAIL_USER={user-email-provider} 
+//actualmente: miguelmjimenez98@gmail.com
+
+MONGO_DBNAME={mongo-database-name}
+//actualmente: TFM_DB
+
+MONGO_PASS={mongo-password} 
+//actualmente: admin1234
+
+MONGO_USER={mongo-username}
+//actualmente: miguelmunnoz
+
+NODE_ENV={enviroment}
+//actualmente: prod
+
+PORT={port}
+//actualmente: 9999
+
+SECRET_KEY={your-ouw-secret-key}
+//actualmente: la-clave-ultra-super-mega-secreta
+//Permite cifrar el token de autenticacion JWT
 ```
 
 > `SECRET_KEY` permite cifrar el token JWT de autenticación.
