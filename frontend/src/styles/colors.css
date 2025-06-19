@@ -1,6 +1,8 @@
 :root {
   --color-bg-main: #cfdff0;
   --color-bg-modal: #f9fafb;
+
+  --color-bg-info: #374151;
   
   --color-bg-white: #ffffff;
   --color-bg-checkbox: #f9fafb;

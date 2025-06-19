@@ -82,7 +82,7 @@
   font-size: 0.9rempx;
   color: var(--color-text-secondary);
   margin-top: 8px;
-  background-color: var(--color-bg-modal);
+  background-color: var(--color-bg-info);
   padding: 8px 12px;
   border-radius: 8px;
 }
