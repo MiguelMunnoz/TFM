@@ -7,9 +7,7 @@ const taskController = {
     getTasksController: [
         async (req, res) => {
             try {
-                console.log('Recogiendo todas las tasks...')
                 const data = await getTasks();
-                console.log('Tasks: ', data);
                 res.status(200).json(data);
             } catch (error) {
                 console.log('[ERROR] Error getting task info: ', error);
@@ -36,7 +34,6 @@ const taskController = {
         createTaskValidations,
         async (req, res) => {
             try {
-                console.log('Entrando en el manejador de tareas -> creando...');
                 const taskData = req.body;
 
                 // Convertir campo 'date' a objeto Date si existe
@@ -44,8 +41,6 @@ const taskController = {
                     taskData.date = new Date(taskData.date);
                 }
 
-                console.log('Info que llega: ', taskData);
-                console.log('Info de las imagenes: ', taskData.images);
                 const response = await createTask(taskData);
                 res.status(201).json(response);
             } catch (error) {
@@ -59,10 +54,8 @@ const taskController = {
         ...updateTaskValidations,
         async (req, res) => {
             try {
-                console.log('Body recibido:', req.body);
                 const { id, updatedData } = req.body;
                 const response = await updateTask(id, updatedData);
-                console.log('Respuesta del servidor: ', response);
                 res.status(200).json(response);
             } catch (error) {
                 console.log('[ERROR] Error updating task info: ', error);
@@ -74,7 +67,6 @@ const taskController = {
     deleteTaskController: [
         async (req, res) => {
             try {
-                console.log('Recibe llamada para eliminar...');
                 const { id } = req.params;
                 const data = await deleteTask(id);
                 res.status(203).json(data);
@@ -90,10 +82,7 @@ const taskController = {
         async (req, res) => {
             try {
                 const { status, fav } = req.query;
-                console.log('STATUS: ', status);
-                console.log('Favoritos: ', fav);
                 const cookie = getCookieInfo(req);
-                console.log('UserId: ', cookie.userId);
                 let filter = {};
 
                 //Añadimos el filtro de status
@@ -104,13 +93,10 @@ const taskController = {
                         filter.status = status.toLowerCase();
                     }
                 }
-                console.log('FILTRO despues de status: ', filter);
 
                 if(fav === 'true') {
-                    console.log('Hemos encontrado un fav verdadero');
                     filter.fav = fav
                 }
-                console.log('FILTRO despues de fav: ', filter);
 
                 filter.userID = cookie.userId;
 

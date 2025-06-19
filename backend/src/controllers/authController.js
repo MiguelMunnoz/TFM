@@ -8,15 +8,10 @@ const { request } = require('express');
 const authController = {
     registerUserController: [
         async (req, res) => {
-            console.log('Enviando informacion de registro...');
             try {
                 const { username, password } = req.body;
-                console.log('Datos del body: ', req.body);
-                console.log('Username: ', username);
-                console.log('Password: ', password);
 
                 if (!username || !password) {
-                    console.log('Returning 400 Error...');
                     return res.status(400).json({ error: 'Required fields are missing (username, password)' });
                 }
                 
@@ -51,7 +46,6 @@ const authController = {
 
     loginUserController: [
         async (req, res) => {
-            console.log('Entramos en el login');
             try {
                 const { username, password } = req.body;
                 const user = await getUserByEmail(username);
@@ -65,7 +59,6 @@ const authController = {
                     return res.status(401).json({ message: 'Invalid credentials' });
                 }
                 
-                console.log('Llegamos a la creacion del token');
                 const token = jwt.sign(
                     {
                         userId: user._id,
@@ -75,15 +68,12 @@ const authController = {
                     { expiresIn: '1h'}
                 );
 
-                console.log('Token: ', token);
-
                 res.cookie('token', token, {
                     httpOnly: true,
                     secure: true,               // 🔐 obligatorio con SameSite: 'None'
                     sameSite: 'None',
                     maxAge: 3 * 60 * 60 * 1000
                 });
-                console.log('Enviando cookie');
 
                 res.json({
                     message: 'Login success',

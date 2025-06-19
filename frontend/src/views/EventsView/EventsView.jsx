@@ -1,17 +1,11 @@
-
-
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import './EventsView.css';
 
-/*Components*/
-import Event from '../../components/Event/Event'; // Asegúrate de que este componente exista
 import EventGallery from '../../components/EventGallery/EventGallery';
 import Modal from '../../components/Modal/Modal';
-
-/*Services*/
 import { eventService } from '../../services/api';
 import { setEvents, setEventModalVisibility } from '../../slices/eventSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const EventsView = () => {
 	const [checked, setChecked] = useState(false);
@@ -19,14 +13,7 @@ const EventsView = () => {
 	const dispatch = useDispatch();
 	const events = useSelector((state) => state.events.events);
 	const isModalVisible = useSelector((state) => state.events.isModalVisible);
-	const selectedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
-	useEffect(()=> {
-		console.log('Instanciada la vista de eventos.');
-		console.log('Usuario loggeado: ', selectedUser);
-	},[]);
-
-	/*Recargamos la lista cada vez que se modifique el array de eventos*/
 	useEffect(() => {
 		const fetchEvents = async () => {
 			const res = await eventService.filter();

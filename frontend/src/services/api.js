@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-const testingBar = "testing.............";
-console.log(testingBar);
-
 const api = axios.create({
     baseURL: 'https://tfm-armw.onrender.com', /*import.meta.env.VITE_API_URL,*//*'https://tfm-armw.onrender.com'*/
     timeout: 10000,
@@ -33,7 +30,6 @@ const taskService = {
     delete: (id) => api.delete(`/tasks/${id}`, { withCredentials: true }),
 
     filter: (filter=null, checked=null) => { 
-        console.log('Enviando filter=', filter, ' y checked=', checked, ' a la siguiente direccion del server: ',  api.defaults.baseURL);
         return api.get('/tasks/filter', {
             params: {
                 status: filter,
@@ -91,7 +87,6 @@ const eventService = {
     delete: (id) => api.delete(`/events/${id}`, { withCredentials: true }),
 
     filter: (filter, checked) => { 
-        console.log('Enviando filter=', filter, ' y checked=', checked);
         return api.get('/events/filter', {
             params: {
                 status: filter,

@@ -74,12 +74,9 @@ async function deleteFile(filename) {
     
         if (!isUsed && !isUsedByUser) {
             const filePath = path.join(uploadDir, filename);
-            console.log('Accediendo al directorio donde esta la imagen: ', filePath);
             fs.unlink(filePath, (err) => {
                 if (err) {
                     console.error('[ERROR] Error deleting file:', err);
-                } else {
-                    console.log(`File '${filename}' delete succsessfully.`);
                 }
             });
         }

@@ -56,7 +56,6 @@ const ProfileMenu = ({setNavBarIcon}) => {
 
             const updatedUser = { ...user, profilePic: uploadedImage};
             localStorage.setItem('loggedUser', JSON.stringify(updatedUser));
-            console.log('Usuario actualizado: ', updatedUser);
             await userService.update(updatedUser.userId, {profilePic: updatedUser.profilePic});
         } catch (err) {
             console.error('[ERROR] Error uploading profile image. ', err);

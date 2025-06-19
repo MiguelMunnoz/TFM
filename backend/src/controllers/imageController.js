@@ -3,7 +3,6 @@ const imageService = require('../services/imageServices');
 const imageController = {    
     uploadImage: [
         async (req, res) => {
-            console.log('Info que me llega de las imagenes: ', req.files);
             try {
                 if (!req.files || req.files.length === 0) {
                     return res.status(400).json({ error: 'Error no files provided' });

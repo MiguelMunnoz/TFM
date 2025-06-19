@@ -1,15 +1,9 @@
 import { useState, useEffect } from 'react';
 import './TasksView.css';
 
-/*Components*/
-import Task from '../../components/Task/Task'; // Asegúrate de que este componente exista
 import TaskGallery from '../../components/TaskGallery/TaskGallery';
 import Modal from '../../components/Modal/Modal';
-
-/*Servides*/
 import { taskService } from '../../services/api';
-
-/*Redux Toolkit*/
 import { useSelector, useDispatch } from 'react-redux';
 import { setTasks, setModalVisibility } from '../../slices/taskSlice';
 
@@ -19,12 +13,6 @@ const TasksView = () => {
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks.tasks);
 	const isModalVisible = useSelector((state) => state.tasks.isModalVisible);
-	const selectedUser = JSON.parse(localStorage.getItem('loggedUser'));
-
-	useEffect(()=> {
-		console.log('Instanciada la vista de eventos.');
-		console.log('Usuario loggeado: ', selectedUser);
-	},[]);
 
 	/*Recargamos la lista cada vez que se modifique el array de tareas*/
 	useEffect(() => {

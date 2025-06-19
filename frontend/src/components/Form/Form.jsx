@@ -43,8 +43,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
 
 
     useEffect(() => {
-        console.log('Form type: ', type);
-        console.log('Form fields: ', fields);
         if (initialData){
             const formattedData = {
                 ...initialData,
@@ -76,7 +74,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
             ...data
         };
         if(type !== 'auth') {
-            console.log('ID del usuario que crea el evento/tarea: ', selectedUser);
             formData = {
                 ...formData,
                 userID: selectedUser.userId,
@@ -84,7 +81,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
             }
         }
 
-        console.log('Enviando info: ', formData);
         if(data.images && data.images.length > 0) {
             
             //Costruimos los datos de los archivos para enviarlos al servidor
@@ -92,7 +88,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
             for (let file of files) {
                 imageData.append('file', file);
             }
-            console.log('Recogiendo imagenes del fomulario: ', imageData);
+
             onSubmit(formData, imageData);
         } else {
             onSubmit(formData);
@@ -114,7 +110,6 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     };
 
     const handleCountryChange = (option) => {
-        console.log('Opcion seleccionada: ', option);
         if (!option || !option.regions) {
             setSelectedCountry(null);
             setCityOptions([]);

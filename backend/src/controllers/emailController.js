@@ -4,7 +4,6 @@ const emailController = {
 	sendEmail: [
 		async (req, res) => {
 			try {
-				console.log('Recibimos info del correo: ', req.body);
 				const { email } = req.body;
 				const result = await emailService.sendEmail(email);
 			
@@ -14,7 +13,6 @@ const emailController = {
 					return res.status(500).json({ error: result.error });
 				}
 			} catch (error) {
-				console.log('[ERROR] Error sending email: ', error);
 				return res.status(500).json({ error: '[ERROR] Error sending email' });
 			}
 		}

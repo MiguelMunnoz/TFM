@@ -10,7 +10,6 @@ import {useDispatch, useSelector } from 'react-redux';
 import { addTask, setModalVisibility } from '../../slices/taskSlice';
 import { addEvent, setEventModalVisibility } from '../../slices/eventSlice';
 import { taskService, eventService, imageService } from '../../services/api';
-import { useEffect } from 'react';
 
 const Modal = ({ type = 'task', mode = 'view', taskId = null, eventId = null, onClose, onDeleteConfirm}) => {
     const dispatch = useDispatch();
@@ -41,7 +40,6 @@ const Modal = ({ type = 'task', mode = 'view', taskId = null, eventId = null, on
             }
         }
 
-        console.log('Enviando info...');
         if(type === 'event') {
             const res = await eventService.create(createData);
             dispatch(addEvent(res.data));
@@ -59,12 +57,6 @@ const Modal = ({ type = 'task', mode = 'view', taskId = null, eventId = null, on
         } 
         onClose();
     };
-
-    useEffect(() => {
-        console.log('Instanciando Modal...');
-        console.log('Modal de tipo: ', type);
-        console.log('Modal con modo: ', mode);
-    }, [])
 
     return (
         <div className="modal-backdrop">

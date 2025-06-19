@@ -34,7 +34,6 @@ const eventController = {
         ...createEventValidations,
         async (req, res) => {
             try {
-                console.log('Datos que llegan al servidor: ', req.body);
                 const eventData = req.body;
                 const response = await createEvent(eventData);
                 res.status(201).json(response);
@@ -49,11 +48,8 @@ const eventController = {
         ...updateEventValidations,
         async (req, res) => {
             try {
-                console.log('Actualizando evento...');
-                console.log('Body recibido:', req.body);
                 const { id, updatedData } = req.body;
                 const response = await updateEvent(id, updatedData);
-                console.log('Respuesta del servidor: ', response);
                 res.status(200).json(response);
             } catch (error) {
                 console.log('[ERROR] Error updating event info: ', error);
@@ -81,9 +77,6 @@ const eventController = {
         async (req, res) => {
             try {
                 const { status, fav } = req.query;
-                console.log('STATUS: ', status);
-                console.log('Favoritos: ', fav);
-                console.log(typeof fav);
                 let filter = {};
 
                 //Añadimos el filtro de status
@@ -96,19 +89,11 @@ const eventController = {
                 }
 
                 if(fav === 'true') {
-                    console.log('Hemos encontrado un fav verdadero');
                     filter.fav = fav
                 }
-                console.log('FILTRO despues de fav: ', filter);
 
-                //A los usuarios sin permisos les impedimos ver otras tareas que no sean las suyas
                 const cookie = getCookieInfo(req);
                 filter.userID = cookie.userId;
-                /*const role = cookie.role;
-                if (role !== 'admin') {
-                    
-                }*/
-                console.log('Filtro despues de recoger el userId: ' , filter);
 
                 const data = await filterEvents(filter);
                 res.status(200).json(data);

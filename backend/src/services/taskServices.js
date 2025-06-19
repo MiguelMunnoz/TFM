@@ -22,10 +22,8 @@ async function getTaskById(id) {
 
 async function createTask(taskData) {
     try {
-        console.log('Creando tarea...');
         const task = new Task(taskData);
         const res = await task.save();
-        console.log('Respuesta tras la creacion:', res);
         return res;
     } catch (error) {
         console.log('[ERROR] Error creating task:', error);

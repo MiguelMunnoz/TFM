@@ -70,7 +70,6 @@ const Panel = ({task, event}) => {
 
     useEffect(() => {
         const fetchWeather = async () => {
-            console.log('Renderizando el weather...')
             try {
                 const response = await weatherService.getCityWeather(event?.city);
                 setWeather(response.data);
@@ -135,7 +134,6 @@ const Panel = ({task, event}) => {
             const res = await service.update(item._id, data);
             dispatch(updateAction(res.data));
             setEdit(false);
-            console.log('Tarea actualizada: ', res.data);
         } catch (error) {
             console.error('[ERROR] Error updating task.', error);
         }

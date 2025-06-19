@@ -11,22 +11,15 @@ const TaskGallery = ({tasks}) => {
 
     const handleDelete = (taskId) => {
         const images = tasks.find(task => task._id === taskId).images;
-        console.log('Id de la tarea que quiero eliminar: ', taskId);
 
-        // Marcar como en proceso de eliminación
         setDeletingTasks((prev) => [...prev, taskId]);
-
-        // Esperar a que la animación termine
         setTimeout(() => {            
             taskService.delete(taskId);
             dispatch(removeTask(taskId));
             setDeletingTasks((prev) => prev.filter((id) => id !== taskId));
             
-            //Rutina para la eliminacion de imagenes en el servidor
             deleteImages(images);
         }, 500); // Debe coincidir con la duracion en CSS
-
-        
     };
 
     const deleteImages = (images) => {
