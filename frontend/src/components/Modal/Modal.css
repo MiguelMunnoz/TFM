@@ -1,8 +1,9 @@
-/* Capa de fondo oscurecida */
+@import url('../../styles/colors.css');
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-bg-black);
   backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
@@ -10,9 +11,8 @@
   z-index: 1000;
 }
 
-/* Contenedor del modal */
 .modal {
-  background-color: #ffffff;
+  background-color: var(--color-bg-white);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   width: 90%;
@@ -22,7 +22,6 @@
   animation: fadeInUp 0.3s ease;
 }
 
-/* Botón de cerrar */
 .modal-close {
   position: absolute;
   top: 5px;
@@ -31,26 +30,13 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #6b7280; /* gris moderno */
+  color: var(--color-text-muted); 
 }
 
 .modal-close:hover {
-  color: #111827;
+  color: var(--color-text-primary);
 }
 
-/* Título y contenido */
-.modal h2 {
-  margin-bottom: 16px;
-  font-size: 1.5rem;
-  color: #1f2937;
-}
-
-.modal p {
-  font-size: 1rem;
-  color: #374151;
-}
-
-/* Animación de entrada */
 @keyframes fadeInUp {
   from {
     opacity: 0;
