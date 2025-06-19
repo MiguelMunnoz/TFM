@@ -12,13 +12,13 @@ const imageRoutes = require('./routes/imageRoutes');
 const errorHandler = require('./middlewares/errorMiddleware');
 const notFoundHandler = require('./middlewares/notFoundMiddleware');
 
-const allowedOrigins = 'https://tfm-fza4.vercel.app';
+const config = require('../config');
 
 const app = express();
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cors({
-    origin: allowedOrigins,
+    origin: config.CORS_ORIGIN,
     credentials: true
 }));
 app.use(cookieParser());

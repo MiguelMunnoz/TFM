@@ -29,5 +29,7 @@ module.exports = {
   DB_PASS: process.env.MONGO_PASS || 'contraseña-desconocida',
   DB_NAME: process.env.MONGO_DBNAME || 'DB-NAME',
 
+  CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost',
+
   createTransporter
 };
