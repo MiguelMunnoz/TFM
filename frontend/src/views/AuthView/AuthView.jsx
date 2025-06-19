@@ -84,8 +84,8 @@ const AuthView = () => {
                 />
 
                 <p className="form-note">
-                    {isLogin ? '¿No tienes una cuenta? ' : '¿Ya tienes cuenta? '} 
-                    <a onClick={() => handleChange()}>{isLogin ? 'Regístrate aquí' : 'Inicia sesión'}</a>
+                    {isLogin ? `Don't have an account? ` : 'Already have an account? '} 
+                    <a onClick={() => handleChange()}>{isLogin ? 'Register here' : 'Log In'}</a>
                 </p> 
 
                 {errorMessage && <p className="login-error-message">{errorMessage}</p>}
