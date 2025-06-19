@@ -13,8 +13,8 @@ const startServer = async () => {
 
         server.listen(config.PORT, ()=>{
             console.log(`Server running at port: ${config.PORT}`);
-            console.log('Datos de las variables de entorno: ', config.NODE_ENV);
-            console.log('Cors origin: ', config.CORS_ORIGIN);
+            console.log('ENV: ', config.NODE_ENV);
+            console.log('CORS ORIGIN: ', config.CORS_ORIGIN);
         })
     } catch(error) {
         console.log('[ERROR] Error starting the server.', error);
