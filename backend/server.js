@@ -8,6 +8,9 @@ const startServer = async () => {
     try {
         await connectDB();
 
+        // Servidor HTTP
+        const server = http.createServer(app);
+
         server.listen(config.PORT, ()=>{
             console.log(`Server running at port: ${config.PORT}`);
             console.log('Datos de las variables de entorno: ', config.NODE_ENV);
