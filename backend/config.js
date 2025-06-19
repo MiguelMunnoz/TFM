@@ -1,35 +1,44 @@
-const dotenv = require('dotenv');
 const path = require('path');
+const dotenv = require('dotenv');
 
-dotenv.config({
-  path: path.resolve(__dirname, 'prod.env')
-});
+// Detectar entorno actual (por defecto, "development")
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
-const createTransporter = () => {
-  const nodemailer = require('nodemailer');
-  
-  return nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-};
+// Cargar archivo `.env` solo si no estás en producción
+if (NODE_ENV !== 'prod') {
+  const envFile = NODE_ENV === 'test' ? '.env.test' : '.env'; // puedes añadir más entornos si quieres
+  dotenv.config({ path: path.resolve(__dirname, envFile) });
+  console.log(`[INFO] Loading variables from ${envFile}`);
+} else {
+  console.log('[INFO] Using env variables');
+}
 
-module.exports = {
+// Exportar configuración
+const config = {
+  NODE_ENV,
   PORT: process.env.PORT || 5000,
-  
-  SECRET_KEY: process.env.SECRET_KEY || 'cotraseña-para-jwc',
 
-  EMAIL_USER: process.env.EMAIL_USER || 'usuarioEmail@gmail.com',
-  EMAIL_PASS: process.env.EMAIL_PASS || 'genericPass',
+  SECRET_KEY: process.env.SECRET_KEY || 'fallback-secret-key',
 
-  DB_USER: process.env.MONGO_USER || 'usuario-desconocido',
-  DB_PASS: process.env.MONGO_PASS || 'contraseña-desconocida',
-  DB_NAME: process.env.MONGO_DBNAME || 'DB-NAME',
+  EMAIL_USER: process.env.EMAIL_USER || '',
+  EMAIL_PASS: process.env.EMAIL_PASS || '',
 
-  CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost',
+  DB_USER: process.env.MONGO_USER || '',
+  DB_PASS: process.env.MONGO_PASS || '',
+  DB_NAME: process.env.MONGO_DBNAME || '',
 
-  createTransporter
+  CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:5173',
+
+  createTransporter: () => {
+    const nodemailer = require('nodemailer');
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+  }
 };
+
+module.exports = config;
