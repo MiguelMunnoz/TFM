@@ -1,7 +1,9 @@
+@import url('../../styles/colors.css');
+
 .weather-wrapper {
   display: flex;
   align-items: center;
-  background-color: #d6e8f9;
+  background-color: var(--color-bg-weather);
   border-radius: 8px;
   padding: 1rem;
   width: 100%;

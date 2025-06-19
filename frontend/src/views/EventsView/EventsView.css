@@ -1,6 +1,8 @@
+@import url('../../styles/colors.css');
+
 #status-filter {
   padding: 10px 14px;
-  border: 1px solid #ccc;
+  border: 1px solid ;
   border-radius: 12px;
   font-size: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -12,21 +14,21 @@
 }
 
 .status-all {
-    background-color: #fff;
-    color: #111827;
+    background-color: var(--color-bg-white);
+    color: var(--color-text-default);
 }
 
 .status-pending {
-    background-color: #fff7ed;
-    color: #f39c12;
+    background-color: var(--color-status-pending-bg);
+    color: var(--color-status-pending-text);
 }
 
 .status-in-progress {
-    background-color: #e6f0fa;
-    color: #3498db;
+    background-color: var(--color-status-progress-bg);
+    color: var(--color-status-progress-text);
 }
 
 .status-completed {
-    background-color: #eafaf1;
-    color: #2ecc71;
+    background-color: var(--color-status-completed-bg);
+    color: var(--color-status-completed-text);
 }

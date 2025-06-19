@@ -1,3 +1,5 @@
+@import url('../../styles/colors.css');
+
 .auth-page {
   display: flex;
   align-items: center;
@@ -10,7 +12,7 @@
 .auth-box {
   width: 100%;
   max-width: 500px;
-  background: #ffffff;
+  background: var(--color-bg-white);
   border-radius: 1rem;
   padding: 2.5rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -24,18 +26,18 @@
 h2 {
     margin-bottom: 16px;
     font-size: 1.5rem;
-    color: #1f2937;
+    color: var(--color-nav-bg);
 }
 
 .form-note {
     text-align: center;
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: #555;
+    color: var(--color-text-muted);
 }
 
 .form-note a {
-    color: #007bff;
+    color: var(--color-btn-bg);
     text-decoration: none;
     background-color: transparent;
 }
@@ -46,7 +48,7 @@ h2 {
 }
 
 .login-error-message {
-  color: #f44336;
+  color: var(--color-btn-delete);
   margin-top: 12px;
   font-size: 15px;
   text-align: center;
