@@ -26,4 +26,10 @@
 
   --color-btn-bg: #1d4ed8;
   --color-btn-bg-hover: #2563eb;
+
+  --color-bg-delete: #fee2e2;
+  --color-icon-delete: #b91c1c;
+
+  --color-btn-delete: #cc3c3c;
+  --color-btn-delete-hover: #a73232;
 }
