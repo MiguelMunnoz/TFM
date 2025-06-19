@@ -34,7 +34,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Filtro de búsqueda */
 .filter-container {
   display: flex;
   flex-direction: row;
@@ -70,7 +69,6 @@
   background-size: 20px;
 }
 
-/*Colores para el select*/
 .status-all {
     background-color: var(--color-bg-white);
     color: var(--color-text-default);
@@ -106,7 +104,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* Botones de configuración */
 .config-container {
   display: flex;
   gap: 12px;
@@ -127,7 +124,6 @@
   background-color: var(--color-btn-bg-hover);
 }
 
-/* Lista de tareas */
 .content-section {
   position: static;
   display: flex;
@@ -137,7 +133,6 @@
   gap: 16px;
 }
 
-/* Mensaje cuando no hay tareas */
 .content-section p {
   color: var(--color-text-muted);
   font-style: italic;

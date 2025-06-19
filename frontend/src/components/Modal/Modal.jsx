@@ -17,7 +17,6 @@ const Modal = ({ type = 'task', mode = 'view', taskId = null, eventId = null, on
     const eventFields = useSelector(state => state.events.visibleFields);
     const visibleFields = type === 'event' ? eventFields : taskFields;
 
-    // Buscar la tarea actualizada en el store según taskId
     const task = useSelector(state => {
         const found = state.tasks.tasks.find(t => t._id === taskId);
         return found;

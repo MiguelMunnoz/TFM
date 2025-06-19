@@ -14,7 +14,6 @@ const TasksView = () => {
 	const tasks = useSelector((state) => state.tasks.tasks);
 	const isModalVisible = useSelector((state) => state.tasks.isModalVisible);
 
-	/*Recargamos la lista cada vez que se modifique el array de tareas*/
 	useEffect(() => {
 		const fetchTasks = async () => {
 			const res = await taskService.filter();
@@ -27,7 +26,6 @@ const TasksView = () => {
 		dispatch(setModalVisibility(true))
 	}
 
-	/*Manejamos el filtro*/
 	const handleFilter = (statusFilter, favFilter) => {
 		
 		const fetchFilter = async () => {
@@ -38,7 +36,7 @@ const TasksView = () => {
 	}
 
 	const handleFav = (e) => {
-		setChecked(e.target.checked); // true o false
+		setChecked(e.target.checked);
 		handleFilter(status, e.target.checked);
 	}
 

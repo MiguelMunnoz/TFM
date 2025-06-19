@@ -10,7 +10,6 @@ const tasksSlice = createSlice({
 	name: 'tasks',
 	initialState,
 	reducers: {
-		/* Manejo del array de tareas */
 		setTasks: (state, action) => {
 			state.tasks = action.payload;
 		},
@@ -30,7 +29,6 @@ const tasksSlice = createSlice({
 			state.tasks = [];
 		},
 
-		/*Manejo de la visibilidad del modal*/ 
 		setModalVisibility: (state, action) => {
 			state.isModalVisible = action.payload;
 		},

@@ -63,7 +63,7 @@ const imageService = {
                 withCredentials: true,
             });
 
-            const imageUrl = URL.createObjectURL(response.data); // response.data es el blob
+            const imageUrl = URL.createObjectURL(response.data);
             return imageUrl;
         } catch (error) {
             console.error('[ERROR] Error getting image by name: ', error);

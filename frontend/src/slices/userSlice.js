@@ -9,7 +9,6 @@ const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
-	    /* Manejo del array de tareas */
         setUser: (state, action) => {
             state.selectedUser = action.payload;
         },

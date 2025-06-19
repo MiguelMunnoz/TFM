@@ -19,7 +19,6 @@ const App = () =>  {
 				<Route element={<AppLayout />}>
 					<Route path="/tasks" element={<TasksView />} />
 					<Route path="/events" element={<EventsView />} />
-					{/* Puedes agregar más rutas aquí */}
 				</Route>
 			</Routes>
 		</Router>

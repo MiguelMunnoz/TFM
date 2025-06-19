@@ -5,7 +5,7 @@ import { eventService, taskService } from "../../services/api";
 
 const FavIcon = ({task = null, event = null}) => {
     const [filled, setFilled] = useState(task ? task.fav : event.fav);            //Estado que maneja si el icono esta coloreado o no
-    const [justClicked, setJustClicked] = useState(false);  //Estado que maneja si el icono debe renderizar la animacion de recien clickado
+    const [justClicked, setJustClicked] = useState(false);                        //Estado que maneja si el icono debe renderizar la animacion de recien clickado
 
     const handleClick = (e) => {
         e.stopPropagation();

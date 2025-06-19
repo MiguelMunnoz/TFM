@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './NavBar.css';
 
 import ProfileButton from '../../components/ProfileButton/ProfileButton';

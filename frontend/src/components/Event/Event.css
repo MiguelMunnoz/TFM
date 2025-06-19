@@ -44,7 +44,7 @@
 .event-location-item {
     display: flex;
     align-items: center;
-    gap: 6px; /* Espacio entre el ícono y el texto */
+    gap: 6px;
     margin-bottom: 1rem;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .delete-button:hover {
-  transform: scale(1.1); /* Opcional: pequeño zoom al pasar el ratón */
+  transform: scale(1.1);
 }
 
 @media (max-width: 500px) {

@@ -11,8 +11,8 @@ import { taskService } from '../../services/api';
 const ImageGallery = ({ task }) => {
     const [imageUrls, setImageUrls] = useState([]);
     const [imageZoomed, setImageZoomed] = useState(null);
-    const [showConfirm, setShowConfirm] = useState(false); // Mostrar o no el mensaje
-    const [imageToDelete, setImageToDelete] = useState(null); // Índice de la imagen seleccionada
+    const [showConfirm, setShowConfirm] = useState(false); 
+    const [imageToDelete, setImageToDelete] = useState(null);
     const dispatch = useDispatch();
     const images = task.images || [];
 
@@ -34,7 +34,7 @@ const ImageGallery = ({ task }) => {
                 }
 
             } catch (err) {
-                console.error('Error cargando imágenes:', err);
+                console.error('[ERROR] Error loading images:', err);
             }
         };
 
@@ -97,7 +97,7 @@ const ImageGallery = ({ task }) => {
                         ))}
                     </div>
                 ) : (
-                    <p className="no-images">No hay imágenes</p>
+                    <p className="no-images">There are no images yet...</p>
                 )}
                 { imageZoomed && (
                     <Image src={imageZoomed} onClick={() => setImageZoomed(null)} />

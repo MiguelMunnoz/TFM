@@ -6,12 +6,11 @@
   gap: 20px;
 
   width: 100%;
-  /*max-width: 320px;*/
   padding: 20px;
   overflow: hidden; 
   box-sizing: border-box;
   
-  border-left: 6px solid #3b82f6; /* azul para identificar */
+  border-left: 6px solid #3b82f6; 
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
@@ -84,7 +83,7 @@
     color: #2ecc71;
 }
 
-/* Fecha y hora centradas y separadas */
+/* Fecha y hora */
 .task-datetime-container {
     display: flex;
     flex-direction: row;

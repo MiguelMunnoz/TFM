@@ -1,4 +1,3 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -7,9 +6,9 @@
 
 .nav-bar {
   width: 100%;
-  background-color: #1f2937; /* gris oscuro */
+  background-color: #1f2937; 
   color: white;
-  position: fixed; /* pegar arriba */
+  position: fixed; 
   top: 0;
   left: 0;
   z-index: 1000;
@@ -40,5 +39,5 @@
 }
 
 .navMenu-item a:hover {
-    color: #60a5fa; /* azul claro */
+    color: #60a5fa;
 }

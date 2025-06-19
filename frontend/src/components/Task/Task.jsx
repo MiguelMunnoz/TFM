@@ -30,12 +30,12 @@ const Task = ({task, onDelete}) => {
 
     const handleDelete = (e) => {
         e.stopPropagation();
-        setShowConfirm(true); // Muestra el modal de confirmación
+        setShowConfirm(true);
     };
 
     const confirmDelete = () => {
-        onDelete(task._id);    // Llama al padre para eliminar la tarea
-        setShowConfirm(false); // Cierra el modal de confirmación
+        onDelete(task._id);    
+        setShowConfirm(false);
     };
 
     const formattedDate = new Date(task.date).toLocaleDateString('es-ES', {
@@ -53,11 +53,11 @@ const Task = ({task, onDelete}) => {
                     <div className="task-datetime-container">
                         <div className="datetime-item">
                             <span role="img" aria-label="calendar">📅</span>
-                            {formattedDate} {/* ejemplo: '05 de junio de 2024' */}
+                            {formattedDate}
                         </div>
                         <div className="datetime-item">
                             <span role="img" aria-label="clock">🕒</span>
-                            {task.time} {/* ejemplo: '19:13' */}
+                            {task.time}
                         </div>
                     </div> 
                     <div className="description">{task.description}</div>

@@ -10,7 +10,6 @@ const eventSlice = createSlice({
 	name: 'events',
 	initialState,
 	reducers: {
-		/* Manejo del array de tareas */
 		setEvents: (state, action) => {
 			state.events = action.payload;
 		},
@@ -30,7 +29,6 @@ const eventSlice = createSlice({
 			state.events = [];
 		},
 
-		/*Manejo de la visibilidad del modal*/ 
 		setEventModalVisibility: (state, action) => {
 			state.isModalVisible = action.payload;
 		},

@@ -46,11 +46,9 @@
   font-size: 0.95em;
 }
 
-
-/* Ocultar texto en pantallas pequeñas */
 @media (max-width: 730px) {
   .sidebar {
-    width: 60px; /* más estrecho */
+    width: 60px; 
     position: fixed;
     border-right: 1px solid var(--color-border-default);
     min-height: 100vh;

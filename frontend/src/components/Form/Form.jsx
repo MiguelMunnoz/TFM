@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
+import './Form.css';
+
 import { FormProvider, useForm, Controller } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Select from 'react-select';
 import { CountryRegionData } from '../../utils/countryRegionData.js';
-import './Form.css';
+
 
 const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     const selectedUser = JSON.parse(localStorage.getItem('loggedUser'));
@@ -82,9 +84,8 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
         }
 
         if(data.images && data.images.length > 0) {
-            
-            //Costruimos los datos de los archivos para enviarlos al servidor
             const imageData = new FormData();
+
             for (let file of files) {
                 imageData.append('file', file);
             }
@@ -104,7 +105,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     const formatDateLocal = (dateInput) => {
         const date = new Date(dateInput);
         const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Mes es 0-indexed
+        const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
@@ -125,7 +126,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
     };
 
     const handleCityChange = (option) => {
-        setValue('city', option.value); // Registramos ciudad en el form
+        setValue('city', option.value);
     };
 
     const isDateTimeField = (field) => Array.isArray(field) && field.includes('date') && field.includes('time');
@@ -279,7 +280,7 @@ const Form = ({title, fields, type, initialData = null, schema, onSubmit}) => {
                         className="nav-button submit"
                         disabled={isLoading}
                     > 
-                        {isLoading ? 'Cargando...' : 'Enviar'}
+                        {isLoading ? 'Loading...' : 'Send'}
                     </button>
 
                     <button 

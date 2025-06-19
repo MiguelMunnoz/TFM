@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './ProfileButton.css';
 
 import { imageService } from '../../services/api';
@@ -37,7 +36,7 @@ const ProfileButton = () => {
             <button className="drop-button" onClick={handleClick}>
                 <div className="profile-image-wrapper">
                     <img 
-                        src={userImage} // o avatar de usuario
+                        src={userImage}
                         alt="Profile" 
                         className="profile-image"
                     />

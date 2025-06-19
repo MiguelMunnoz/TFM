@@ -8,7 +8,6 @@
   max-width: 500px;
 }
 
-/* Estilo general para cada sección */
 .panel-item-card section {
   border-bottom: 1px solid #ccc;
   padding: 16px;
@@ -50,7 +49,7 @@ h4 {
   text-align: center;
 }
 
-/* Fecha y hora centradas y separadas */
+/* Fecha y hora */
 .item-datetime-container {
   display: flex;
   flex-direction: column;

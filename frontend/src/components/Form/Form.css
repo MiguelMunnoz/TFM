@@ -28,14 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #555; /* Puedes ajustar según tu tema */
+  color: #555; 
 }
 
 .password-wrapper button:hover {
   color: #000;
 }
 
-/* Grupo de fecha y hora */
 .date-time-wrapper {
   display: flex;
   gap: 10px;
@@ -121,7 +120,6 @@
     background-color: #0056b3;
 }
 
-/*Styles for select input*/
 .form-select-input {
     width: 100%;
     padding: 10px 12px;
@@ -133,7 +131,7 @@
     outline: none;
     cursor: pointer;
 
-    appearance: none; /* Elimina el estilo por defecto */
+    appearance: none;
     background-color: #f9fafb;
     color: #111827;
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='none'%20stroke='%23666'%20d='M0,0%20L2,2%20L4,0'/%3E%3C/svg%3E");
