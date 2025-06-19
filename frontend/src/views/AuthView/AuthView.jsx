@@ -21,6 +21,7 @@ const AuthView = () => {
     useEffect(() => {
         try {
             userService.logout();
+            setErrorMessage(null);
         } catch (error) {
             console.log('[ERROR] Error in logout', error);
         }
