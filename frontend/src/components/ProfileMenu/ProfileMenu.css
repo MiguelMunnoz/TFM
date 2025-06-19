@@ -1,3 +1,5 @@
+@import url('../../styles/colors.css');
+
 .dropdown-content {
     position: absolute;
     top: 4rem;
@@ -11,10 +13,10 @@
     align-items: center;
     gap: 12px;
 
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background-color: var(--color-bg-modal);
     box-shadow: 0 8px 20px rgba(33, 37, 41, 0.2);
     border-radius: 12px;
-    border: 1px solid #ced4da;
+    border: 1px solid var(--color-border-default);
     backdrop-filter: saturate(180%) blur(10px);
     transition: transform 0.25s ease, opacity 0.25s ease;
     transform-origin: top right;
@@ -22,7 +24,7 @@
 
 .username-container {
   text-align: center;
-  color: #333;
+  color: var(--color-datetime-text);
 }
 
 .profile-image-container {
@@ -33,12 +35,12 @@
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #ccc;
+  border: 2px solid var(--color-border-default);
   cursor: pointer;
 }
 
 .profile-image-container:hover {
-  border-color: #4a90e2;
+  border-color: var(--color-border-focus);
 }
 
 .dropdown-item {
@@ -48,16 +50,14 @@
   border-left: 3px solid transparent;
   border-radius: 8px;
   user-select: none;
-  color: #842029;
+  color: var(--color-btn-delete-hover);
 }
 
 .dropdown-item:hover {
   background-color: rgba(0, 123, 255, 0.08); 
-  border-left-color: #0d6efd; 
 }
 
 .dropdown-item__link {
-  color: #403a34; 
   font-weight: 500;
   text-decoration: none;
   display: block;
@@ -66,28 +66,27 @@
 }
 
 .dropdown-item__link:hover {
-  color: #0d6efd;
   text-decoration: underline;
 }
 
 .dropdown-item--logout {
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid var(--color-border-light);
   margin-top: 8px;
   padding-top: 12px;
 }
 
 .dropdown-item--logout:hover {
   background-color: rgba(220, 53, 69, 0.08); 
-  border-left-color: #dc3545;
+  border-left-color: var(--color-btn-delete);
 }
 
 .dropdown-item--logout .dropdown-item__link {
-  color: #842029;
+  color: var(--color-btn-delete-hover);
   font-weight: 600;
 }
 
 .dropdown-item--logout .dropdown-item__link:hover {
-  color: #a71d2a;
+  color: var(--color-icon-delete);
   text-decoration: underline;
 }
 
